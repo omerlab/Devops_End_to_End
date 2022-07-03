@@ -1,0 +1,126 @@
+===============Kubernetes==============================
+
+Kubernetes (K8s) is an open-source system for containerized applications.
+It is a container orchestration tool
+It allows you to automate the deployment, scaling and management of 
+containers at scale.
+
+This competency area includes Kubernetes Installation and Configuration, 
+deployments and clusters, working with Kubernetes services to access 
+deployments, creating configs, and secret data, among others. 
+
+Key Competencies:
+
+Kubernetes Installation and Configuration
+Kubernetes Deployments and Clusters - Creating different kinds of deployments
+and understanding how to work with the deployments API. Stateless and 
+State-full Deployments. Knowledge of Pods, Deployments, Services, Storage,
+ingress and persistence.
+Accessing Kubernetes applications with Services - Working with Kubernetes
+Services to access deployments.
+Scaling Kubernetes Applications - Scale applications up and down.
+Deleting Applications - Understanding how to delete various Kubernetes
+objects.
+Setting up different workloads in Kubernetes - Understanding how to deploy 
+different kinds of applications, from microservices, jobs and crons.
+Microservices in Kubernetes - Deploying sample microservices to a cluster.
+Creating configs and secret data - Dealing with configuration and secret data
+with clusters. Creating config maps.
+
+Accessing logs - Working and accessing Kubernetes and Application logs in a 
+cluster.
+Using Persistent Volumes and Claims - Working with stateful data with 
+Persistent Volumes and Claims.
+Debugging Pod failures - Understand pod specific issues by debugging various failures in a pod.
+Init Containers - Creating and using pod init containers.
+Network Policy - Working with creating and working with network policies for a cluster.
+Performance Tuning the Scheduler - Working with the Kubernetes scheduler including eviction policies and eviction signals.
+
+Architecture: - Master 
+                  - api-server: look authentication/ authorization
+                  - etcd: communicate with api-server. it is the key/value Store
+                          of the clusters
+                  - scheduler: pods placement/ schedule task    
+                  - controller manager: manage all objects in the cluster
+
+              - Slave 
+                  - kubelet: creating pods and start them
+                  - container runtime: use docker to create container 
+                  - kubeproxy: use for networking between containers
+
+K8s objects: 
+  - Pods:  Pods are the smallest, most basic deployable objects 
+           in Kubernetes. A Pod represents a single instance of a 
+           running process in your cluster. Pods contain one or more 
+           containers, such as Docker containers. When a Pod runs multiple
+            containers, the containers are managed as a single entity and 
+            share the Pod's resources.
+  
+  - RC-RS: The replica set are also known as next generation replication 
+           controller. The only difference between replica set and replication 
+           controller is the selector types. The replication controller supports 
+           equality based selectors whereas the replica set supports equality 
+           based as well as set based selectors
+
+ - Deployment: a resource object in Kubernetes that provides declarative 
+               updates to applications. A deployment allows you to describe 
+               an application's life cycle, such as which images to use for 
+               the app, the number of pods there should be, and the way in 
+               which they should be updated
+
+ - Daemonset: The DaemonSet feature is used to ensure that some or all of
+              your pods are scheduled and running on every single available
+              node. This essentially runs a copy of the desired pod across
+              all nodes. When a new node is added to a Kubernetes cluster,
+              a new pod will be added to that newly attached node
+
+ - Statefulset: 
+  StatefulSet is the workload API object used to manage stateful
+                applications. Manages the deployment and scaling of a set of 
+                Pods, and provides guarantees about the ordering and uniqueness
+                of these Pods. Like a Deployment,a StatefulSet manages Pods 
+                that are based on an identical container spec. 
+
+b) Workload and scheduling:
+
+ - QOS in pods creation
+
+guaranteed: it is a pod with request equal to limit(high priority)
+
+burstable: it is pod with request no equal to limit  (2nd priority)
+
+best effort: pod is the pod with no request limit. It could be fast terminated 
+           if the node runs out of resource. It is important to define request
+           and limit when creating pods
+
+ - Nodeselector
+    pod will be create in a node with a particular label. if no resources pod
+    will still not create.
+
+- Nodeaffinity
+    pods are attract in a node with a nodeaffinity
+
+- podaffinity
+     similar to nodeaffinity but we need to specify the topologyKey to 
+     determine where the pods need to run or attract because they can have
+     dependencies.  
+
+- Taint and tolerations:
+  marks a node as unschedulable. The node is still available.
+  we can schedule a pod on a tainted node only if we set toleration on 
+  that pod.
+
+  By default master node is tainted, so we can shedule pod on it if we apply
+  the appropriate toleration. but it is not advisable and practice
+
+- Draining a node:  
+  marks a pod as unavailable, it is out of service. it happens when we want 
+  to maintain or upgrade node.
+  It will evict all pods running on it and schedule them on anaother node.
+  if the maintenance is done you need to uncordon the node to make
+  it available for scheduler.
+
+ResourceQuota is important for namespace because it set the amount of resource
+we can use in a particular namespace. such that developers namespace can't use
+more resources that the one allocated to them.
+

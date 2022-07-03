@@ -1,0 +1,35 @@
+===============Ansible==============================
+
+Ansible Playbooks are utilized in configuring applications, servers, large networks, and systems. Automating tasks such 
+as rolling updates becomes easy with Ansible Playbooks and modules.
+
+This competency area includes configuring a playbook, controlling tasks, play behavior, and performing simple bash 
+automation tasks. 
+
+Key Competencies:
+
+Convert basic Bash scripts to Ansible - Writing Ansible 
+
+playbooks to automate simple bash scripts.
+
+Conditionals, Control Flow, Templating, and Iteration - 
+Coordinating multiple sets of actions by using the different fundamental concepts of Ansible.
+
+Patch Systems and Install Applications - Managing the system configurations and responding to changes in the configuration.
+
+ Accounts Management in the system - Automation in managing user accounts in various groups.
+
+Roles, Plays, Playbook, Modules, and Blocks - Using roles to break playbooks into multiple files. 
+
+Configuration of Systems, Applications - Setting up state-driven resource models to bring systems and applications to
+ the desired state.
+
+Application Control using REST API - Managing and communicating with applications using their REST APIs. 
+
+Testing Ansible: Roles with Molecule - Using Molecule’s driver, linter, and, verifier to test Ansible code.
+
+Ansible Tower - Using Ansible Tower to perform role-based access control, job scheduling, and others.
+
+Security Automation: Setup Firewall and Hardening - Setting up firewall rules and security policies.
+
+Cloud Automation - Using Ansible with cloud services and containers, AWS, and Docker.

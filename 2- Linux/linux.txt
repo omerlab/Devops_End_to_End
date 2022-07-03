@@ -1,0 +1,478 @@
+=====================================================
+Linux OS;   Linux Computers(Servers);  Linux Commands:
+
+   Operating System (OS) = LINUX OR Windows, Solaris       
+=====================================================
+Laptop or other Personal Computer:
+
+hardware and software make a computer. without software a computers is just a bare metal
+
+Computer Vendors:  hp laptop $900 [hw=600, sw-OS =300]
+  hp --- Your HP laptop is running with a windows OS   
+  dell 
+  lenovo -Your laptop is running with a Linux OS 
+  acer 
+  microsoft 
+  toshiba
+  apple --- Your laptop is running with a MacOS  
+  
+Servers:
+  Operating System is the heart of the Computer/servers 
+
+  Windows -- OS 
+     Licence 
+  Linux -- OS 
+     Open source 
+  macOS 
+
+Solaris ---> paid 
+Linux -- 
+Solaris kernel and Developed the Linux kernel 
+1991 Linus 
+  Solaris 
+     kernel 
+       Developed LINUX OS from Solaris kernel  
+
+
+Open source vs FREE OS 
+Open source: -- both the source codes
+               and the softwares is free 
+Free: --- ONLY the the softwares is free  
+Licence technology: softwares is not free
+
+KFC     / Coca cola:   GoodChicken (GC) 
+recipe    recipe        Open source 
+
+  ssh-client = ssh = secure shell = 22
+
+  
+LINUX         vs      Windows:
+Open source           Licence
+virus=no              Virus=Yes
+case sensitive        not case sensitive 
+LS =! Ls, lS ls       LS, Ls, lS ls 
+use for backend       workstations 
+backend 80%Linux      20% backend
+MULTI-DESTRIBUTIONS    Single distribution
+ Redhat 
+ CentOS 
+ ubuntu 
+
+LandmarkTech:
+  servers: 90% are Linux (running a linus os/dist)
+           10% are Windows   
+  work stations: 
+    Windows --> 50 Windows 
+    MacOS   ---> 40 Mac Laptop
+    others  ---> 10 
+
+Virtual servers hosted in AWS  ---> Cloud Computing 
+INSTALL AND RUN A DATA CENTER
+  aws - amazon web services  : 
+         AWS is hosting our  LINUX servers  =  
+
+    aws.amazon.com 
+email: landmarkunive@gmail.com
+passwd: 
+
+RedHat Server in AWS = EC2 :
+
+Windows Loptop: 
+ ssh-client ----softwares use to connect to any Linux servers
+  mobaXterm --1
+  git bash  --2
+  putty
+  PowerShell & Command prompt 
+
+MacOS Laptop:
+   Terminal 
+   GIT-Bash
+
+How servers or PC are managed?
+How are tasks performed in servers? 
+    GUI = Graphical user interface 
+    CLI = Command LINE  interface
+
+Git bash installation:
+   https://git-scm.com 
+
+Operating
+  Linux   - Linus
+  Windows - Bill Gates
+
+How to access a Linus server running in AWS:
+  username: ec2-user / simon / LandmarkTech
+  
+  authentication:
+    password authentication: admin@124
+    multi-factor authentication (password + code):
+
+    ssh key 
+
+  ssh-client -- putty / Git bash / mobaXterm 
+
+  Server's address: ip-address, dns 
+
+      ssh jane@demoServer or  ssh jane@10.1.10.2
+      ssh jane@appServer  0r  ssh jane@10.10.10.8
+      ssh jane@dbServer   0r  ssh -i key27.pem jane@10.10.10.8
+
+      ssh userName@ip-address
+
+  Firewall is open on required ports: 
+
+   SSH = Secure SHELL 
+
+   ssh userName@ip-address
+
+cd Downloads 
+ssh -i "class27key.pem" ec2-user@ec2-3-133-151-47.us-east-2.compute.amazonaws.com
+
+ ssh 
+
+ Running tasks or workloads in a server:
+
+ 1. GUI     = Graphical User Interface 
+              Typing  
+ 2. CLI     = Command Line Interface 
+         mkdir git sonaQube jenkins aws azure  
+ 3. Scripts = List of instructions/commands that automate workloads 
+
+Windows File/Directory Structure
+   c:// = The root Directory [folder] 
+   Files and Folders & sub folders
+     mkdir git sonaQube jenkins aws azure gcp
+Linux File/Directory Structure
+  Files and Directory & sub Directories 
+  Files = Files for Linux/windows
+  Folders = Windows and Directory for Linux
+
+
+Linux comands:
+  root (principal) directory (folders) = / 
+
+           Linux File Structure   :                   
+                    /  
+/home = it contains user's home directory details
+
+/etc = contains configuration files 
+  =====
+  /etc/ssh/sshd_config = sshd_config file is used to configure ssh  
+  /etc/shadow  = detail information about users password 
+  /etc/passwd  = detail information about users 
+     cat /etc/passwd
+
+/bin = contains binary files [commands]
+=====
+  ls = list contains of a file
+  pwd = print working Directory 
+  whoami = Print the user name associated with the current effective user ID.  Same as id -un.
+  cd  = change Directory
+  cat = displays the content of a file 
+  clear = clear your consoline line
+
+
+/sbin - contains system binary files [commands]
+=====
+  - contains system binary files [commands]
+    Executed ONLY by priviledge /admin/root users 
+  - adduser lab
+  - passwd lab
+
+                       IQ: What is the difference between bin and sbin in Linux? 
+
+ sbin are binary flies only executable by users 
+   with admin and elevated priviledges  
+    exple: adduser admin
+
+ bin files are executable by any user 
+  exple: ls = list the content of a Directory
+
+                        IQ: Explain how users are categorised in Linux?
+
+    We have three category of users in Linux:
+
+    1. admin/root user  = super user that runs all commands 
+    2. normal users  = runs executables in /bin 
+
+    3. system users 
+        Users created when we install certain softwares 
+
+tmp:
+====
+contains temporal files 
+
+opt: it contains softwares. It is were packages are installed.
+===
+  Installation of third party softwares like Jenkins
+
+lib  = 
+====
+
+proc 
+=======
+-  meminfo 
+-  cpuinfo 
+
+var = dynamic files [logs]
+========================== 
+ - /var/log/messages 
+    sudo cat /var/log/messages
+
+Linux Basic Commands:
+=====================
+How do you run Linux commands Landmark?
+1. Create a Linux server in AWS Cloud
+2. Connect via ssh into the server 
+   make sure the ssh port 22 is open in the server's firewall
+3. Start running task/workloads using commands.
+Craeting, Navigation and Directory Control Commands: 
+
+      mkdir = create directory  
+      cd    = directory navigation   
+      ls    = list file and directories
+      pwd   = where are you located in the server 
+              print/present working Directory 
+
+     ls     = list the content of pwd 
+     ls /   = list the content of the root Directory  
+     ls /tmp = list the content of the tmp directory 
+     ls /var/log = list the content of the /var/log directory
+
+      mkdir class28
+      mkdir devops
+      mkdir -v test 
+           -v verbose
+
+  sudo hostname demo 
+  sudo su - ec2-user 
+
+mkdir class/class1/class2/class3 
+mkdir Devops/SDLC/Linux/Jenkins/Git/Maven/Nexus/
+mkdir -pv Devops/SDLC/Linux/Jenkins/Git/Maven/Nexus/
+  - p = will create both parent and child Directory
+
+
+  mkdir  Devops/
+  mkdir  Devops/SDLC/
+  mkdir  Devops/SDLC/Linux/
+  mkdir  Devops/SDLC/Linux/Jenkins/
+  mkdir  Devops/SDLC/Linux/Jenkins/Git/
+  mkdir  Devops/SDLC/Linux/Jenkins/Git/Maven/
+  mkdir  Devops/SDLC/Linux/Jenkins/Git/Maven/Nexus/
+
+ = tree cannot be found 
+
+ = yum install tree 
+   This command has to be run with superuser privileges
+   (under the root user on most systems)
+sudo = permit a user to run commands as another user or superuser 
+
+ sudo yum install tree
+
+ =========================
+Deleting an empty directory:
+   rmdir dirName 
+     rmdir paypal/
+
+   rm -r dirName
+     rm -r paypal/
+
+[ec2-user@demo ~]$ rmdir class
+rmdir: failed to remove 'class': Directory not empty
+
+Deleting a directory with content:
+   rm -r dirName 
+   rm -rf dirName 
+   
+Deleting all directories that start with a
+   'class' or a 'given pattern'
+   rm -rf class*  
+
+  * = wild card 
+
+Deleting all directories that ends with a
+   'app' or a 'given pattern'
+   rm -rf *app   
+
+cd  = directory navigation
+
+[ec2-user@demo ~]$ pwd
+pwd = /home/ec2-user
+pwd =  /home/ec2-user/Devops/SDLC/Linux
+
+cd .. 
+cd ../../
+cd - = moves you to the  directory you were before
+
+cd / 
+cd /bin 
+cd /etc 
+
+File management:
+  touch fileName 
+  touch list.txt 
+  echo command 
+  echo  DevOps is good
+  echo 'JESUS IS LORD'
+  echo JESUS IS LORD
+  echo "JESUS IS LORD" > truth.sh 
+  echo  DevOps is good > hired
+
+ls = 
+ll or ls -l = long list the content of
+              a directory
+
+ls -lt = long list base on time  
+ls -ltr 
+Why/how are some files hidden
+Important files are hidden 
+ to avoid accidental delete
+  rm -rf class* 
+  mkdir .config 
+  touch .deploy 
+
+IQ: How can you deplay hidden files/dirs?
+   ls -a 
+
+Path to files/directories:
+  relative path and 
+    start pwd 
+    cat test
+    ls Devops/ 
+  absolute path
+      start from root dir (/) 
+    cat /home/ec2-user/test
+    ls /home/ec2-user/Devops/
+
+Reading the content of a file:
+  cat fileName 
+  cat -n fileName 
+  cat test 
+  cat  /etc/passwd 
+      [users details] 
+  cat   /etc/shadow
+  sudo cat /etc/shadow
+        [users password] 
+ monitor.sh file has 1000 lines 
+   head fileName 
+      [display the 1st 10 lines]
+   tail fileName 
+      [display the last 10 lines]
+  tail -1 fileName
+     [displays the last line]
+  tail -4 fileName
+    [displays the last 4 lines]
+
+list :
+ simon 
+ Legah 
+ Paul 
+ John 
+ Peter 
+ James 
+ Tita 
+ Pefok 
+ Linux 
+ Windows 
+ Git 
+ Maven 
+ aws 
+ gcp 
+ mgc 
+ toyota 
+
+Modifying the content of a file:
+  Text editors:
+ Windows:
+    sublime text
+    bracket
+    notepad++
+    vs code 
+    atom 
+    eclipse 
+
+ Linux:
+  vi/vim editors
+  nano 
+  vi fileName 
+[ec2-user@demo ~]$ vim tools
+-bash: vim: command not found
+  sudo yum install vim  tree 
+  1. you start accessing the file in command mode 
+     press the 'i' key to enter insert mode 
+     press "esc key" to enter command mode 
+
+ Save and Quit: 
+     type :wq and press enter key to save and quit
+     do a quick double press on the shift+z key  
+       to save and quit 
+            press+hold 'shift key' and type ZZ
+ Quit without saving:  
+     enter command mode          
+     type :q! and press enter key to quit 
+           without saving
+
+Project:
+ create a file in using vi and explain your expection
+ in your the DevOps class28 Program.
+
+  Graduation date = July 9, 2022.
+
+less fileName 
+       tools
+
+cat / tail / head /  less / more
+
+Cat / TAIL / Head /  less / more
+
+ cat Dev.txt 
+ cat DEV.txt 
+ cat dev.txt 
+
+Screen1 = Laptop
+screen2 = (external monitor)
+
+5-9 minutes video 
+
+cp = copy files [backup]
+mv = rename files/directories
+
+files:
+  mv fileName 
+  cp fileName
+
+directories:
+  mv dirName 
+  cp -r dirName 
+
+file  
+wc  = word counts 
+  wc -l = no of lines 
+  wc -c = no of charesters in a file  
+ln:  link 
+  fileName =  list 
+  ln list list-hard 
+       = hard link  [ln/cp]
+       = copy 
+  ln -s list list-soft 
+       = soft link 
+
+Deleting a file in Linux:
+ rm fileName 
+ rm list 
+==============================
+
+
+
+
+
+
+
+
+
+
+
+
+
+

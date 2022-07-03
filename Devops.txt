@@ -1,0 +1,14 @@
+what is devops?
+  it is all about automation. It is continuous transformation, improvement in company operations
+    it is the future of software development.
+    it bring automation, speed and high ROI(return of investment)
+    - continuous intergration
+    - continuous development
+    - continuous testing
+    - continuous delivery
+    - continuous deployment
+    - continuous monitoring
+    - continuous security
+
+what is DevSecOps?
+  It is the intergration of continuous development + security + operations

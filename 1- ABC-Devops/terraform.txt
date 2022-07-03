@@ -1,0 +1,51 @@
+===============Terraform=============================
+
+Terraform allows you to build, change, and version your infrastructure using infrastructure as code techniques. It allows 
+to set configuration files to define your applications or infrastructure, and stores the state of your infrastructure to
+ modify or update.
+
+This key competency includes Deploying Terraform Configurations, Launching and changing an AWS instance using Terraform,
+ Working with the Terraform Registry, resources and outputs, among others. 
+
+Key Competencies:
+
+Deploying Terraform Configurations 
+- Using the Console and CLI, variables, functions, and modules.
+Launch an Amazon Web Services Instance using Terraform 
+- Launching an AWS instance using Terraform resources and plans.
+Changing Amazon Web Services Instance using Terraform 
+- Changing an already existing AWS instance deployed by Terraform
+ to a different instance type and properties using Terraform config files.
+Working with the Terraform Registry
+- Working with the Terraform Registry to deploy registry modules.
+Destroying Resources
+- Deleting existing TF resources and working with the delete API.
+Outputs 
+- Understanding how to retrieve specific values from the existing infrastructure.
+
+Working with the Docker Provider - Using the TF Docker provider to launch Docker containers.
+Importing existing Infrastructure - Working with import API to import existing TF infrastructures.
+Working with Terraform Secrets - Understanding how to work with sensitive data in Terraform while creating infrastructure.
+Conditionals, Counters, and Functions - Working with the mechanics of Terraform including functions, counters, and conditionals.
+Working with Variables: Understanding how to use variables with Terraform to pass values to functions and TF infrastructure.
+
+Understanding Backends - Working with local and remote backends and understanding how to use them.
+Working with the additional provider: Using the MySQL, local, and time provider to manage database instances, local data
+ and time-based providers to understand how to use providers.
+Debugging Terraform - Verifying that Terraform logs can be read and understand how to read debug information.
+Modularizing code - Splitting up code in a modular manner and using best practices to split up larger codebases into more
+ modular components.
+Understanding the Terraform Graph API: Working with the TF graph API to learn how to build a visual representation of the
+ configurations
+================================================================
+
+Terraform creates an implementation plan, define what it will do to attain the preferred state, and then executes it to
+ construct the described infrastructure. As the configuration changes, Terraform is talented to decide what changed and
+  generate incremental execution plans which can be practical
+
+-What are the reasons for choosing Terraform for DevOps?
+
+Image result for what is your experience using terraform
+Reason #1: Terraform is platform-agnostic and can deploy infrastructure to multiple clouds. Managing multicloud 
+infrastructure is best done with a coordinated approach that supports, not complicates DevOps use of continuous 
+integration and continuous deployment (CI/CD) tools

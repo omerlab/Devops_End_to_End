@@ -1,0 +1,35 @@
+===============Docker=================================
+
+Docker is a platform that is designed to make it simple to create, update, deploy, and run containerized applications.
+
+This competency area includes building Docker Images and Docker Files, creating, deploying, and running simple applications,
+ working with .NET Containers, among others.
+
+Key Competencies:
+
+Docker Images - Building Docker Images and Docker Files.
+Deploying Simple Applications with Docker - Creating and deploying simple existing containerized applications 
+(API’s and UI’s) with docker.
+
+Containerizing a sample application - Containerizing an existing application into a Docker container.
+
+Running applications with Docker - Using the Docker Run API to run applications and test competency of the API’s 
+including detached/foreground, container naming and identification, cleanup and restart policies.
+
+Deploying images to a Docker Registry - Deploying built images to a registry.
+
+Working with .NET Containers - Deploying windows .NET applications on Docker.
+
+Building Images - Building Docker images using the Image API, including building from git, tarballs, text files, or URLs.
+Basic DevOps - Understanding of basic DevOps commands for docker including versioning, top, history, and ability to view 
+and understand system events that are provided by the Docker API.
+Tags and Labels - Creating, updating, listing, and sorting with tagged images.
+Running Multiple Services in a container - Testing a user's knowledge of running multiple services in a container.
+Orchestration - Running dockerized applications at scale using Docker Swarm or Kubernetes.
+
+Multi-Stage Builds - Building and working applications that are built with multiple build stages.
+Running commands inside a container - Execing into an existing running container and debugging issues in a running container.
+DevOps for Docker Containers - Learning how to extract metrics and log data from Docker containers.
+Adapting stronger Security Practices - Verifying that users understand principles of building secure containers with seccomp,
+ apparmor, user namespaces, least privileged users, etc.
+Working with Volumes - Working with volumes on a file system, including creating, attaching, listing, pruning, and removing.
