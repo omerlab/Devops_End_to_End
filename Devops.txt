@@ -1,5 +1,8 @@
 what is devops?
   it is all about automation. It is continuous transformation, improvement in company operations
+  In Landmark automation is the key for our Project.
+
+  
     it is the future of software development.
     it bring automation, speed and high ROI(return of investment)
     - continuous intergration
@@ -12,3 +15,46 @@ what is devops?
 
 what is DevSecOps?
   It is the intergration of continuous development + security + operations
+
+
+What is a CI/CD pipeline?
+  CI/CD Pipeline or Continuous Integration/ Continuous Delivery is considered the DevOps approach's backbone. The pipeline is 
+responsible for building codes, running tests, and deploying new software versions.
+
+
+What is Jenkinsfile? 
+  Jenkins file is a text file that has a definition of a Jenkins pipeline and is checked into 
+the source control repository. It enables code review and iteration on the pipeline. It also permits 
+an audit trail for the pipeline.
+
+
+Assume that you have a pipeline. The first job that you performed was successful, but the second one 
+failed.  What would you do now?
+
+  You don't have to worry, and you just have to restart the pipeline from the point where it 
+failed by doing 'restart from stage.'
+
+
+What is Groovy in Jenkins?
+  Apache Groovy is a dynamic object-oriented programming language used as a scripting language for Java platforms. 
+  Groovy is used to orchestrate the Jenkins pipeline and enables different teams to contribute to the work in different languages. 
+  Groovy's syntax is very similar to that of Java, making it more seamless with the Java interface. 
+  The language has several features like Java compatibility and Development support.
+
+
+
+How do you store credentials in Jenkins securely?
+
+  Credentials can be stored securely in Jenkins using the Credentials plugin, which stores 
+different types of credentials like - Username with a password, SSH username with the private key, 
+AWS Credentials, Jenkins Build Token, Secret File/Text, X509 & other certificates, Vault related 
+credentials securely with proper encryption & decryption as and when required.
+
+
+What are the types of Jenkins pipelines?
+
+  Jenkins Pipelines can be either - a Declarative pipeline or a Scripted Pipeline. 
+Declarative pipeline makes use of numerous, generic, predefined build steps/stages (i.e. code snippets) 
+to build our job according to our build/automation needs whereas, with Scripted pipelines, 
+the steps/stages can be custom-defined & used using a groovy syntax which provides better 
+control & fine-tuned execution levels

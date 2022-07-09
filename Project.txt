@@ -1,0 +1,12 @@
+I managed a federated micro-services java based application:
+   As part of my job i needed to configure Infrastructure: VM{onprem, AWS, GCP, AZURE} ==> linux or windows OS
+   i need to ensure that the development environment is highly secure and collaborative:
+    i used terraform to create Infrastructure. it does continuous provisionning   
+    i used ansible to configure : it does continuous configuration
+     - Git and github, Maven, sonarQube, Nexus, Tomcat, jenkins, Docker, proxies/Lb, k8s(kubeadm,eks), aws
+
+     With ansible i used modules to be able to configure Infrastructures
+Development:
+   GIT is used for versionning and data integrity. It tracks each commit and tag username and email of commit Developer
+
+

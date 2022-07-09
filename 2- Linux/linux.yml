@@ -193,20 +193,20 @@ Linux comands:
     We have three category of users in Linux:
 
     1. admin/root user  = super user that runs all commands 
-    2. normal users  = runs executables in /bin 
+    2. normal users  = runs executables in /bin. we can have normal users with elevated privileges
 
     3. system users 
         Users created when we install certain softwares 
 
-tmp:
+/tmp:
 ====
 contains temporal files 
 
-opt: it contains softwares. It is were packages are installed.
+/opt: it contains softwares. It is were packages are installed.
 ===
   Installation of third party softwares like Jenkins
 
-lib  = 
+/lib  = librairies folders are found there
 ====
 
 proc 
@@ -214,10 +214,10 @@ proc
 -  meminfo 
 -  cpuinfo 
 
-var = dynamic files [logs]
+var = dynamic files [logs]/ contains variables files
 ========================== 
  - /var/log/messages 
-    sudo cat /var/log/messages
+    sudo cat /var/log/messages : whatever happenning in the server is saved in this file
 
 Linux Basic Commands:
 =====================
@@ -226,7 +226,7 @@ How do you run Linux commands Landmark?
 2. Connect via ssh into the server 
    make sure the ssh port 22 is open in the server's firewall
 3. Start running task/workloads using commands.
-Craeting, Navigation and Directory Control Commands: 
+Creating, Navigation and Directory Control Commands: 
 
       mkdir = create directory  
       cd    = directory navigation   
@@ -310,14 +310,15 @@ cd /bin
 cd /etc 
 
 File management:
-  touch fileName 
-  touch list.txt 
-  echo command 
-  echo  DevOps is good
-  echo 'JESUS IS LORD'
-  echo JESUS IS LORD
-  echo "JESUS IS LORD" > truth.sh 
-  echo  DevOps is good > hired
+  touch is used to create an empty file
+     touch fileName 
+     touch list.txt 
+  echo command is used to print some information 
+     echo  DevOps is good
+     echo 'JESUS IS LORD'
+     echo JESUS IS LORD
+     echo "JESUS IS LORD" > truth.sh 
+     echo  DevOps is good > hired
 
 ls = 
 ll or ls -l = long list the content of
@@ -332,7 +333,7 @@ Important files are hidden
   mkdir .config 
   touch .deploy 
 
-IQ: How can you deplay hidden files/dirs?
+IQ: How can you display hidden files/dirs?
    ls -a 
 
 Path to files/directories:
@@ -404,13 +405,13 @@ Modifying the content of a file:
      press "esc key" to enter command mode 
 
  Save and Quit: 
-     type :wq and press enter key to save and quit
+     type : wq and press enter key to save and quit
      do a quick double press on the shift+z key  
        to save and quit 
             press+hold 'shift key' and type ZZ
  Quit without saving:  
      enter command mode          
-     type :q! and press enter key to quit 
+     type : q! and press enter key to quit 
            without saving
 
 Project:
@@ -419,15 +420,18 @@ Project:
 
   Graduation date = July 9, 2022.
 
-less fileName 
+less : it is used to read large file
+less fileName
        tools
+more : it is also used to read file 
 
 cat / tail / head /  less / more
 
-Cat / TAIL / Head /  less / more
+linux is case sensitive, so Cat / TAIL / Head  will not work but in windows it will work.
 
+exple:
  cat Dev.txt 
- cat DEV.txt 
+ cat DEV.txt will not work on linux but will work on windows.
  cat dev.txt 
 
 Screen1 = Laptop
@@ -444,13 +448,17 @@ files:
 
 directories:
   mv dirName 
-  cp -r dirName 
+  cp -r dirName ==> we need to add -r to be able to copy a directory
 
 file  
 wc  = word counts 
-  wc -l = no of lines 
-  wc -c = no of charesters in a file  
-ln:  link 
+  wc -l = number of lines 
+  wc -c = number of charesters in a file  
+ln:  link can be hard link or soft link.
+    hard link: is the copy of the original file. if we delete the original file the hard 
+                link will remain
+    soft link: redirect to the original link. if we delete the original file, the soft link
+               will not be able to output the original file content
   fileName =  list 
   ln list list-hard 
        = hard link  [ln/cp]
@@ -462,6 +470,160 @@ Deleting a file in Linux:
  rm fileName 
  rm list 
 ==============================
+
+Folders = Windows : Is a container of files and sub-folders/directories 
+Directories= Linux :  Is a container of files and sub-folders 
+Files 
+Diminion Systems =  cnn 
+   mkdir cnn 
+   When creating a directory we need to secure it because it contains informations about the project. 
+
+File permissions/security:
+-rw-rw-r--. 1 ec2-user ec2-user 45 Apr 23 08:33 list:  FILE
+lrwxrwxrwx. 1 ec2-user ec2-user  4 Apr 23 08:35 mylist : Link
+drwxrwxr-x. 2 ec2-user ec2-user  6 Apr 23 08:31 news: Directory
+-rw-rw-r--. 2 ec2-user ec2-user 45 Apr 23 08:33 list.hard: 
+1   2       3   4         5     6     7           8
+  Files start with - 
+  directories start with a 'd'
+  symbolic/soft links start with 'l'
+
+Fields for files:
+  1)  type (-file,)
+  2)  Permissions 
+  3)  Number of links
+  4)  Owner
+  5)  Group Owner
+  6)  Size of the File in Bytes
+  7)  Date and Time of creation
+  8)  File name/Dir Name 
+d rwxrwxr-x. 2 ec2-user ec2-user  6 Apr 23 08:31 news: Directory
+- rw-rw-r--. 2 ec2-user ec2-user 45 Apr 23 08:33 list: 
+- rw-rw-r--. 2 simon developers  45 Apr 23 08:33 news:     
+Permission attributes:
+  Read    - r      = 4   grant read access for a user  
+  Write   - w      = 2   grant write/modify  access for a user
+  Execute - x      = 1   grant access to run the file as a command 
+           Normal Users:
+  Owner     Group             others: 
+  simon     developers        anyone 
+  rw-=6     rw-=6              r--=4    = file = 664 
+  rwx=7     rwx=7              r-x=5    = Dir  = 775
+
+            root User:
+            su - userName [SU = SWITCH USER]
+            su - root
+        Password:
+        [ec2-user@demo cnn]$ sudo su - root
+   sudo: permit priviledge users to run commands as other users
+d rwx r-x r-x. 2 root root    6 Apr 23 09:02 cbs
+- rw- r-- r--. 1 root root    0 Apr 23 09:01 deploy.java
+  Owner     Group             others: 
+  root       root              anyone 
+  rw-=6      r--=4              r--=4    = file =  644
+  rwx=7      r-x=5              r-x=5    = dir  =  755
+                   root user        Normal Users:
+                   File  Dir        File     Dir 
+Full Permissions:  0666 0777        0666     0777
+Default perm:      0644 0755        0664     0775 
+                  ---- ----        ----     ----
+umask value :      0022 0022        0002     0002:
+                  ---- ----        ----     ----                  
+umask value: set the Default files permissions for users.
+what is the Default file permissions for root and normal users?
+
+For our cnn project all files should carry 644 permissions 
+  Determine the umask value that should be set?
+                          File      Dir:
+  Full Permissions        0666     0777      
+  Expected permissions    0644
+                          -----
+  umask value             0022
+  ---
+
+For our ebay project all files should carry 444 permissions 
+  Determine the umask value that should be set?
+                          File      Dir:
+  Full Permissions        0666     0777      
+  Expected permissions    0444
+                          -----
+  umask value             0222
+  ---
+
+For our news broadcast project all files should carry 600 permissions 
+  Determine the umask value that should be set?
+                          File      Dir:
+  Full Permissions        0666     0777      
+  Expected permissions    0600
+                          -----
+  umask value             0066
+  ---
+For our news project all files should carry 400 permissions 
+  Determine the umask value that should be set?
+                          File      Dir:
+  Full Permissions        0666     0777      
+  Expected permissions    0400
+                          -----
+  umask value             0266
+  ---
+
+For our cbs project all files should carry 0777 permissions.
+  Determine the umask value that should be set? 
+Directories navigation = executable permissions is required   
+
+File permissions/security:
+  How are files permissions modified in Linux?
+     1. By changing umask value =  
+     2. by running the chmod command 
+  chmod: we can add or remove permissions rights & priviledges
+    chmod permissions fileName 
+    chmod 600 app.py 
+        Owner  = 6 = rw- 
+        group  = 0 = ---
+        others = 0 = ---
+        rwx rwx r-x.
+        Owner  = 7 = rwx       7- rwx
+        group  = 7 = rwx       0- ---
+        others = 5 = r-x       0- --- 
+  
+  chown: changing the ownership of files/directories
+    Only the root user can change ownership of files 
+       /bin or /sbin == it is in sbin because only root user can change ownership
+  - rw- --- ---. 1 ec2-user ec2-user 0 Apr 23 09:32 app.py
+  d rwx --- ---. 2 ec2-user ec2-user 6 Apr 23 09:32 test
+    useradd or 
+    adduser simon 
+    sudo chown simon app.py
+    sudo -u simon chown simon app.py
+    chown: changing ownership of 'app.py': Operation not permitted
+    sudo -u root chown simon app.py
+    sudo chgrp simon app.py
+    sudo chown simon:simon test 
+
+  grep: Extract specific patterns from files  
+         /etc/passwd file  with over 1000 user's details 
+      Extract simon's details from the /etc/passwd file 
+      grep simon /etc/passwd 
+
+      cat /etc/passwd = output  
+      grep simon 
+
+  pipe: |
+     cat /etc/passwd | grep simon 
+
+
+  IQ: explain the grep and the pipe commands 
+
+  grep
+  sort
+  tr
+    find 
+    find -a
+    find . -empty 
+  sed
+  date 
+  timedatectl list-timezones
+  sudo timedatectl set-timezone "America/New_York"  
 
 
 
