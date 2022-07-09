@@ -50,4 +50,10 @@ for Developer and Operations.
 Implement a load balancer to increase capacity for an application​ - Automatically distributing incoming application traffic 
 across multiple targets using elastic load balancing. ​Applicable for Developer and Operations.
 
+    AWS CLI
+    ========
+   - To configure AWS CLI you need to install it using aws documentation. 
+   - Confcigure credentials using access-keys and secret-key from the aws console " aws configure"
 
+      ======   How to create a vpc ======
+  example:     aws ec2 create-vpc --cidr-block 10.10.0.0/16 
