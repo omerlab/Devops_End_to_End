@@ -530,7 +530,10 @@ Default perm:      0644 0755        0664     0775
 umask value :      0022 0022        0002     0002:
                   ---- ----        ----     ----                  
 umask value: set the Default files permissions for users.
+
 what is the Default file permissions for root and normal users?
+
+Umask setup: is in /etc/bashrc or /etc/profile file as follows
 
 For our cnn project all files should carry 644 permissions 
   Determine the umask value that should be set?
@@ -572,9 +575,9 @@ For our cbs project all files should carry 0777 permissions.
 Directories navigation = executable permissions is required   
 
 File permissions/security:
-  How are files permissions modified in Linux?
-     1. By changing umask value =  
-     2. by running the chmod command 
+  How are files permissions modified in Linux?:
+     1. By changing umask value (this will affect all files created) 
+     2. by running the chmod command (This will change permission for a specific files)
   chmod: we can add or remove permissions rights & priviledges
     chmod permissions fileName 
     chmod 600 app.py 
@@ -587,20 +590,24 @@ File permissions/security:
         others = 5 = r-x       0- --- 
   
   chown: changing the ownership of files/directories
-    Only the root user can change ownership of files 
+         Only the root user can change ownership of files 
        /bin or /sbin == it is in sbin because only root user can change ownership
+
   - rw- --- ---. 1 ec2-user ec2-user 0 Apr 23 09:32 app.py
   d rwx --- ---. 2 ec2-user ec2-user 6 Apr 23 09:32 test
     useradd or 
     adduser simon 
     sudo chown simon app.py
-    sudo -u simon chown simon app.py
+    sudo -u simon chown simon app.py (-u means that we want to run as simon but the permission was denied only root can do)
     chown: changing ownership of 'app.py': Operation not permitted
     sudo -u root chown simon app.py
-    sudo chgrp simon app.py
-    sudo chown simon:simon test 
+
+    chgrp: is use to change group ownership
+    sudo chgrp simon app.py 
+    sudo chown simon:simon test ==> this will change ownership of both owner and group
 
   grep: Extract specific patterns from files  
+
          /etc/passwd file  with over 1000 user's details 
       Extract simon's details from the /etc/passwd file 
       grep simon /etc/passwd 
@@ -608,27 +615,406 @@ File permissions/security:
       cat /etc/passwd = output  
       grep simon 
 
-  pipe: |
+  pipe: |  it allows the output of one command to become the input of another command
+
      cat /etc/passwd | grep simon 
 
 
   IQ: explain the grep and the pipe commands 
 
   grep
-  sort
-  tr
-    find 
+  sort : to sort file alphabetically
+  sort -i : will ignore casing in linux. NB==> linux is case sensitive by Default
+  
+    find: to search for a file
     find -a
     find . -empty 
-  sed
+
+sort : It is used to sort the output in numeric or alphabetic order .
+
+tr: To translate the text from lower case to upper case.
+
+Sed : is a Stream editor. A stream editor is used to perform basic text 
+transformations on an input stream (a file or input from a pipeline).
+ 
   date 
   timedatectl list-timezones
   sudo timedatectl set-timezone "America/New_York"  
 
+find 
+    find /home/ec2-user -name list.txt
+    find ~ -name list.txt :  search file in the user's homeDir wherever you are located 
+    find . -name hired  :    search file in a pwd 
+    find /tmp -name list.txt :
+    sudo find / -name test : search file in the entire server or globally (root )
+    find . -empty :  search for empty file 
+    find .-type f -empty
+    find . -type f -perm 0777: It will search all the files which have 777 permissions.
+
+        . = pwd 
+        ~ = user's homeDirectory
+    find . -mtime 1 : It will find all the files modified exact 1 day in current directory.
+  
+  sed
+  cut 
+  awk 
+  date 
+  timedatectl list-timezones
+  sudo timedatectl set-timezone "America/New_York"  
+
+user management commands:
+ 3 category of users in Linux:
+
+   1. root user:
+         superUser or admin  
+         can run all commands in the server  
+
+  2. Normal users :
+     Users created by the admin/root
+     can only run binary [/bin] files by Default   
+
+  3. system users :
+         Created with softwares installations   
+
+ Groups / Users: 10 teams with 200 Team members 
+ app-Server 
+ db-Server 
+ web-Server
+    Directors
+      legah
+    Managers/
+      emma 
+      gloria
+    Engineers 
+      landmark 
+      acho 
+      alu 
+    Developers  
+       babs   
+
+ adduser : --- create a user in Linux 
+ useradd : --- create a user in Linux
+ groupadd : -- create a group in Linux 
+ groupdel : -- delete a group in Linux
+    groupadd managers
+    sudo groupadd managers
+    sudo -u root groupadd managers
+      cat /etc/group : group are find in this directory
+
+         tail -5 /etc/group  ==> will output the last 5 groups created
+
+[ec2-user@demo ~]$ sudo groupadd managers
+[ec2-user@demo ~]$ sudo groupadd class28
+[ec2-user@demo ~]$ sudo groupadd developers
+
+ sudo useradd userName : use to create users
+
+ sudo -u root useradd paul : This create the user and her homeDir 
+    paul     = homeDir = /home/paul  = ~ 
+    landmark = homeDir = /home/landmark 
+    ec2-user = homeDir = /home/ec2-user
+
+   ls -ltr /home  
+
+Assigning password to users:
+
+  passwd userName 
+  sudo -u root passwd landmark
+  sudo passwd landmark 
+     class28   
+
+ /etc/passwd : file use to check users password
+
+ /etc/sudoers :  File use to assign sudo, escalated or admin rights/priviledges to users 
+ 
+ to achieve that we need to ==> sudo vi /etc/sudoers  
+#includedir /etc/sudoers.d
+ec2-user        ALL=(ALL)       NOPASSWD: ALL
+landmark        ALL=(ALL)       NOPASSWD: ALL
+simon           ALL=(ALL)       NOPASSWD: ALL
+
+ Files to consider:
+   /etc/passwd  :      users details 
+       cat /etc/passwd
+
+   /etc/groups :       group details 
+       cat /etc/groups
+
+   /etc/shadow :       user's password 
+       cat /etc/shadow
+
+
+Project:
+Create the following groups 
+    managers, 
+    developers
+Create the following users and assign passwords:
+    dominion 
+    success 
+
+Assign dominion to the managers group and assign
+success to the developers 
+
+How to users to groups in Linux?
+  useradd 
+  userdel 
+  groupadd
+  groupdel  
+  usermod  = 
+    This modify a user's account in Linux e.g 
+    Add a user to a secondary group :  usermod -G groupName userName
+  sudo usermod -G managers landmark 
+  Coomand to list/display user's group.
+           
+
+[landmark@demo ~]$ id landmark
+   uid=1002(landmark) 
+   gid=1005(landmark) groups=1005(landmark)
+
+[landmark@demo ~]$ sudo usermod -G managers landmark
+[landmark@demo ~]$
+[landmark@demo ~]$ id landmark
+ uid=1002(landmark) gid=1005(landmark)
+ groups=1005(landmark),1002(managers)
+
+  chage : used to change age's details of users
+  lid : used to display user's and group's details. only root can run it
+
+[landmark@demo ~]$ sudo chage admin:
+Changing the aging information for landmark
+Enter the new value, or press ENTER for the default
+        Minimum Password Age [0]:
+        Maximum Password Age [99999]: 7
+        Last Password Change (YYYY-MM-DD) [2022-04-24]:
+        Password Expiration Warning [7]: 3
+        Password Inactive [-1]: 90
+        Account Expiration Date (YYYY-MM-DD) [-1]: 180
+
+EC2 SERVER: 
+    root user  elevated priviledges  
+    ec2-user elevated priviledges 
+      How can a user [ec2-user] access the server?
+       userName: ec2-user 
+       ssh-private-key = class28key.pem [001244fafsd] 
+       password: class28 
+       server's address: public-ip [52.87.248.166]
+ using Password:
+    ssh ec2-user@52.87.248.166
+ using ssh-private-key:
+    ssh -i class28key.pem ec2-user@52.87.248.166
+Passwordless authentication --- :
+landmark 
+simon  
+paul 
+
+How users can access ec2 servers  with password ?:
+1. assign password to the user 
+2. Configure password authentication 
+   - sudo vi /etc/ssh/sshd_config
+       allow password authentication 
+         PasswordAuthentication: yes [change from no to yes]
+  - restart the ssh service 
+       sudo systemctl restart sshd     
+
+3.  ssh userName@hostAddress
+    ssh simon@52.87.248.166
+       password = class28 
+
+Files: 
+  /etc/ssh/sshd_config   
+    sudo vi /etc/ssh/sshd_config
+  /etc/sudoers 
+    sudo vi  /etc/sudoers
 
 
 
+Granting sudo access to users:
+  sudo vi  /etc/sudoers or 
+  echo "userName ALL=(ALL) NOPASSWD:ALL" |  tee /etc/sudoers.d/userName
+ add ansible user in the sudoers file:
+  sudo echo "ansible  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
+ add simon's user in the sudoers file:
+  sudo echo "simon  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/simon 
+Allow users to login using password:
+  sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+  sudo service sshd restart  
+  sudo systemctl restart sshd 
 
+
+ ssh simon@54.85.146.233  
+
+System Resources Commands:
+who 
+w 
+whoami 
+users 
+whereis 
+date 
+df 
+du 
+hostname
+
+System Resources Commands:
+who : Displays the current users working on the system.
+w : Show who is logged on and what they are doing
+users : Displays a compact list of the users currently logged
+        on the  system.
+whoami : Display the current user info who gave this command
+
+whereis: locate binary file location in the server
+         whereis ls 
+         whereis whereis
+         whereis pwd 
+         whereis touch 
+date : : Print or set the system date and time
+  date 
+  date -s "24 JAN 2022 20:04:40"
+  date -s "28 APR 2022 20:00:00"
+
+How to define/set set-timezones: 
+  timedatectl list-timezones
+  sudo timedatectl set-timezone <your_time_zone>
+  sudo timedatectl set-timezone Africa/Accra
+  sudo timedatectl set-timezone America/New_York
+
+application server:
+  the system is very Important for automation 
+    scheduling an application deployment for 11:55PM EST/EDT 
+
+df - Report file system disk space usage
+     RAM = 8GB, Hard drive space = 500GB SSD 
+server/system/computer/laptop = 
+   create files, directories folders 
+   downloads movies, videos, study materials 
+
+df - 
+$ df -h
+Filesystem            Size  Used Avail Use% Mounted on
+C:/Program Files/Git  953G  922G   31G  97% /
+
+df : Report file system disk space usage
+  df 
+  df -h  ; 
+     where -h = human readable 
+du : Estimate file space usage.
+      tesla 
+      dev  
+      qa 
+      prod 
+      videos --- movie1 
+                 movie2
+                 movie3
+
+du -h 
+
+RAM = 8GB,
+  RANDOM ACCESS MEMORY 
+  IT DETERMINES THE SPEED OF YOUR System/SERVER 
+    memory 
+
+free -h 
+feer -m  = megabytes 
+
+[ec2-user@demo ~]$ free -h
+      total   used        free      shared  buff/cache   available
+Mem:  965M     123M        233M     648K        608M        701M
+Swap: 0B       0B          0B
+
+Swap: 200% of memory and it is extracted from the hard disk 
+
+df -h:
+   /dev/xvda1      9.0G  1.7G  7.4G  18% /
+
+Mem:            10G         9.8G         0.2G
+  applications will either not run or lacks performance 
+Mem:            10G         9.8G         0.2G
+swap:           20G          0 
+  swap memory equals 200% of memory 
+
+  RAM = Random access memory 
+  running applications --> memory optimised 
+
+lscpu 
+lsmem 
+
+How can a System/server be identified?
+ webServer 
+ remoteHost details:
+    public or private ip address: 54.85.146.233
+       ssh simon@54.85.146.233
+    hostName: webserver 
+       ssh simon@webserver
+    dnsName: www.rbc.com
+       ssh simon@ww.rbc.com      
+hostname : Show or set the system host name.
+   hostname  = displays the system's hostname 
+   hostname dbServer  = this will assign the system hostname 
+                        as dbServer 
+   hostname dbServer = only the root user or users with 
+                       admin/sudo access can assign hostname 
+   sudo hostname dbServer
+        hostname webserver 
+
+   ping demo
+
+   ping google.com      = dnsName 
+   ping 172.253.122.113 = public ip address
+hostname:
+  hostname dbServer
+  hostname  
+ifconfig  = display the IP addresses of a server/system 
+    172.31.19.167
+    172.31.19.167
+ip a
+
+[ec2-user@dbserver ~]$ hostname -i
+    fe80::832:a4ff:fe8a:91d1%eth0  = ipv6
+                                   128 bites 
+    172.31.19.167 = ipv4  
+     8 + 8  8  8  = 32 bites 
+
+  boa = 500,000 servers [1,000,000 ip address] 
+
+hostname -i 
+
+lsblk 
+cat 
+Command helpers:
+  man : Display the on-line manual pages.
+    man ls 
+       ls - list directory contents
+    man pwd 
+      pwd - print name of current/working directory
+  info:
+    info ls 
+  help:
+    ls --help 
+  whatis:
+   whatis ls  
+    The whatis command displays a summary line
+    from the  man page for the specified 
+    command in Linux.
+    whatis ls 
+
+service sshd status  [Redhat 5/6]  
+service serviceName status  [Redhat 5/6] 
+
+systemctl status sshd [redhat 7/8]
+service sshd status [redhat 7/8]
+
+systemctl status|stop|start|restart|enable|disable sshd 
+systemctl status|stop|start|restart|enable|disable httpd
+
+systemctl list-unit-files
+
+uptime: Tells how long the system has been running.
+    uptime 
+        5 years 
+        366 days 
+        15 days 
+  To optimised uptime ---
+last: show listing of last logged in users.
+Yum: 
 
 
 
