@@ -878,10 +878,10 @@ How to define/set set-timezones:
   sudo timedatectl set-timezone America/New_York
 
 application server:
-  the system is very Important for automation 
+  The system: is very Important for automation 
     scheduling an application deployment for 11:55PM EST/EDT 
 
-df - Report file system disk space usage
+df : Report file system disk space usage
      RAM = 8GB, Hard drive space = 500GB SSD 
 server/system/computer/laptop = 
    create files, directories folders 
@@ -896,6 +896,7 @@ df : Report file system disk space usage
   df 
   df -h  ; 
      where -h = human readable 
+
 du : Estimate file space usage.
       tesla 
       dev  
@@ -908,10 +909,11 @@ du : Estimate file space usage.
 du -h 
 
 RAM = 8GB,
-  RANDOM ACCESS MEMORY 
+RAM : RANDOM ACCESS MEMORY 
   IT DETERMINES THE SPEED OF YOUR System/SERVER 
     memory 
 
+ free : memory available 
 free -h 
 feer -m  = megabytes 
 
@@ -934,10 +936,12 @@ swap:           20G          0
   RAM = Random access memory 
   running applications --> memory optimised 
 
-lscpu 
-lsmem 
+lscpu : used to list your hardware property
+lsmem : list your hardware memory
 
-How can a System/server be identified?
+How can a System/server be identified? :
+=====================================================
+
  webServer 
  remoteHost details:
     public or private ip address: 54.85.146.233
@@ -946,23 +950,29 @@ How can a System/server be identified?
        ssh simon@webserver
     dnsName: www.rbc.com
        ssh simon@ww.rbc.com      
+
 hostname : Show or set the system host name.
+
    hostname  = displays the system's hostname 
-   hostname dbServer  = this will assign the system hostname 
+   exple: hostname dbServer  = this will assign the system hostname 
                         as dbServer 
    hostname dbServer = only the root user or users with 
                        admin/sudo access can assign hostname 
    sudo hostname dbServer
         hostname webserver 
 
-   ping demo
+   ping demo : will try to check if the server with demo hostname is alive
+                or up and running
 
-   ping google.com      = dnsName 
-   ping 172.253.122.113 = public ip address
+
+   ping google.com      =  used dnsName to ping 
+   ping 172.253.122.113 = used public ip address to ping 
+
 hostname:
   hostname dbServer
   hostname  
-ifconfig  = display the IP addresses of a server/system 
+
+ifconfig : display the IP addresses of a server/system 
     172.31.19.167
     172.31.19.167
 ip a
@@ -975,7 +985,7 @@ ip a
 
   boa = 500,000 servers [1,000,000 ip address] 
 
-hostname -i 
+hostname -i : will display the private ip address of a server 
 
 lsblk 
 cat 
@@ -995,6 +1005,8 @@ Command helpers:
     from the  man page for the specified 
     command in Linux.
     whatis ls 
+
+servive : help to configure service and check service status
 
 service sshd status  [Redhat 5/6]  
 service serviceName status  [Redhat 5/6] 
@@ -1016,11 +1028,182 @@ uptime: Tells how long the system has been running.
 last: show listing of last logged in users.
 Yum: 
 
+passwd -d <username> : will delete user's password
+
+cat /etc/*release : give system's informations
+
+cat /proc/version :  command give the kernel version.
+==================================================
+ dbServer -- redhat8 Linux OS 
+       deploy.java (files )
+
+   scp deploy.java  appServer 
+   scp fileName userName@host 
+with password authentication enabled 
+
+scp -i bricekey25.pem docker-compose.yml  ec2-user@172.31.36.125:/home/ec2-user:
+
+and passwORD assigned to user:
+   scp deploy.java ec2-user@172.31.15.177:/home/ec2-user
+   ssh ec2-user@172.31.15.177
+
+with ssh-private-key:
+   scp -i key.pem deploy.java ec2-user@172.31.15.177:/home/ec2-user
+   ssh -i key.pem ec2-user@172.31.15.177
+
+  Deployment server:
+     tomcat-appServer   -- redhat8 Linux OS
+  host: 3.137.159.171
+        172.31.15.177
+  
+  host2: 3.133.151.47
+    ssh simon@3.133.151.47
+        172.31.7.161
+
+  users:
+     ec2-user 
+     tomcat 
+     elvis  
+  
+  scp = secure copy
+     copy files from a Linux server to another and vice-versa  
+
+Configuring password authentication in linux ec2 instances:
+  when we create an ec2 server (instance) in aws 
+  it comes with a private-key for the default user 
+     default users are:
+      RedHat Servers = ec2-user (ssh-private-key and/or password) 
+      ubuntu         = ubuntu
+Configuring password authentication in linux ec2 instances:
+  1. sudo su - to become the root user 
+  2. vim /etc/ssh/sshd_config 
+        change password authentication from no to yes 
+  3. restart your ssh service or daemon 
+      service sshd restart 
+      [root@appserver ~]# systemctl restart sshd
+
+sudo echo "$user  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/$user
+
+sudo echo "simon  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/simon
+
+sudo echo "class27  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/class27 
+
+sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+
+systemctl restart sshd
+
+[root@appserver ~]# yum install vim
+[simon@appserver ~]$ sudo yum install vim
+
+ scp -r devops/  ec2-user@172.31.15.177:/home/ec2-user/
+    copying a directory (scp -r):
+
+ 
+scp : is a binary command locate in /usr/bin
+      to search a command use which <command name>
+
+clear : Clears the terminal screen.
+cal : Displays a calendar
+wget : The non-interactive network downloader.
+       us to Downloads packages/softwares from the internet 
+
+  yum  = Downloads and install packages 
+     yum install wget tree
+
+        are you sure you want to continue (y/n)  
+       
+tee: : It is command is used to store and view (both at the same time) 
+       the output of any other command.
+
+       cat test.txt > log 
+       cat test.txt | grep simon 
+       cat test.txt | tee 
 
 
+    
+   echo "DevOps is good" > test.txt
+   
+   echo "DevOps is good " | tee test.py
+   
+   cat /etc/passwd > users 
+   
+   cat /etc/passwd | tee users.sh
 
 
+script : This command records your login session in a typescript in the current directory.
+
+ping: The ping command sends ICMP ECHO_REQUEST to network hosts.
+      ping webserver 
+      ping mylandmarktech.com 
+      ping google.com 
+IQ: How can you check and resvolve a server that isn't responding?
+ 
+  | ping the server 
+   check the Firewall - security group :  
+     open ports in the firewall 
+  check the console to make sure the running
+
+  df -h 
+  free -m 
+  top 
+  ps 
 
 
+telnet:
+     telnet localhost:8080 
+
+  sudo yum install telnet telnet-server -y
+
+
+history : Displays the recently executed commands .
+
+uname:  Print system information.
+
+cat /etc/*release :  Print system information.
+
+cat /etc/redhat-release
+
+Netstat: prints information about the Linux networking subsystem
+netstat -tulpn:
+   t = tcp traffic 
+   u = udp traffic 
+   l = listening 
+   p = port 
+   n = number
+   webserver 
+
+  sudo yum install net-tools -y : will install nestat
+
+  deploying tomcat applications 
+    application port = 8080 
+
+
+watch: Using watch command we can execute the
+         command periodically.
+  watch:  gives a floating output like top command
+   watch ls 
+
+shutdown:
+  init 0  
+      --> gives no warning 
+  shutdown
+     ---> It gracefully  shut dowm the server 
+
+reboot:  init 6 
+   shutdown the server 
+     shutdown
+  only the root user can run this command and 
+  users with superuser privileges
+restart:
+    restart reboot
+reboot:
+
+
+exit : (OR) Ctrl +d (OR) logout
+
+
+cat /etc/shells : It will give all available shells in your system
+
+echo $SHELL : It will give you the current shell type.
 
 
