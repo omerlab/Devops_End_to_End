@@ -1,0 +1,1020 @@
+Automating IT processes/workloads with Scripting
+=================================================
+  Computer/system:
+  1. Bare Metal or Hard Ware  component
+      RAM - memory 
+      Cpu 
+      ROM - hard disk / volume / storage 
+      MOUSE
+      KEYBOARD
+  2.   software component 
+          operating system = OS
+            Windows OS
+            MacOS 
+            Linux  OS  
+            Solaris  :
+      other softwares :
+         shell 
+         Sublime text 
+         Microsoft word/Excell  
+
+workload management on systems:
+    GUI = Graphical user interface 
+    CLI = command line interface
+     Linux OS = Linux servers/systems
+      ls  = list the content of a directory
+      touch test.txt
+
+ shell: A shell is an interpreter that interpretes commands to the OS. 
+
+name   uID   gID    homeDir    shell  
+
+paul:x:1001:1001::/home/paul:/bin/bash
+
+landmark:x:1002:1002::/home/landmark:/bin/bash
+simon:x:1003:1003::/home/simon:/bin/bash
+james:x:1004:1004::/home/james:/bin/bash
+
+To List all interpreters [shells] in the system :
+   cat /etc/shells  
+
+echo $SHELL 
+cat /etc/shells
+  /bin/sh
+  /bin/bash
+  /usr/bin/sh
+  /usr/bin/bash
+  /bin/tcsh
+  /bin/csh
+borne again shell = bash : was developped after borne shell and come with better function   
+borne shell = sh 
+
+A shell script: is a collection of commands in a file.
+Shell-scripts has .sc or .sh extensions 
+
+Naming conventions:
+  deploy.sh  = Shell-script
+  test.txt   = text file 
+  app.sc     = Shell-script
+  app.java   = java code 
+  monitor.py =python code/script 
+  app.yaml   = playbook
+
+whatis echo
+
+#!/bin/bash ==> shiban
+
+  vi hello.sh 
+  #!/bin/bash
+  echo "Welcome to landmark Technologies"
+  echo "Your are now a millionaire"
+  echo "Today is the: "
+  date 
+  echo scripting is automation
+  echo "Thanks for coming"
+
+ ./scriptName 
+ ./hello.sh
+[simon@db ~]$ ./hello.sh
+-bash: ./hello.sh: Permission denied
+
+-rw-rw-r-- 1  hello.sh
+ 6  6  4 
+ We need the executable Permission for the file to run as a script/command:
+
+ chmod +x hello.sh :  
+                     to give executable permission to hello.sh
+ chmod 764 hello.sh : 
+ -rwxrwxr-x 1 hello.sh 
+
+ always make sure that your file has excutable permission before 
+  running the script
+
+ # 
+ chmod +x script-file-name #
+ chmod 755 script file name 
+
+ Scripting or automation langauges :
+  1. Bash Shell Scripting
+  2. Python 
+  3. Groovy  (Jenkins)
+  3. Rudy
+  4. Yaml  
+      (k8s, Ansible, CloudFormation)
+  5. JSon 
+  6. HCL hashicorp configuration language - Terraform  
+  7. XML = 
+  8. html 
+  9. go/golang    
+       
+cat /etc/shells : tell the interpreter that we have
+
+deploy.sh 
+#!/bin/bash
+echo "Welcome to Landmark" 
+echo "apps are ready for deployment" 
+sleep 5 
+echo "deployment successful"
+
+How to make scripts/code easily understand?: Add explanations or comments 
+
+Running the script directly with an interpreter:
+  bash deploy.sh
+  sh deploy.sh
+  csh deploy.sh  
+
+tsh deploy.sh
+-bash: tsh: command not found
+     yum install tsh ksh -y 
+     sudo -u root yum install tsh ksh -y 
+     sudo yum install tsh ksh -y
+     sudo -u paul yum install tsh ksh -y
+  ksh deploy.sh
+  csh  
+explain the sudo command? : it helps run command as another user
+
+comment: metadata = data about data 
+  Explains what the script is achieving 
+  Use to eplain the script file
+
+  single-line comment  ==>  #
+slc.sh 
+#!/bin/bash
+echo single-line comment starts.
+# This is a simple script
+# This script will work in Linux OS
+# Author: Landmark Technologies
+echo single-line comment ends.
+date
+echo Congratulations you made it.
+
+Multi-line line comment: start with 
+<<bo
+   =========
+   ==========
+   ==========
+ bo
+  shell-script:
+
+#!/bin/sh 
+echo Multi-line comments starts 
+<<boy 
+Author: Simon 
+This is a simple script
+This script will work in Linux OS
+Author: Landmark Technologies
+echo Jesus is Lord 
+boy 
+
+echo Multi-line comments ends 
+date  
+
+  xml : 
+    <!--
+
+    -->
+  groovy:
+    /* 
+
+
+    */ 
+  python:
+  '''  
+
+  '''
+
+Who are the comments meant for? :
+
+  1. It make your script/code to be understood by you and others
+
+  2. It make your script/code easily reusable in the future
+  3. Facilitate/ease troubleshooting and debugging
+
+  4. comments are Good for teams:
+        6. developers writing codes/scripts 
+        1. Scrum master 
+        3. DevOps Engineers 
+        1. DevOps Security Engineer 
+
+  can you write your comments first and then 
+  under it write your script? or does it have to 
+  come between the scripts? Depends on you.  
+
+Variables :
+There are two types of variables in Linux shell script. 
+
+    System define variables
+    user define  variables 
+
+user define  variables: are Variables created/defined by the users 
+vars.sh 
+#/bin/bash 
+company=LandmarkTechnology 
+address=Canada
+name=SimonLegah 
+# $Variable Name is use to call a variable in shell scripting
+echo The Director is $name 
+echo $name works for $company 
+
+systems define  variables: Variables defined by the system
+
+  environmental variables
+echo $SHELL 
+echo $PWD 
+whatis env 
+env  
+  HOSTNAME=db      :
+  SHELL=/bin/bash  :
+  TERM=xterm       :
+  HISTSIZE=1000    :
+  USER=simon       :
+  HOME=/home/simon :
+  LOGNAME=simon    :
+  $HISTSIZE        : number of command that can be save
+
+echo $SHELL 
+echo $PWD 
+echo $HOSTNAME 
+echo $HISTSIZE 
+  1000
+export HISTSIZE=80 :  changes effected for a session of the history
+
+.bashrc and .bash_profile
+vi .bashrc :  enforce changes for a specific user
+
+vi .bashrc
+  export HISTSIZE=2000 
+  source .bashrc : to refresh the previous command so change will take effect
+
+ /etc/profile : will enforce the changes to all users  
+
+ ONLY the root user can modify this file 
+ sudo vi /etc/profile  
+ export HISTSIZE=1500 
+ source /etc/profile
+
+or 
+ sudo echo "export HISTSIZE=1500" >> /etc/profile
+ File management  = files and directory 
+                   dir      file 
+ full Permission   0777     0666 
+ expected perm.    0777     0666
+                   ----     -----
+                   0000      0000
+                   -----     -----
+ 
+ Creating a user:
+  sudo adduser enock 
+   user-id = 1004   
+ Where are users created: In the system/server 
+   server/system:
+    ip-address = 54.85.146.233
+    HOSTNAME   = ip-172-31-19-167.ec2.internal
+      sudo hostname db 
+    id         = i-027214ccfa75d5b0b
+=====================================
+
+Creating a user:
+  sudo adduser enock 
+   user-id = 1004   
+ Where are users created: In the system/server 
+   server/system:
+    ip-address = 54.85.146.233
+    HOSTNAME   = ip-172-31-19-167.ec2.internal
+      sudo hostname db 
+    id         = i-027214ccfa75d5b0b
+=====================================
+
+A script is a collection of one or more commands organise in a file.
+app.sh 
+echo JESUS IS LORD
+
+monitor_server.sh 
+# check for cpu and memory utilisation
+df -h
+free -m
+du -h
+top
+
+variables:
+  code quality 
+
+systems defined variables
+   echo $USER
+   simon 
+user defined variables
+  usd.sh 
+  USER=Tesla 
+  echo $USER
+
+code smell 
+bank-app.sh  
+username=simon
+password=admin123
+pin=12345
+echo $username welcome to TD Bank  
+echo your pin $pin 
+echo login successful 
+
+bank-app1.sh:
+# Create a login script for a banking app
+
+ echo please enter your username 
+ read username 
+ echo The name you entered is $username
+ echo please enter your pin
+ read pin     
+ echo The name you entered is $pin 
+ echo login successful 
+
+login.sh :
+ echo please enter your username 
+ read username 
+ echo please enter your password 
+
+# read -s will read your password as a secret. it will what user provides against what they have
+
+ read -s password 
+ echo $username welcome to paypal
+
+create_user.sh 
+This script will create and manage user in redhat and centos Linux servers:
+adduser 
+
+create_user.sh :
+
+[simon@db ~]$ cat create_user.sh
+<<mm      :
+This script will create and manage users
+     in redhat and centos Linux servers
+Run only as root user or users with sudo access
+mm   :
+
+echo Please enter your username
+read newUser
+sudo adduser $newUser
+echo Please enter your password
+read -s password
+echo "$password" | sudo passwd "$newUser" --stdin
+echo Congratlations your username is $newUser
+
+# verify if the user account was created
+id  $newUser
+grep $newUser  /etc/passwd
+tail -3 /etc/passwd
+
+# Explain you experience in automation/scripting
+   
+
+Command Line arguments: CLA  
+db_backup.sh 
+vi db_backup.sh  
+# This script will backup mySQL data bases
+# please specify the environment as an argument
+# Please specify the server and your details as arguments
+echo data base ready for backup
+echo backup in progress
+sleep 5
+echo backup completed
+ echo $? 
+ echo $$ 
+ echo $#
+ echo $* 
+echo the scriptName is $0
+echo The first argument is $1 
+echo The third argument is $3
+echo $3 
+
+environments:  
+  dev 
+  test
+  prod 
+db servers:
+  mySQL1, mysql2 
+
+[simon@db ~]$ cat db_backup.sh
+# This script will backup mySQL data bases
+# please specify the environment as an argument
+# Please specify the server and your details as arguments
+echo data base ready for backup
+echo backup in progress
+sleep 5
+echo backup completed
+echo the scriptName is $0
+echo The first argument is $1
+echo The third argument is $3
+echo The number arguments are $#
+echo The list of the arguments are $*
+echo The list of the arguments are $@
+echo The process id is  $$
+date
+echo The status of the last run command is $?
+Date
+echo The status of the last run command is $?
+
+What does $? represent in Scripting?
+
+$? represent:
+ The status of the last run command.
+ if $? = 0 that implies ok  
+ if $? != 0 that implies something is wrong 
+ 	!= means if not equal to
+  
+  $? = 0  = ok  
+   or 
+   $?  = 1---127  = implies something is wrong 
+ 	  command not found = 127 
+ 	  No such file or directory = 1 
+
+arth.sh 
+expr : is expression command used to evaluated expression
+expr 10 - 3  
+expr 10 + 3 
+expr 10 \* 3 
+expr 10 / 3
+expr 10 % 3 
+
+sao.sh  :
+echo welcome to simple arithmetic operations
+echo please enter the first number
+read num1
+echo please enter the second number
+read num2
+echo  The total is =
+expr $num1 + $num2
+echo  The difference is =
+expr $num1 - $num2
+-------
+
+sao.sh: 
+echo welcome to simple arithmetic operations
+echo please enter the first number
+read num1
+echo please enter the second number
+read num2
+#   (``) backtick will allows us to display the result on the same line
+echo  The total is = `expr $num1 + $num2` 
+echo  The difference is `expr $num1 - $num2`
+
+#if (( $# >= 3 ))
+#if [ $# -gt 3 ]
+#if [ $# -lt 3 ]
+if (( $# == 3 ))
+then
+#Number of arguments on the command line.
+echo '$#:' $#
+#Process number of the current process.
+echo '$$:' $$
+#Display the 3rd argument on the command line, from left to right.
+echo '$3:' $3
+#Display the 10th argument on the command line, from left to right.
+echo '${10}:' ${10}
+#Display the name of the current shell or program.
+echo '$0:' $0
+#Display all the arguments on the command line using * symb
+echo '$*:' $*
+#Display all the arguments on the command line using @ symb
+echo '$@:' $@
+date
+echo '$?:' $?
+else
+echo "Please Pass the 3 command line args along with script "
+fi
+
+
+systemctl 
+service sshd status|start|restart|stop|enable|disable 
+sh sonar.sh status|start|restart|stop|enable|disable   
+pwd  
+ls -l 
+ls -la  
+  .kube .ssh .config 
+
+Inode : when typing on the vm it translate it in number to understand
+         what human type
+
+What Humans understand  : touch test 
+    That my file name is 'test' 
+
+Linux virtual manchine understands bytes code 
+    0123456789 
+     understand 
+running a script:
+ Relative 
+  ./monitor_server.sh 
+  sh monitor_server.sh  
+
+ absolute path 
+  /home/simon/monitor_server.sh
+  sh /home/simon/monitor_server.sh 
+
+=====================================================:
+
+We can equally perform tasks using Graphical user interface 
+Linux commands --- Are used to perform or execute tasks on a server
+   Commands can help in task automation 
+   scripting escalate the use of commands for automation 
+
+Ansible  --> Playbooks = we automate tasks on multiple hosts
+scripting -> scripts   = we easily automate tasks on the localhost (1 server)
+   bash scripts 
+   python scripts 
+   groovy scripts
+
+Equality and inequality:
+
+  -eq  or  ==  : represent equals to      (x == y or  x -eq y)
+  -ne  or  !=  : represent not equals to   (x != y or x -ne y)
+  -gt  or  >   : represent greater than     (x>y or  x -gt y)
+  -lt  or  <   : less than 
+  -ge  or >=   : greater than or equals to
+  -le  or <=   : less than  or equals to
+
+if control statement:
+
+Syntax:
+if condition
+then
+Display commands list if condition is true.
+else
+Display commands list if condition is false.
+fi
+
+echo "Please enter your price"
+read price
+if [ $price == 2000 ]
+then 
+echo "The price is good for the business"
+echo "Please deliver the product"
+fi 
+
+
+echo "Please enter your pin"
+read pin 
+if [ $pin -eq 5470 ]
+then 
+echo 'You entered a valid pin'
+echo 'Welcome to TD, how can we help you'
+else 
+echo "Sorry, your pin is invalid. Please contact a branch."
+fi 
+
+#!/bin/bash
+echo "Please enter a number"
+read num1
+echo "Please enter another number"
+read num2
+if [ $num1 == $num2 ]
+then
+echo "$num1 is equals to $num2"
+else
+echo "$num1 is not equal to $num2"
+fi
+
+#!/bin/bash
+echo "enter the offer price of customer1"
+read price1
+echo "enter the offer price of customer2"
+read price2
+if [ $price1 > $price2 ]
+then
+echo $price1 is greater than $price2"
+echo "Sell to customer1"
+elif [  $price1  < $price2 ]
+then
+echo "$price1 is less than $price2"
+echo "Sell to customer2 who's offering a better deal"
+else
+echo "$price1 is equal to $price2"
+echo "Request for an increase a choose the best possible offer"
+fi
+
+
+if (( $# == 3 ))
+then 
+echo "scripting is good"
+echo "Always run this script with 3 arguments"
+else 
+echo "Please enter  3 arguments to run this script"
+fi 
+
+Loops : condition with multiple iterations 
+
+Syntax:
+
+for (condition ) :
+do   :
+execute here all command/script until the condition is
+not satisfied. (And repeat all statement between do and done)
+
+done  :
+
+Syntax:
+or-loop:
+c/c++/java:
+for ( initiallation;conditions;inc/dec )
+{
+  write statements/commands
+}
+
+
+use case : load test on server, bid in auction
+shell-script:
+for loops:
+for (( initiation;conditions;increasing/decreasing ))
+do 
+commands 
+commands 
+done
+
+fl1.sh 
+echo 'for loop starts'
+for (( a=1;a<=6;a++ )) 
+do 
+echo $a 
+done
+echo 'for loop ends'
+
+std Output:
+  a = 1 
+  a = 1 + 1 = 2
+  a = 2 + 1 = 3 
+  a = 3 + 1 = 4 
+  a = 4 + 1 = 5 
+  a = 5 + 1 = 6 
+  =======================
+  a = 6 + 1 = 7 
+
+Assignment:
+  Write a shell script to print numbers from 100-90 
+   using for-loop
+
+scripting:
+
+for loops:
+for (( initiation;conditions;inc/dec ))
+do 
+commands 
+commands 
+done
+==============
+while loop 
+initiallation 
+while [ condition ]
+do 
+commands 
+done
+----
+#while.sh 
+echo "while loop demo starts..."
+i=1
+while [ $i -le 5 ]
+do
+echo $i
+i=`expr $i + 1`
+done
+echo "while loop is over ..."
+
+Output:
+  i=`expr $i + 1`
+  i = 1 
+  i = 1 + 1 = 2 
+  i = 2 + 1 = 3 
+  i = 3 + 1 = 4 
+  i = 4 + 1 = 5
+  ======================
+  i = 5 + 1 = 6
+
+#initiation
+rc=5000
+echo "minimun request from clients is 5000"
+while [ $rc -le 50000 ]
+do
+echo $rc
+rc=`expr $rc + 5000`
+done
+echo maximum requests reached.
+# The server maximum load is 50000 requests.
+# Performing load test for my application
+# Using while loop
+# rc=request-count
+<<rc
+rc = 5000
+rc = 5000 + 5000 = 10000
+rc
+===============
+switch case:
+  yum install | remove | update | upgrade 
+  systemctl httpd start | status | restart | enable | disable | stop
+
+tomcat:
+  catalina.sh   | status | restart | stop | start | version
+sonarQube:
+  sonar.sh  | status | restart | stop | start | version
+
+sh sonar.sh start 
+sh sonar.sh stop 
+ switch case syntax:
+  case $1 in 
+     options
+    option1)
+      commands;;
+    option2)
+      commands;;
+    option3)
+      commands;;
+    *)
+       commands;;
+  esac
+
+echo "learning switch cases in scripting"
+case $1 in 
+start)
+echo "starting sonarQube server"
+echo "sonarQube server started";;
+stop)
+echo "stopping sonarQube server"
+echo "sonarQube server stopped";;
+restart)
+echo "restarting sonarQube server"
+echo "sonarQube server restarted";;
+*)
+ echo "sorry you passed the wrong option"
+ echo "Options are start | stop | restart" 
+ ;;
+esac
+echo "switch cases are very good and easy to understand"
+
+Differences b/w scripts (scripting) and code (programming)?
+programming: instructions that tell a computer to perform a certain tasks
+script: file containing commands
+
+IT Professional:
+docker
+docker.sh 
+  docker run  
+  docker build 
+kubernetes 
+jenkins
+
+  Powershell --> use to run commands in windows OS (servers ) 
+  bash-shell --> use to run commands in Linux OS (servers ) 
+
+2 ---> 
+   Automate 
+
+
+common commands:
+  vi or vim to create and modify scripts 
+  cat or cat -n to display or read the content of a script 
+  sh/bash/tsh/csh ksh to run/execute the script 
+     sh class.sh
+     bash class.sh 
+     ksh class.sh  
+
+ vi class.sh  = this create the script
+ sh class.sh  = to run the script    
+
+ 
+
+ scripting is all about automation using scripts:
+Examples of autamted tasks:
+  Explain your experience in bash shell scripting??
+  In Landmark I have written and Maintained/modify
+  shell scripts to:
+    monitor_servers.sh  
+    dataBase_backup.sh 
+    deploy_app.sh 
+    access_account.sh  
+    user_management.sh  
+    file_management.sh  
+
+  sh access_account.sh  simon dev  cicd 
+
+  echo $1 =  simon
+  echo $2 =  dev 
+  echo $3 =  cicd 
+  echo $0 =  access_account.sh
+switch cases:
+  access_account.sh 
+  case $1 in 
+  cashdeposit) 
+      echo "slot in the cash" 
+      echo "cash deposited" ;;
+  checkdeposit)
+      echo "slot in your checks" 
+      echo "cash amount deposited" ;;
+  withdrawal)
+  balance)
+  transfer)
+  *)
+      echo "You entered an invalid option"
+  esac     
+
+sh access_account.sh  
+
+===========
+switch.sh   :
+
+echo "Switch case demo starts.."
+case $1 in
+start) echo "starting sq server.."
+echo "started..."
+;;
+
+stop)
+echo "stopping the server"
+echo "server stopped";;
+
+restart)
+echo "restarting the server"
+echo "server restarted"
+;;
+
+*)
+echo "You have to pass start|stop|restart"
+;;
+
+esac
+
+echo "Switch case is over"
+
+https://github.com/LandmakTechnology/scripting
+
+  script = is a collection of one or more commands
+
+How do you resolve or troubleshot issues from scripts? :
+
+ - study the errors messages carefully 
+  vi scriptName and fixed the error 
+ - Run the scripts in Debugging mode by passing the -x flag   
+     sh -x debug.sh
+
+ debug.sh 
+ echo "I am rich"
+ echo 'DevOps is easy' 
+ echo "Today is the: "
+ Date
+
+What is the difference b/w Redirect [>] and append [>>] :
+
+  Redirect [>] = overides/replaces content 
+
+     echo Jesus saves > save.txt  
+     cat /etc/passwd > users.txt 
+
+  append [>>]  = add to the content  
+     echo Jesus is alive >> save.txt  
+
+Input - Output redirection in Linux / Shell Scripts:
+
+  cat /etc/passwd  = Display all users   
+  cat /etc/group   = Display all groups 
+  history  
+  history > his.log      
+ 
+   2>  Redirect standard error
+           sh debug.sh 2> output.error 
+
+  1>  Redirect standard output
+        sh debug.sh.sh 1> output.log 
+        sh debug.sh.sh > output.log
+
+2>&1  Redirect standard error and  standard output
+       bash debug.sh > logs 2>&1
+       bash debug.sh > /dev/null 2>&1
+
+We used redirection to isolated problems into a file and troubleshoot
+
+
+Functions:   
+cronJobs :32
+  Attorney? 
+  Lawyer?
+
+A function is a piece of code that perfoms
+ a specific task and avoids repetition. 
+
+1. Define a function
+   syntax for Functions in shell scripting???
+   
+   fn(){
+    #commands
+   }
+
+  usermgt() {
+    echo please enter your lastName
+    read name 
+    sudo useradd $name  
+  }
+  # invoke the function 
+  usermgt
+  echo Create an user account for the admin   
+  usermgt
+
+fn.sh 
+# functions avoid duplication in coding
+usermgt() {
+    echo please enter the lastName of the user
+    read name
+    sudo useradd $name
+    echo "assign a temporal password to;  $name  "
+    sudo passwd $name
+  }
+  # invoke the function
+  echo create an  account for the  TeamLead.
+  usermgt
+ echo create an  account for the 2nd member of your team.
+  usermgt
+ echo create an account for the 3rd member of your team.
+usermgt
+##################
+fn2.sh 
+#!/bin/bash
+check()
+{
+if [ -e /etc/passwd ]
+then
+ echo "It exist. Please proceed ..."
+ grep roma /etc/passwd
+ tail -5 /etc/passwd
+ touch test.java /home/simon/
+else
+ echo "It doesn't exist"
+fi
+}
+check
+
+EUROPE / Germany visa ---> Part time  
+===========================================
+
+IQ: Explain your experience in batch shell scripting ? 
+I have written and maintained the following scripts;
+1. monitor_server.sh  = server monitoring
+     Memory / cpu  > 85% 
+
+2. deploy_app.sh 
+    build_Server = app.war 
+    app_Server
+    appServer 
+    scp app.war ec2-user@appServer:/tmp 
+
+3. sshkey_gen_uploadGithubAPI.sh
+
+4. db-backup.sh 
+    Linux commands 
+        cp 
+        scp 
+    DBA = sql 
+
+5. Patching for optimisation 
+      yum update
+      yum remove  
+
+6. Package management = 
+      Git / Maven / Jenkins manages packages
+      tree  
+
+7. user and file Management 
+    create-user.sh  
+     echo "Enter the username for the new user you want to create" 
+     read username 
+     sudo useradd $username  = useradd (sbin)
+     echo "Please Enter the password for the new user" 
+     read -s password 
+     echo $password | passwd $username  
+
+8. Use for systemd management and starting applications 
+    
+IQ: Explain a problem you encountered and how you 
+    resolved it in scripting??
+
+You ran a script and the exit code != 0. 
+ How did you troubleshoot? 
+    echo $? == 0  ok 
+    echo $? != 0  not ok 
+       date  --- Date   
+   Identify and explain 
+     User management shell script failing
+     1. I ran the script in debugging mode  = sh -x scriptName 
+            useradd $username   
+            useradd (sbin)
+        sudo    
+
+     2. I contacted my peers on our help desk 
+
+     3. Check google, youtube and stack overflow
+
+     4. Check with the vendor  = Server (EC2)  = 
+          echo $BASH_VERSION = version 
+         
+     5. Open Source  = enterprise 
+
+ NB: *What you know is more important than who you know.*
+     *Who you are is more important than where you are.*
+
+usecases
+
+create-user.sh 
+
+sh monitor_server.sh
