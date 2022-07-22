@@ -224,15 +224,16 @@ https://class27adevops.s3.amazonaws.com/git-1%262-May15-2022
   Untracked files     git add     git commit    git push 
     red                green     
              
-git fetch                           <------------------- move change from remote to local repo
+git fetch               :            <------------------- move change from remote to local repo
 git merge    
-git pull <------------------------------------------------------  move changes from remote repo to working area.
+
+git pull :  <--------------------------  move changes from remote repo to working area.
  
-git init          = to initialised a git empty repository
-git status        = to track files location
+git init          : to initialised a git empty repository
+git status        : to track files location
 git log           
-git add           = move files to staging area from working area
-git commit -m     = move files to the local repository FROM STAGING AREA
+git add           :  move files to staging area from working area
+git commit -m     :  move files to the local repository FROM STAGING AREA
                     good commit message for tracking changes/authors 
 
 git commit -m "users list created"
@@ -305,9 +306,9 @@ IQ: How many branches are you supporting?
 
   private or public 
   
-  git fetch --> It brings changes in the code to the LocalRepo
-  git pull --> It brings changes in the code to the Working area 
-  git clone --> It brings the entire code to the working area 
+  git fetch : --> It brings changes in the code to the LocalRepo
+  git pull  : --> It brings changes in the code to the Working area 
+  git clone : --> It brings the entire code to the working area 
 
     use to merge changes on the RemoteRepo with the localRepo
 
@@ -545,10 +546,11 @@ git stash pop
 
 git merge stage  = all changes
 
-git cherry-pick 0aa9b586ed   #
-  It is use choose a specific commit from one 
-  branch and  apply it onto another
+git cherry-pick :  It is use choose a specific commit from one branch and  apply it onto another
 
+
+git cherry-pick 0aa9b586ed   #
+ 
 stage --> dc1 --> dc2 --> dc10
    
 master
@@ -561,7 +563,7 @@ master
   git branch uat
   git checkout uat  
 
-  git checkout -b bugfix 
+  git checkout -b bugfix : switch to bugfix branch and create bugfix
 
 
 https://github.com/mylandmarktechs/ebay.git
@@ -735,7 +737,13 @@ ACHIEVING ZERO DOWNTIME:
     3. Raise ticket of issues and share in the help desk.
     4. Be quick to help others reslove issues/tickets - 
 =====
-
+ I have experience in Git and Github. we use git as versionning tool and to track code development.
+ we use github as our source code repository since we have a team distributed in different location.
+ As a DevOps Engineer i am resposible to setup developers environment, make sure that Organisation, repositories, teams,
+ are created, make sure that proper member are asssigned to the right team and have the least priviledge.
+ I create Branch for dev, qat and prod environment and i set all best practices that need to be follow by the team.
+ i make sure that we use pull request before merging code from one branch to another
+ i make sure that developers apply best practices
 
 
 
