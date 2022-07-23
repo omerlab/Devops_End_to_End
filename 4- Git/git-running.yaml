@@ -235,6 +235,10 @@ git log
 git add           :  move files to staging area from working area
 git commit -m     :  move files to the local repository FROM STAGING AREA
                     good commit message for tracking changes/authors 
+git branch -m my-new-branch-name : rename a local branch
+git push -u origin my-new-branch-name : push new rename local branch to the remote repo
+git push origin --delete my-branch-to-rename : delete oldname branch remote repo 
+git branch -d branchName:   delete branch from local repo
 
 git commit -m "users list created"
 git push RemoteRepo master 
@@ -745,9 +749,11 @@ ACHIEVING ZERO DOWNTIME:
  i make sure that we use pull request before merging code from one branch to another
  i make sure that developers apply best practices
 
-
-
-
+Git : allows a team of people to work together, all using the same files. And it helps 
+      the team cope with the confusion that tends to happen when multiple people are editing 
+      the same files.
+      I spend a fair amount of time on Git to manage our version control. We also use Git to collaborate
+       with other developers to track bug fixes, build new features, refactor codes, and many more things.
 
 
 
