@@ -1,0 +1,92 @@
+File Commands :
+
+These shell commands allow us to manipulate files.
+
+ls: If you run the ls command (without any additional parameters), the program will simply list the contents of the current directory in a short form.
+
+ls [option(s)] [file(s)]
+-l a detailed list
+-a displays all hidden files
+ ls -lah is aliased as ll on some systems
+The cp command copies a sourcefile to a targetfile.
+
+cp [option(s)] sourcefile targetfile
+-i : The -i flag prompts for confirmation before an existing file is overwritten
+-r : The -r flag copies subdirectories recursively 
+The mv command copies from a sourcefile to a target file, then removes the source file.
+
+mv [option(s)] sourcefile targetfile
+-b : The -b flag creates a backup copy of the source file prior to moving it
+-i : The -i flag waits for confirmation before the existing target file is overwritten
+The rm command removes the files from the file system. Directories themselves are not removed by rm unless the -r option is used.
+
+rm [option(s)] file(s)
+-r Removes any existing subdirectories
+-i Waits for confirmation before deleting each file
+-rf deletes with confirmation
+(use with EXTREME CAUTION as this command removes the file or directory forever.)
+As you can below, we created several directories and then using rm via the xargs command, we can remove those same directories.
+
+root@host:~# echo '1 2 3' | xargs mkdir
+root@host:~# ll
+total 4
+drwx------ 1 root root 4096 Jul 17 18:10 ./
+drwxr-xr-x 1 root root 4096 Dec  9  2019 ../
+-rw-r--r-- 1 root root 3106 Apr  9  2018 .bashrc
+drwxr-xr-x 1 root root 4096 Jul 17 17:52 .cache/
+drwx------ 1 root root 4096 Jul 17 17:52 .config/
+-rw-r--r-- 1 root root  148 Aug 17  2015 .profile
+drwxr-xr-x 1 root root 4096 Jul 17 18:10 1/
+drwxr-xr-x 1 root root 4096 Jul 17 18:10 2/
+drwxr-xr-x 1 root root 4096 Jul 17 18:10 3/
+
+root@host:~# echo '1 2 3' |xargs rm -rf
+root@host:~# ll
+total 4
+drwx------ 1 root root 4096 Jul 17 18:10 ./
+drwxr-xr-x 1 root root 4096 Dec  9  2019 ../
+-rw-r--r-- 1 root root 3106 Apr  9  2018 .bashrc
+drwxr-xr-x 1 root root 4096 Jul 17 17:52 .cache/
+drwx------ 1 root root 4096 Jul 17 17:52 .config/
+-rw-r--r-- 1 root root  148 Aug 17  2015 .profile
+root@host:~#
+The ln command creates a link from the source file to the target file, using a different name. This link will point directly to the source file on the same file system. However, if ln uses the -s option, it creates a symbolic link that points to the directory location where the source file is located, which enables linking across file systems.
+
+ln [option(s)] sourcefile targetfile
+The -s flag creates a symbolic link.
+Directory Commands
+Using the cd command alone without any parameters changes directories to the user's home directory.
+
+cd [options(s)] [directory]
+The mkdir command creates a new directory. The same command can also create multiple directories.
+
+mkdir [option(s)] directoryname
+mkdir {test1,test2,test3}
+The rmdir command deletes a specific directory, assuming it is empty.
+
+rmdir [option(s)] directoryname
+The chown command transfers ownership of a file to the user, with the specified username.
+
+chown [option(s)] username.group file(s)
+Using the -R flag changes file and directory ownership in all subdirectories.
+
+The chgrp command modifies or assigns the group ownership of a file or folder.
+
+chgrp [option(s)] groupname file(s)
+Ownership and Permissions
+The chmod command changes the permissions access.
+
+chmod [options] mode file(s) 
+This parameter has three parts: group, access, and access type. The group option accepts the following characters:
+
+u = user
+g = group
+w = world
+Access is allowed by using the '+' symbol and denied by the '-' symbol.
+
+The following options control the access type itself:
+
+r = read
+w = write
+x = execute 
+s = Set uid bit - the program or application is loaded as if the owner of the file started it.

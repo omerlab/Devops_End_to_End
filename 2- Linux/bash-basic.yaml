@@ -1,0 +1,9 @@
+Bash Basics
+env - This command displays all environment variables
+echo $SHELL - This command displays the shell you are using
+echo $BASH_VERSION - This command displays bash version
+bash - if you want to use bash (type exit to go back to your previously opened shell)
+whereis bash - locates the binary, source and manual-page for a command
+which bash - locates which program is executed as 'bash' (default: /bin/bash. This can change across environments)
+clear - This command clears content on the window (hide displayed lines)
+reset - This command restores a console to a normal state

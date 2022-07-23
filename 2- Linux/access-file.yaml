@@ -1,0 +1,47 @@
+Commands to Access File Contents
+The cat command prints the contents of a file to the screen without interruption.
+
+cat [option(s)] file(s)
+-n The -n flag numbers the output on the left margin. We can also list the file contents in reverse by using the tac command. Example:
+
+tac filename
+The less command browses the contents of a file. We can scroll using the page up or down with PgUp and PgDn command half a screen, or we can scroll down a full screen using the spacebar. To move to the beginning or end of a file, use the Home and End keys. To exit the program, press Q.
+
+less [option(s)] file(s)
+The grep command locates a search string in a specified file(s). If the string is found, the command will display the line in which the search string was found, including the file name.
+
+grep [option(s)] searchstring filenames
+-i The -i flag ignores the case of the string.
+-l The -l flag displays the name of the file, but not the lines of text.
+-n The -n flag shows the line number where it found a match.
+-l The -l flag lists the files where the search string did not occur.
+The diff command compares the contents of any two files. The output produced by diff lists all lines that do not match. 
+
+diff [option(s)] file1 file2
+The vim command to open a file for viewing and editing using the vi or vim text editor. The other standard editor is nano. Below are some universal shortcuts for the vi commands:
+
+vi(m) filename
+:q - This will make you quit out of vi without saving.
+:q! - This will let us quit vi without saving any changes made to the file.
+:wq - This will make you quit vi after writing or saving the changes you made.
+a - Begin inserting text.
+dd - This will delete the line you are currently on.
+G # - Goto line number, This can be used to jump to a specific line number.
+/text - Search the file for the text specified after the /.
+n - Goto next instance of text specified by the search.
+esc - Escapes you from edit or insert mode.
+u - Undo last change made.
+The zcat command prints the content of gzipped file to the current screen.
+
+zcat filename.gz
+Sed - The sed command (or stream editor) searches, enables find and replace, or insertion or deletion of data within a file. 
+
+sed OPTIONS... [SCRIPT] [INPUTFILE...] 
+The sed command below delete both leading and trailing whitespaces from each line in a file.
+
+sed 's/^[ \t]//;s/[ \t]$//'
+The awk command uses a scripting language for manipulating data and creating reports. The awk programming language does not require compiling, and allows a user to employ variables, logical operators, string functions, and numeric functions. Awk lets programmers write small programs using statements using patterns of text that can be within the lines of a document, and then employ an action based on when a match is found. In essence, awk searches files to see if they contain text which matches specific parameters and then executes an action.
+
+awk options 'selection _criteria {action }' input-file > output-file
+
+user@host:~$ awk '{print}' file.txt

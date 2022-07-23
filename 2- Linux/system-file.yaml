@@ -1,0 +1,43 @@
+A- Commands to Gather System Information:
+
+
+The df (or disk free) command displays information about the total disk space.
+
+df [option(s)] [directory] :
+-H shows the number of occupied blocks in gb, mb, or kb in a human-readable format
+-t Defines the type of file system (ext2, nfs, etc.)
+The du command shows the total amount of disk space occupied by files and subdirectories within the current directory.
+
+du [option(s)] [path] :
+-a This flag displays each individual file size
+-h Shows human-readable output
+-s Displays only the calculated total size
+The free command displays information about swap space and RAM usage, showing both the used and total amount from both.
+
+free [option(s)] :
+-b Displays output in bytes
+-k Displays output in kilobytes
+-m Displays Output in megabytes
+The date program shows the systems current date and time. 
+
+date [option(s)] :
+ 
+user@host:~$ date
+Thu Jul 23 15:31:43 EDT 2020
+user@host:~$
+
+
+B- Commands to Modify the File system:
+=====================================
+
+The mount command is used to mount a hard drive, CD-ROM, or other drive media to a Linux file system directory.
+
+mount [option(s)] [<device>] mountpoint :
+-r This flag mounts the drive as read-only
+-t This flag specifies the filesystem.
+The umount command unmounts a mounted drive from the file system.
+
+umount [option(s)] mountpoint :
+
+Warning:
+To prevent data loss, only run this command before taking a backup of the data from the drive.

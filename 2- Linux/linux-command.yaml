@@ -1,0 +1,39 @@
+Command Quick Reference:
+
+cat [filename] : - Display file’s contents to the standard output device. 
+cd /directorypath : - Changes directory.
+chmod [options] mode filename - : Changes a file’s permissions.
+chown [options] filename - : Changes the ownership of a file.
+clear - : The Clear command clears the screen.
+cp [options] source destination - : Copies directories and files.
+date [options] - : Display or set the system date and time.
+df [options] - : Display used and available disk space.
+du [options] - : Show how much space each file takes up.
+file [options] filename - : Determines what type of data is within a file.
+find [pathname] [expression] - : Searches for files matching a specific pattern.
+grep [options] pattern [filename] - : Searches files or output for a specific pattern.
+kill [options] pid - : Stops a process. If the process is hung or refuses to stop, we can use the 'kill -9 pid' command.
+less [options] [filename] - : Views the contents of a file, one page at a time.
+ln [options] source [destination] - : Create shortcut.
+locate filename - : Search file system for specified filename.
+lpr [options] - : Send a print job.
+ls [options] - : List directory contents.
+man [command] - : Display help information for command.
+mkdir [options] directory - : Create a new directory.
+mv [options] source destination - : Rename or move directory or file(s).
+passwd [name [password]] - : Change password.
+ps [options] - : Show snapshot of running processes.
+pwd - : Shows current directory path.
+rm [options] directory - : Remove (delete) file(s) and/or directories.
+rmdir [options] directory - :  Delete empty directories.
+ssh [options] user@server - : Log in to another Linux machine remotely. 
+su [options] [user [arguments]] - : Switch to another user account.
+tail [options] [filename] - : Display the last n lines of a file.
+tar [options] filename - : Store or extract files from a .tar.gz or .tgz).
+top - : Show systems resource usage.
+touch filename - : Create an empty file.
+who [options] - : Display who is logged on.
+reboot : command is similar to the halt command, but the system immediately reboots.
+nslookup : command uses DNS to resolve a domain name to an IP addresses. The command below uses nslookup to display the nameserver records for domain.com.
+
+

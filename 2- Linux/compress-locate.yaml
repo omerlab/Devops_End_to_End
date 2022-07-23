@@ -1,0 +1,41 @@
+Compress or Locate commands:
+==============================
+
+The gzip program compresses the contents of a file using mathematical algorithms. Any files compressed in this manner are assigned the .gz extension. Files will then need to be decompressed before they can be used. To compress multiple files or entire directories, the tar command must be used.
+
+gzip [parameters] file(s)
+-d The -d flag decompresses the packaged files, so they return to their original size. They can then be processed normally (using a command like gunzip).
+The tar command adds files into an archive. Using compression is optional. The tar command is quite complex, with numerous options available. Some of the most frequently used options are:
+
+tar options archive file(s)
+-f The -f flag writes the output to a file and not to the screen.
+-c The -c flag creates a new tar archive.
+-r The -c flag adds a file(s) to an existing archive.
+-t The -t flag outputs the contents of an archive.
+-u The -u flag adds files only if they are newer than the files already contained in the archive.
+-x The -x flag extracts the files from an archive.
+-z The -z flag packs the resulting archive with gzip.
+-j The -j flag compresses the resulting archive with bzip2.
+-v The -v flag lists files processed.
+tar zxvf file.tar.gz
+Examples: The command above will extract the tarball into the current directory. The z flag is for gzip, x is for extract, v is for verbose, f is for file.
+
+The command below will compress the 'directory' folder into a new tarball. The c flag is for compress. The p flag is for preserve permissions.
+
+tar czpvf file.tar.gz directory/
+An archived file that is created by tar will end with the .tar extension. If a tar archive was also compressed using gzip, the ending would be .tgz, or .tar.gz. If it was compressed using bzip2, the output would be .tar.bz2.
+
+The locate command will find and specify where a file is located, including the directory where it is located. We can also use wildcards to indicate file names. One major drawback of locate is that it will be unable to find any files created after the latest update of its database.
+
+locate pattern(s)
+The locate database is updated by running the command 'updatedb' as the root user.
+
+The updatedb command runs an update of the database used by locate. It will include files in all existing directories when run by the root user. 'updatedb' can be run in the background by appending an ampersand (&) to the command, to work can continue within the same command line Example:
+
+updatedb [options(s)]
+updatedb &
+The find command searches for a file within a stated directory. The first arguments identify the options needed and then, the path where to start the search is noted. This is followed by the expressions. The find command scans the actual directory, unlike locate, which uses a database.
+
+find [-H] [-L] [-P] [-D debugopts] [-Olevel] [path...] [expression]
+
+find [option(s)] 
