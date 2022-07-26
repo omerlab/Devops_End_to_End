@@ -1,0 +1,13 @@
+I have experience in Git and Github. we use git as versionning tool and to track code development.
+ we use github as our source code repository since we have a team distributed in different location.
+ As a DevOps Engineer i am resposible to setup developers environment, make sure that Organisation, repositories, teams,
+ are created, make sure that proper member are asssigned to the right team and have the least priviledge.
+ I create Branch for dev, qat and prod environment and i set all best practices that need to be follow by the team.
+ i make sure that we use pull request before merging code from one branch to another
+ i make sure that developers apply best practices
+
+Git : allows a team of people to work together, all using the same files. And it helps 
+      the team cope with the confusion that tends to happen when multiple people are editing 
+      the same files.
+      I spend a fair amount of time on Git to manage our version control. We also use Git to collaborate
+       with other developers to track bug fixes, build new features, refactor codes, and many more things.

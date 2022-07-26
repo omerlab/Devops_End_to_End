@@ -1,0 +1,22 @@
+What is maven?
+why we use maven?
+how we use maven?
+
+maven to run need plugins and dependencies. those are find in : 
+    - the local repo .m2/repo
+    - remote server
+    - proxy server
+    - central repo
+
+
+  In my recent project i was task to configure maven remote, proxy repo for our maven server
+   to be able to retrieve dependencies and plugins from them before accessing internet to access central repo.
+   i configure maven to retrieve some dependencies from proxy and others from remote.
+   
+   In this scenario we don't want our build server to access internet to get plugins, it will go through
+     the local--remote--proxy--central
+
+
+To avoid some mistake from Jr Eng:
+   - do proper onboarding 
+   - restrict who can run maven command and create packages
