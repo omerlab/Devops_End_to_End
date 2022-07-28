@@ -1,0 +1,57 @@
+My name is Brice, i'am Senior DevOps Engineer working  with Landmark technologies for more 
+than 6 years. I Lead the CI/CD team.It is a small team, we are resposible of the CI/CD tools.
+ We deal with github installation, Jenkins integration with Maven which is our build tool since we
+ manage java based application ,Sonarqube as code quality and nexus as artifactory.
+ we are responsible of bulding, maintaining the service resposible that run the  automation. 
+
+
+Design, review, document, and implement infrastructure around web, application, 
+and data tiers to meet security, availability, responsiveness, and cost objectives.
+     At Landmark i build a three tiers infrastructure for Security reason:
+Automate application and cloud infrastructure management using scripting and industry standard tooling, 
+achieving a high degree of configurability.
+
+Building and maintaining tools, solutions and microservices associated with deployment and our operations
+platform, ensuring that all meet our customer service standards and reduce errors.
+
+Intensive involvement in Infrastructure as Code (IAC), execution plans, resource graph and change automation.
+
+Implement and maintain intelligent infrastructure and application monitoring for other engineering teams to plug into.
+
+Troubleshoot infrastructure and application configuration issues identified by monitoring and manual testing and
+add monitoring to cover identified gaps.
+
+Proficiency in Server Provisioning, Middleware Management, Build and Deployment Automation through tools like GITHub,
+Jenkins, Docker and other technologies.
+
+Stress test infrastructure, implementing process and design changes as needed.
+
+Create and maintain runbooks for operational issues. Implement and refine operational processes and procedures,
+automating these when possible.
+
+  Runbooks solve the problem of inconsistent incident response for every team. Design the process you want teams  :
+  to take when a new incident is declared :
+  - i automate the workflow to be able to process as faster as possible the incident and constantly :
+    execute the every time the incident occur.
+  - 
+
+Support company security compliance efforts.
+  some best practices for security compliance:
+    - we Build a cybersecurity compliance plan : your IT, security, and compliance teams on the same page.
+    - we Make sure your teams are talking to each other: educate teams members, and train your IT and security team 
+        to be be up on the finer points of compliance and regulatory standards.
+    - we Use smart and automated tools: it helps to make business processes more efficient and more consistent as 
+        organisation scale. It can be difficult to maintain and keep track of our infrastructure.
+    - We Patch and update often:  A patching schedule is critical. To keep your systems up to date, and 
+        boost security,performance, and compliance.
+    - We need to Monitor continuously: Threats are constantly evolving, it is important to be aware of your 
+        infrastructure and the specific risks that affect your data and networks.
+      
+Establish and manage DevOps team best practices.
+
+Manage code deployments, fixes, updates and related processes.
+Provide leadership and mentorship for DevOps engineers.
+Stay current with industry trends and source new ways for our business to improve.
+Manage and participate in an on-call rotation with other engineer
+
+

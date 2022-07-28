@@ -1,0 +1,171 @@
+How to deploy java based applications:
+maven-standalone-application
+   java -jar appName.jar 
+    .jar
+    java -jar packageName.jar
+    java -jar user-banking.jar 
+      java JDK 1.7+
+
+maven-web-application
+    app.war 
+    Tomcat
+    JBoss/WildFly
+
+maven-enterprise-application
+      app.ear
+    JBoss/WildFly
+ aa.com 
+
+ users(30m)-->webServers-->appServer-->database
+    India      filter 
+  users(30m)-->appServer-->
+   hackers 
+
+ multi-tier applications : DMZ 
+   backend tier  : Militarised zone = MZ 
+      applications tier 
+      data base tier  
+   frontend tier  : D-Militarised zone = DMZ 
+      webServers-- 
+      LoadBalancers
+      JumpServers  
+Application Server: 
+  IBM WebSphere Application Server (WAS)  --> IBM
+  Apache Tomcat   --> Apache  --> OS
+  
+  JBoss/WildFly   --> Redhat/IBM 
+    1.0.0 to 7.0.9
+    1.x to 7.x --> JBoss
+    from 8.x-->    WildFly
+         versioning  
+    git branch and git tag 
+
+  WebLogic --> Oracle  
+
+
+IQ: What is the d/f b/w JBoss/WildFly and Tomcat? 
+    vendors: Tomcat==Apache  
+             JBoss=Redhat  
+    Applications:          
+        JBoss; Web applications .WAR 
+               enterprise applications .ear 
+        Tomcat; web applications ONLY 
+                            
+
+100.25.142.148 
+key= dominion.pem  
+user: ec2-user 
+============================
+Tomcat Installation:
+---------------------
+https://tomcat.apache.org/download-90.cgi
+https://downloads.apache.org/tomcat/tomcat-9/v9.0.63/bin/apache-tomcat-9.0.63.tar.gz
+
+ Java is the pre-requisit for Tomcat 
+
+THD: The Tomcat Home Directory is 
+     where the tomcat software is extracted 
+        wget   to download tomcat  
+        tar or unzip to extract
+
+Where us your THD located in your environment?
+     /opt/tomcat9
+      /app/tomcat  
+      /usr/local/tomcat 
+
+ $HOME_TOMCAT:  /opt/tomcat9    /app/tomcat  /usr/local/tomcat 
+ bin:
+    startup.sh    LINUX SYSTEM
+    startup.bat   ----> WINDOWS OS
+    shutdown.sh
+    shutdown.bat     ----> WINDOWS OS
+    catalina.sh start
+    catalina.sh stop | start | restart | 
+    version.sh
+    version.bat
+    sh /opt/tomcat9/bin/startup.sh
+    sudo 
+    ln -s /opt/tomcat9/bin/startup.sh /usr/bin/tomcatstarting
+ 
+ conf:
+    server.xml
+       default port for tomcat   = 8080 
+       changing the default port = 6000
+       autoDeploy
+       webapps
+    tomcat-user.xml  
+       simon    - Manager 
+       landmark - Developer 
+       paul     - deployment engineer 
+ lib:
+    contain all the jar files
+ 
+ logs:
+  catalina.out
+  host-manager.log
+IQ:  What are the log files available in the log dir?
+  
+ webapps: we effect deployments in Tomcat in the webapps Directory
+           default deployment Directory in Tomcat 
+    war files
+        maven-web-app.war  # mvn package 
+        maven-web-app
+        cp *.war /webapps
+    cp *war   /opt/tomcat9/webapps/maven-web-app.war
+
+sh /opt/tomcat9/bin/startup.sh  
+
+sh startup.sh
+[ec2-user@app ~]$ sh startup.sh
+sh: startup.sh: No such file or directory
+
+ln -s /opt/tomcat9/bin/startup.sh /usr/bin/starttomcat
+
+ work:
+    working related files
+    
+ temp:   
+ sudo sh /opt/tomcat/bin/catalina.sh status 
+
+   ps -ef | grep tomcat 
+
+  100.25.142.148:8080 
+
+403 Access Denied
+==================
+
+  vi /opt/tomcat9/webapps/manager/META-INF/context.xml
+
+ Tomcat server configuration:
+  vi /opt/tomcat9/webapps/manager/META-INF/context.xml 
+  #vi /webapps/host-manager/META-INF/context.xml  
+  
+ Tomcat server configuration:
+  vi /opt/tomcat9/webapps/manager/META-INF/context.xml
+
+ <!--
+  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+-->
+vi /opt/tomcat9/conf/tomcat-users.xml  # to add user
+<user username="landmark" password="admin123" roles="manager-gui,admin-gui, manager-script"/>
+  <user username="simon" password="admin123" roles="admin-gui"/> 
+
+  <user username="Landmark" password="admin123" roles="manager-gui,admin-gui"/>
+
+   http://100.25.142.148:8080/maven-web-app/
+
+
+maven   ---- 
+   Build
+Tomcat  
+  Deployment  
+
+Tomcat:privateIP = 172.31.0.238
+Tomcat:publicIP  = 100.25.142.148
+
+172.31.0.19:
+  scp tesla-webapp.war  ec2-user@172.31.0.238:/opt/tomcat9/webapps
+  scp *war  ec2-user@172.31.0.238:/opt/tomcat9/webapps
+  scp -i dominion.pem *war  ec2-user@172.31.0.238:/opt/tomcat9/webapps
+scp -i dominion.pem *war  ec2-user@172.31.0.238:/opt/tomcat9/webapps/td.war

@@ -1,0 +1,22 @@
+Docker flow:
+ - Dockerfile uses to build images and the image will deploy using Docker/DockerSwarm/K8s
+   The image is our application+all his dependencies
+ 
+ - dockerfile
+             -->build: to create image
+                                -->: run : deploy app in container
+
+Project Stages:
+    Build and release:
+   1- git clone -----> git latest code / Newversion
+   2- mvn test ------> Test + Build
+               -------> Build (war)
+   3- CodeQuality -----> code Quality report 
+   4- uploadArtifacts ----> backupArtifacts
+   
+     Deploiement:
+   5- docker build ----> build docker images
+   6- docker push -----> push image to registry(Dockerhub)
+   7- docker run ------> deploy application as docker container
+   8- Email notification  
+   
