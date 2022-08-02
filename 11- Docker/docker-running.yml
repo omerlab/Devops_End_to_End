@@ -1,0 +1,995 @@
+AWS WEB SERVICES:
+  1. server resources 
+      ec2-instances
+  2. serverles resources 
+       Lambda 
+       fargate profile 
+  3. storage recources
+       EBS = ELASTIC BLOCK STORE  (ebs-jenkins-vol )
+         We mount the root file system using EBS VOLUME
+         /etc /bin /home /opt  /app 
+         The R/W speed is very fast with EBS
+         It is use equally to boot-up (start) servers  
+
+       EFS/NFS = ELASTIC FILE SYSTEM 
+          dbServer1 
+             /app
+             touch names.txt 
+          dbServer2 
+             /app
+          dbServer3 
+            /app        
+       S3  =  object storage
+              log files / audio files / videos / 
+              archives -- 2010logs.zip 
+              artifacts -- app.war
+              data migration 
+              versioning   
+              costing strategy:
+                   standard=Frequent access ---> $50
+                   IA - InFrequent access        $25
+                   Reduce redundancy             $15
+                   Glacier                       $5               s3 storgae classes:
+
+  Netflix ---> 
+  4. security resources:
+       IAM ---> 
+       VPC and its components ---> 
+         private subnets 
+         Route Tables 
+       Security Groups 
+       private key pair
+       NACL 
+       Secret managers 
+       Paramenter store 
+       WAF 
+       ELB [users--->elb---applications]
+  5. DATABASES :
+       RDS [mySQL, mariaDB]
+       nonRDS [dynamoDB,]
+  6. Networking resources
+        VPC / VPN 
+        Route53
+
+This are not the complete services of AWS:
+  AWS SOLUTION ARCHITECT COURSE ----
+
+95% has zero certification  
+You will apply for a job as someone with experience:
+
+IAM ---> 
+   Dominion Systems Inc. has 5 aws accounts with 600 Engineers
+   In my team I work with 13 Engineers
+
+  manages:
+    1. How to access AWS resources 
+         Console access-GUI [username and password]
+         Sign in as IAM user
+            account no: 800894970101 
+            username: landmark 
+            password: admin@12345...!@@#
+            multi-factor authenticator 
+         Pragramatic access[CLI, sdk, terraform]
+            access-Key: @@##$NHGFDASHgggfd
+            secret-access-key:@@##$%%*&<MJKJHHGTDSRTEOPOI{OIKOIUG
+    2. Who can access AWS resources / services 
+AWS Organisation:
+  account no1: 800894970101 
+  account no2: 800894970155
+  account no3: 560372791671  
+
+Docker 
+======
+Docker is a containerisation software used to package 
+applications and all its dependencies. 
+With docker applications runs seamlessly in all Environments. 
+  app.war        = application code 
+  tomcat/java    = dependencies 
+In Dominion we manage 4 Environments 
+   Dev 
+   stage 
+   uat/pre-prod 
+   prod 
+
+Docker is a software use to create docker images and
+ run  containerized  apps. 
+
+Docker is used by Developers, Administrator and others to build 
+    and run applications as containers.
+
+We maintain a minimun of 3 ENVIRONMENTS = 
+   dev ---> 
+   stage/testing  -->
+   production --> 
+
+  dev branch --> developed -- build -- tested (Unit Testing)
+     --> deploy (TomcatServer - VM)
+       running well 
+  QA branch --> developed -- build -- tested (add Testing) 
+    --> deploy (VM) 
+        running well
+  Stage branch --> developed -- build -- tested (add Testing)
+   --> deploy (VM)
+         NOT running well
+  
+ Tomcat appServer
+    patching 
+    installation
+
+    scp app.war tomcat@tomcat/webapps/app.war 
+
+  app.war
+     tomcat
+     java
+
+ --> image ---> contianer 
+docker image = app + dependencies 
+               app.war + tomcat 
+               myapp.jar + java
+                 javac myapp.jar
+               app.ear + Jboss
+Docker Editions:
+    Docker CE --> Comunity Edition --> Open Source (Free)
+    Docker EE --> Enterprise Edition --> Commercial
+
+Type: Containerization
+Vendor: Docker INC
+
+Installation:
+O.S --> Cross Platform (Docker can be installed in any O.S)
+        Linux -- CentOS / ubuntu / redhat
+        Windows --- 
+
+Assignment---> Install docker desktop in your personal computer
+
+    Docker Can Be Installed in Linux, Windows OS, mac OS, etc.  
+
+Docker CE Can be installed in Most of the linux distribution except redhat.
+         ubuntu /  centos / Amazon Linux
+
+Docker EE can installed in all O.S including redhat.
+Docker CE --> OpenSource Free  
+
+What is your experience in Open Source technology:
+  SOFTWARES: java / tomcat / nexus / maven / sonar / git / github / jenkins 
+             Docker-CE
+  Linux OS distribution: ubuntu / centOS, 
+
+Docker EE --> Commerical :
+   DTR --> Docker Trusted Registry(Private Repo to keep docker images)
+   UCP --> Universal Control Plane --> It's GUI for managing Docker Machines
+
+Containerzation Platforms/Softwares.     :
+    Docker,     = 80%
+    CoreOS,     = 9%
+    Rocket --   = 6%
+    Container-D = 5%
+
+Docker Container--> It's a runtime instance of a docker image
+                    where our application is running.
+
+     The standard unit where the application service is deployed or running.
+
+ GitHub / 
+ Nexus  
+
+  Code are managed by SCM = GitHub 
+  Packages (app.war) are uploaded and managed in Nexus 
+  Docker images are stored and/or managed in dockerhub/Registries  
+
+Docker Repo/Registry. --> We can store and share docker images.   
+
+    Public Repo --> Docker hub 
+       is It is generally a public repo. 
+      Which contains all the open source softwares as  a docker images. 
+       We can think of docker hub as play store for docker images.
+
+    Private Repo (ECR, Nexus, JFrog, D.T.R(Docker Trusted Registory)) --> 
+            We can store and share the docker images with in our company
+        network using private repos
+  
+
+ PaaS  = 
+ IaaS  = EC2
+ SaaS  = DockerHub, New Relic, GitHub, SonarCloud
+
+What is docker hub?
+It's a public repository for docker images. You can think as play store for
+docker images.
+First Create Account in docker hub
+    https://hub.docker.com
+
+
+############################
+#!/bin/bash
+ Ubuntu Server 18.04 LTS (HVM),
+ redhat ec2-instances creates ec2-users by default 
+ ubuntu ec2-instances creats ubuntu user by default
+-----
+#!/bin/bash
+sudo hostname docker
+sudo apt update -y 
+sudo apt install docker.io -y
+sudo usermod -aG docker ubuntu 
+sudo su - ubuntu
+=========================
+Docker commands need admins right or
+ sudo priviledges to run docker commands 
+===================================
+
+docker comes with:
+  engine/daemon --- That performs tasks  
+  cli    --- docker 
+Docker commands:
+  docker info 
+  docker --version 
+
+Dominion Systems = 
+Java based application
+https://github.com/LandmakTechnology/java-web-app
+      src / tests / pom.xml
+      mvn package  [target/app.war]
+     
+      Jenkinsfile /  
+
+applications code:  web-app.war  
+dependencies: tomcat:8.0.20-jre8
+
+Dockerfile  --- Instructions used to create docker images  
+
+  FROM tomcat:8.0.20-jre8
+  COPY target/web-app.war /usr/local/tomcat/webapps/web-app.war
+
+  COPY target/web-app.war /opt/tomcat9/webapps/web-app.war
+
+FROM is use for the minimal base image 
+  FROM tomcat:jdk17-temurin-focal
+
+The default name for dockerfile is 'Dockerfile'
+Docker images
+  docker build   = create a docker images 
+     docker build -t appimage:1 .  
+          build from default name
+     docker build -t appimage:1 -f Dockerfile-jboss . 
+         -f flag when building from custom name
+  docker images  = list docker images 
+Docker Containers --- This is a running instance of docker images 
+ docker run  = will create and start a container  
+    docker run --name containerName -d -p hostPort:containerPort imageName:v 
+    docker run --name myapp -d -p  8000:8080  appimage:1  
+    docker run --name webapp -d -p 9000:8080  appimage:2  
+    docker run --name hello -d -p  80:80 mylandmarktech/hello [latest]
+    docker run --name springapp -d -p 8080:8080 mylandmarktech/spring-boot-mongo
+ docker ps  = list running containers 
+
+ http://35.171.7.100:8000/web-app/
+ http://35.171.7.100:9000/ebay/
+ http://35.171.7.100:80 
+ http://35.171.7.100:90
+        54.234.146.130:90 
+Docker Server has 65536 
+
+Dockerfile-----Images------Containers
+         Build        Run
+
+Docker registry 
+Docker commands: 
+  docker build = create an image from a Dockerfile
+     docker build -t mylandmarktech/maven-web-app . 
+  docker images  = list images
+  docker create = create a docker container
+  docker start = start the docker container/application
+  docker run = create and start a container
+  docker ps  = list all running containers
+  docker ps -a  = list all running containers and stopped/EXITED containers
+  docker login -u mylandmarktech
+  docker push  = push images to Registry / dockerhub 
+  docker tag 
+    docker build -t appimage:2 .  
+    docker tag appimage:2 mylandmarktech/maven-web-app:11 
+    docker tag appimage:2 mylandmarktech/maven-web-app
+    docker tag appimage:1 mylandmarktech/maven-web-app:12 
+    docker push mylandmarktech/maven-web-app:tagname
+
+Docker images commands:
+  docker build   = create images  
+  docker tag  = assigns repository name to images 
+  docker images    = list images
+  docker images -q = list image ids 
+  docker image ls  = list images
+  docker rmi imageID/name:tag     = delete an image
+  docker rmi -f imageID/name:tag  = force delete an image
+  docker rmi -f a848f84f4894 
+  docker rmi -f  $(docker images -q)
+  image2 
+  docker run image2 
+
+Docker container commands:
+  docker pull mylandmarktech/maven-web-app:12 
+  docker scan mylandmarktech/maven-web-app:12
+  docker run -d -p 3000:8080 mylandmarktech/maven-web-app:12
+  docker run [pull, create and start]
+      docker scan 
+      docker pull,
+      docker create and 
+      docker start
+docker run -d -p 3000:8080 mylandmarktech/maven-web-app:12
+   portable 
+localhost:3000 
+
+How to resolves issues occuring in a docker container??
+
+version of windows:
+  windows 10 Home
+  windows 10 professional 
+
+pay@mylandmarktech.com 
+
+https://github.com/LandmakTechnology/maven-web-application
+Dockerfile
+FROM tomcat:8.0.20-jre8
+COPY target/*.war /usr/local/tomcat/webapps/maven-web-app.war
+
+Dockerfile
+With Dockerfile docker images are created :
+
+docker images commands  
+=======================
+    docker build
+    docker tag  
+    docker imags ls  
+    docker images   
+Docker images commands:
+  docker build   = create images  
+  docker tag  = assigns repository name to images 
+  docker images    = list images
+  docker imags ls  = list images
+  docker images -q = list image ids 
+  docker rmi imageID/name:tag     = delete an image
+  docker rmi -f imageID/name:tag  = force delete an image
+  docker rmi -f a848f84f4894 
+  docker rmi -f  $(docker images -q)
+  image2 
+  docker run image2 
+
+Docker containers related commands:
+  docker pull mylandmarktech/maven-web-app:12 
+  docker scan mylandmarktech/maven-web-app:12
+  docker run = docker create  + docker start     
+  docker run -d -p 3000:8080 mylandmarktech/maven-web-app:12
+  docker run --name webapp -d -p 80:80 mylandmarktech/hello  
+  docker run [pull, create and start]
+      docker scan 
+      docker pull,
+      docker create and 
+      docker start
+  docker ps -          = list running containers 
+  docker container ls  = list running containers 
+  docker ps -q = list running containers IDs 
+  docker ps -a  = list running & stopped/excited containers
+  docker ps -aq = list running & stopped/excited containers IDs 
+
+List ONLY stopped Containers
+=================================
+  docker ps -aq --filter  status="exited" 
+  docker ps -a --filter  status="exited" 
+
+List Running Containers
+=======================
+docker ps -a --filter  status="running" 
+docker ps 
+docker container ls
+
+List All Containers
+==================
+docker ps -a
+docker container ls -a
+
+List only running container ids
+==============================
+docker ps -q
+docker container ls -q
+
+
+List all container ids
+==============================
+docker ps -aq
+docker container ls -aq
+
+Delete excited/stopped Containers
+================================
+  docker rm containerId/Name
+
+Delete running Containers
+================================
+  docker rm -f containerId/Name
+  docker stop containerId/Name && docker rm containerId/Name
+
+Delete all Containers
+================================
+  How to delete all containers
+  docker rm -f $(docker ps -aq)
+
+
+Start the container
+===================
+docker start <containerId/Name>
+
+stop/kill the container
+========================
+  docker stop <containerId/Name>
+      gives warning before stopping the container process 
+  docker kill <containerId/Name>
+     gives no warning before stopping the container process 
+
+pause/unpause 
+============
+    docker pause <containerId/Name>
+    docker unpause <containerId/Name>
+ 
+  docker rm containerID/name -- delete a docker container in excited state
+
+docker run -d -p 3000:8080 mylandmarktech/maven-web-app:12
+   portable 
+localhost:3000 
+
+How to resolves issues occuring in a docker container??
+
+version of windows:
+  windows 10 Home
+  windows 10 professional 
+
+docker registry 
+docker containers  
+
+
+http://3.84.86.211:8000/java-web-app/  
+http://3.84.86.211:8080/maven-web-app/
+
+How to resolves issues occuring in a docker container??:
+  docker ps to ensure the container is running  
+  docker ps -a to ensure that the container exist 
+  docker inspect app   
+  docker logs app 
+  docker exec      
+  docker top 
+
+How to trouble shoot or debug applications running as a container? :
+1. docker inspect myimage/container  
+  docker run -d -p 900:900 --name java-web-app mylandmarktech/java-web-app
+      http://54.234.146.130:900/java-web-app  
+     -p 900:900 
+     "ExposedPorts": {
+                "8080/tcp": {}
+ docker run -d -p 900:8080 --name java-web-app mylandmarktech/java-web-app
+ users---->172.31.83.123:900----->172.17.0.2:900  
+
+ check: Environments variables
+        ExposedPorts   
+
+2. docker logs <containerId/Name> 
+   docker logs myapp | grep errors  
+   docker logs myapp | grep exception  
+   docker logs --tail <NoOflines> <containerId/Name>
+   docker logs --tail 10 app | grep errors
+   docker logs --tail 5 app | grep errors
+
+3. docker top  RAM 256MB ROM 1GB
+      insufficient / Limited resources 
+
+4. docker stats 
+       e0845ab3308e   app       97% cpu  98% mem 
+
+5. docker exec <containerId/Name> 
+     This is use to execute commands inside a container 
+      docker exec containerId commands 
+      docker exec app ls 
+    docker exec -it <containerId/Name>  /bin/bash 
+    docker exec -it app /bin/bash 
+    echo $SHELL
+
+It will display process details which is runing inside a container.
+ docker top <containerId/Name>
+
+It will display resource(RAM,CPU) consumption details.
+  $ docker stats <containerId/Name>
+
+Execute commands on a running container.
+   docker exec <containerId/Name> <cmd>
+
+How to copy files from container to host system or host system to container?
+  docker cp app:/usr/local/tomcat/logs . 
+    from container to host system
+
+  docker cp java-web-app/ app:/usr/local/tomcat/
+  docker cp test28 app:/usr/local/tomcat/
+     host system  to container 
+  docker run --name app -d -p 3000:8080 mylandmarktech/maven-web-app
+
+   docker pull mylandmarktech/maven-web-app 
+   docker run  
+
+The default setup/configuration of my container has change 
+How can I apply those changes for future application deployment./  
+answer: Use docker commit to apply the changes to my container images   
+
+What is docker commit?
+Using docker commit we can create image from 
+  the container which will include changes effected.
+docker commit <containerId/Name> <imageName>
+docker commit app newimage:1 
+docker commit app mylandmarktech/java-web-app:3 
+docker tag newimage:1 mylandmarktech/java-web-app:9
+docker push mylandmarktech/java-web-app:9
+docker login -u mylandmarktech 
+
+How can we troubleshoot or debug issues in a docker container?   :
+  docker top <cName/cID>
+  docker logs
+  docker stats
+  docker exec
+  docker exec -it cName /bin/sh
+  docker attach 
+  docker inspect     
+===============================
+Dockerfile --> It's file which contains instructions to create an image quickly. 
+               Docker Daemon  will process these instruction from top to bottom.
+
+Dockerfile ---> 
+              List of instructions needed to dockerise an application
+              Docker images are created from DockerFile
+              Docker images comprises of:
+                  application codes  = app.war
+                  +
+                  softwares and dependencies
+
+mvn package :
+    target/app.war
+
+Dockerfile
+EX:
+FROM tomcat:8.0.20-jre8 
+COPY target/app.war /usr/local/tomcat/webapps/maven-web-app.war
+
+EX2
+FROM jboss/wildfly
+COPY target/*.war /opt/jboss/wildfly/standalone/deployments/app.war  
+
+http://3.92.188.138:5000/app/
+
+Dockerfile Keywords:
+======================
+MAINTAINER 
+FROM 
+COPY 
+ADD 
+RUN       instructions are use to pass commands [docker build] 
+CMD       instructions are use to pass commands [docker run]
+ENTRYPOINT  instructions are use to pass commands [docker run]
+WORKDIR 
+ENV
+EXPOSE
+USER   ---
+VOLUME
+LABEL
+ARG 
+
+FROM = Define minimal base images which contains required softwares + dependencies
+
+COPY: --> This will copy files from the docker-host to the container
+          when creating a docker image
+
+COPY: index.html /var/www/html/
+       FROM nginx:alpine
+       COPY index.html /usr/share/nginx/html
+
+           http://54.234.146.130
+           curl -v localhost
+COPY:  . .
+COPY: <source> <dest>
+COPY vs cp =
+what is difference b/w COPY and docker cp?
+  docker cp = copy files and directories from docker-host to container and vice versa
+      docker cp  
+  COPY is a keyword in the docker file use to copy files into the image at creation.
+
+ADD: This will copy files from the docker-host to the container
+          when creating a docker image    
+     It can copy files from external sources like url also  
+
+ADD  https://github.com/LandmakTechnology/k8s-ansible   /usr/local/tomcat/
+ADD: <source> <dest>
+ADD <URL> <dest>
+
+
+COPY target/*.war /usr/local/tomcat/webapps/java-web-app.war
+ADD target/*.war /usr/local/tomcat/webapps/java-web-app.war
+ADD  https://github.com/LandmakTechnology/k8s-ansible
+
+MAINTAINER:   --> Author's details 
+
+MAINTAINER LandmakTechnology
+
+RUN --> This will execute commands when creating a docker image 
+        docker build [RUN instructions/commands are executed] 
+
+RUN    mkdir -pv /opt/app  
+RUN    touch /opt/app/test.java  
+RUN    tar -xvzf /opt/app/tomcat-8.tar.gz
+
+CMD --> This will execute commands when creating a docker container
+        It will execute the last  CMD listed on the DockerFile
+
+      docker run/start  
+
+
+ENTRYPOINT --> his will execute commands when creating/starting a docker container
+        
+  docker -- run/create [CMD & ENTRYPOINT commands are executed] 
+       
+IQ: What is the difference between CMD and ENTRYPOINT?
+    We can overwrite CMD but we cannot overwrite ENTRYPOINT
+
+=# Dockerfile1 = image1
+
+FROM centos 
+RUN mkdir /app
+RUN touch /app/test.sh
+RUN echo mylandmarktech >> /app/test.sh
+COPY . .
+CMD ["echo" ,"From CMD DevOps 1st"]
+CMD ["echo" ,"From CMD DockerFile last"]                  
+
+IQ: What is the difference between CMD and ENTRYPOINT?
+    We can overwrite CMD but we cannot overwrite ENTRYPOINT
+
+Dockerfile keywords/instructions
+================================
+Maven BuildServer creating artifacts [jar/war/ear]
+  Web applications ie war artifacts are deployed in Tomcat/JBoss servers 
+  standalone applications [jar] are deploy in boxes[VM] with java installed 
+  enterprise applications [ear] are deployed in JBoss/wildfly servers  
+
+Maven BuildServer creating artifacts [jar/war/ear]
+Artifacts are stored securely in artifactory JFrog/Nexus [jar/war/ear] 
+   https://45.0.2.88:8081/repository/td-releases/app.war  
+
+Docker BuildServer creating artifacts [docker images]
+  To build a docker image a Dockerfile is required.
+  Docker images generally contained application code + dependencies, softwares 
+
+FROM tomcat:8.0.20-jre8
+ADD https://45.0.2.88:8081/repository/td-releases/app.war /usr/local/tomcat/webapps
+ADD target/web-app.war /usr/local/tomcat/webapps  
+ADD target/springapp.war /usr/local/tomcat/webapps
+RUN touch readme.md  
+CMD sh startup.sh 
+ENTRYPOINT sh catalina.sh run  
+CMD sh catalina.sh  start            = shell form  
+CMD ["sh", "catalina.sh", "start"]   = executable form 
+ENTRYPOINT ["sh", "catalina.sh", "start"]
+ENTRYPOINT ["sh", "catalina.sh", "run"]
+
+docker build [RUN, FROM, ]
+docker run [CMD, ENTRYPOINT ]
+
+scaling  problem 
+
+Docker deployment Server
+  pulling docker images from registry and creating containers  
+COPY   
+
+
+shell form vs executable form:   
+shell form :
+    ENTRYPOINT sh catalina.sh start
+    CMD sh catalina.sh start
+When using the shell form, the specified binary is executed with an invocation 
+of the shell using /bin/sh -c
+        with shell form application runs as a child process 
+          It can be killed unnoticed
+        sh catalina.sh
+ 
+process mgt commands  
+
+  child process  
+  parent process  
+
+
+executable form in docker:
+When instruction is executed in exec form it calls the executable directly, 
+and shell processing does not happen. 
+When instruction is executed in shell form it calls /bin/sh -c <command> 
+under the hood and normal shell processing happens.
+For example, 
+the following snippet in Dockerfile-
+    ENTRYPOINT ["sh","catalina.sh"]
+    CMD ["sh","catalina.sh"]
+          application runs as a parent process
+          It cannot be killed unnoticed
+
+
+IQ- Explain a problem you faced in your Project recently?:
+ 
+    shell form vs executable form: 
+
+    ENTRYPOINT ["sh","catalina.sh"]
+    CMD ["sh","catalina.sh", "run"]
+
+    ENTRYPOINT sh catalina.sh run  
+    CMD sh catalina.sh  start  
+
+ENTRYPOINT  instructions are use to pass commands [docker run]
+WORKDIR 
+ENV
+EXPOSE 9001  
+USER   ---
+VOLUME
+LABEL
+ARG
+
+
+
+        DEV /  CATALINA_HOME /usr/local/tomcat
+        UAT / CATALINA_HOME /opt/tomcat
+        PROD  CATALINA_HOME /app/tomcat
+
+
+
+    tomcat:9.0.62-jdk17-corretto
+     tomcat home directory = THD = CATALINA_HOME
+     CATALINA_HOME
+
+FROM openjdk:17-jdk-buster
+ENV CATALINA_HOME /usr/local/tomcat
+ENV PATH $CATALINA_HOME/bin:$PATH
+RUN mkdir -p "$CATALINA_HOME"
+RUN adduser tomcat 
+USER tomcat
+WORKDIR $CATALINA_HOME
+
+EXPOSE 8080  
+CMD ["catalina.sh", "run"]
+CMD sh catalina.sh start
+https://github.com/LandmakTechnology/Dockerfiles
+========
+FROM centos
+MAINTAINER mylandmarktech@gmail.com
+RUN mkdir /opt/tomcat/
+WORKDIR /opt/tomcat
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.tar.gz .
+RUN tar xvfz apache*.tar.gz
+RUN mv apache-tomcat-9.0.65/* /opt/tomcat/.
+RUN yum -y install java
+RUN java -version
+EXPOSE 8080
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+
+Create Leightweight docker images  
+
+Each run instruction create a layer in the docker image  
+The more Layers the heavier the docker image  
+
+FROM centos
+MAINTAINER mylandmarktech@gmail.com
+RUN mkdir /opt/tomcat/
+WORKDIR /opt/tomcat
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.tar.gz .
+RUN tar xvfz apache*.tar.gz \
+  &&  mv apache-tomcat-9.0.65/* /opt/tomcat/.  \
+  &&  yum -y install java  \
+  && java -version 
+EXPOSE 8080
+#CMD sh /opt/tomcat/bin/catalina.sh run
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+
+
+
+ Docker Dockerfile2 
+Each run instruction create a layer in the docker image
+Each run instruction increases the size of the  docker image
+applications portable
+how to reduce the no of layers in a docker image = docker history imageName/ID
+
+  docker history mylandmarktech/maven-web-app:29
+  docker history imageName/ID  
+
+Multi Stage Docker file
+======================--
+Multi-stage Docker builds let you write Dockerfiles with multiple FROM statements. 
+This means you can create images which derive from several bases,
+which can help cut the size of your final build (image size).
+
+Docker images are created by selecting a base image using the FROM statement.
+ You then add layers to that image by adding commands to your Dockerfile.
+
+With multi-stage builds, you can split your Dockerfile into multiple sections.
+ Each stage has its own FROM statement so you can involve
+  more than one image in your builds. Stages are built sequentially 
+  and can reference their predecessors,
+
+
+ so you can copy the output of one layer into the next.
+  very large image that will impact the performance of 
+    applications running in the container
+
+docker build -t image4 -f /home/ubuntu/lap/msdf /home/ubuntu/lap
+ocker build -t image4 -f msdf .  
+ocker build -t image4 -f msdf /home/ubuntu/lap 
+
+ ==============
+ ===============
+1. clone code 
+
+2. Build 
+
+3. Deploy in tomcat 
+
+===============
+ubuntu@deployServer:~/lap$ docker system prune
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all dangling images
+  - all dangling build cache
+Are you sure you want to continue? [y/N]
+
+Best practices in writing Dockerfiles:
+======================================    
+1. Use Linux lightweight  alpine images were applicable/possible
+    redhat / ubuntu / centos / alpine 
+
+2. Reduce the number of layers by minimising the number
+   of RUN instructions in your Dockerfile. 
+   Muliple run instructions affects the performance of containers.
+    RUN yum install java -y \
+      && yum install maven -y \
+      &&  yum install git wget unzip tree nano zip -y \
+      && git clone  github/maven-web-app 
+
+     docker history    
+
+3. Use only official images in docker hub for base image
+   docker inc. 
+
+4. Avoid downloading unnecessary softwares and packages    
+
+5. Use muliStage Dockerfile were applicable. 
+
+6. scan base images before deployment
+
+7. Use executable form over shell form for CMD and/or ENTRYPOINT instructions
+
+8. Developers should not hard code 
+1===========================
+  we can deploy jenkins/sonarqube etc. as docker containers  
+
+Explain a project you are proud of ??
+  I migrated jenkins running on a Linux VM {EC2 INSTANCE} TO 
+  Jenkins running as a docker container using Job Import Plugin 
+
+ docker run -d -p 3000:8080 --name jenkins jenkins/jenkin
+ docker run -d -p 8080:8080 --name jenkins jenkins/jenkin
+ docker run -d -p 9000:9000 --name sonarqube sonarqube
+ docker run -d -p 9999:9000 --name sonarqube sonarqube
+
+ EXPOSE 9000 
+ EXPOSE 8080 
+ EXPOSE 8081   
+
+ netstat -nutlp   
+
+docker system prune 
+ WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all dangling images (images without tags )
+  - all dangling build cache
+
+docker images  prune
+ WARNING! This will remove:
+    - all dangling images
+    - all dangling build cache
+docker containers  prune
+ WARNING! This will remove:
+  - all stopped containers
+
+Docker:  commands, 
+         images, 
+         containers  
+         Dockerfile + Best practices
+         port forwarding/mapping  
+           docker run -d -p hostPort:containerPort  --name app image  
+           docker run -d -p 4000:8080  --name app mylandmarktech/hello
+           docker run -d -p 4000:8080  --name app2 mylandmarktech/hello
+           docker run -d -p 300:8080  --name app1 mylandmarktech/hello
+   netstat -nutlp   
+
+             hostPort: 0-65355
+             containerPort
+
+ Docker networks 
+ Docker volumes 
+ Docker compose 
+ Docker swarm   
+
+Java based web -app:
+spring Boot framework --> It's a java based framework. 
+It will eliminate the boilerplate code. 
+Using this framework Developers build projects very quickly.
+   It eases the process of developing, building, testing
+   and deploying java-based application  
+
+spring-Boot-suite: ide /  
+We can develop /build/run 
+    web applications
+    standalone application
+    Enterprise applications 
+
+spring:
+  data:
+    mongodb:
+      host: ${MONGO_DB_HOSTNAME}
+      port: 27017
+      username: ${MONGO_DB_USERNAME}
+      password: ${MONGO_DB_PASSWORD}
+      database: users
+      authentication-database: admin
+server:
+  port: 8080
+
+How to connect to a database:
+    hostName: mydb 
+    username: mydb123
+    password: mydb@123
+deployment:
+ app   
+ db
+
+deploy stateless applications:
+  docker run --name spingapp -d -p 80:8080 --network fintech \
+ -e MONGO_DB_USERNAME=devdb -e MONGO_DB_PASSWORD=dev@123 \
+ -e MONGO_DB_HOSTNAME=mongodb mylandmarktech/spring-boot-mongo 
+
+
+docker run --name spingapp -d -p 6000:8080 mylandmarktech/spring-boot-mongo
+    docker inspect mylandmarktech/spring-boot-mongo
+    docker pull mylandmarktech/spring-boot-mongo
+
+docker run --name mongodb -d mongo 
+
+How can docker containers communicate with each other???
+   docker containers communicate Via docker Networking
+   docker containers communicate can ONLY communicate 
+      if they are in the same network by using ip/names
+   
+ubuntu@docker:~/laps$ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+80ecf3161e25   bridge    bridge    local
+e8e2e5868c4f   host      host      local
+a62a973fd852   none      null      local
+
+docker network create  fintech -d bridge 
+docker network create ebay 
+
+ docker network connect app fintech 
+ docker network connect app customer-service  
+ docker network disconnect app customer-service 
+
+ubuntu@docker:~/laps$ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+80ecf3161e25   bridge    bridge    local
+e34fd1b46da5   ebay      bridge    local
+ef5ccb04718e   fintech   bridge    local
+e8e2e5868c4f   host      host      local
+a62a973fd852   none      null      local
+
+
+docker run --name spingapp -d -p 80:8080 --network fintech \
+    -e MONGO_INITDB_ROOT_USERNAME=devdb \
+    -e MONGO_INITDB_ROOT_PASSWORD=dev@123 \
+    -e MONGO_DB_HOSTNAME=mongodb mylandmarktech/spring-boot-mongo
+
+docker run --name mongodb -d --network fintech \
+    -e MONGO_INITDB_ROOT_USERNAME=devdb \
+    -e MONGO_INITDB_ROOT_PASSWORD=dev@123  mongo 
