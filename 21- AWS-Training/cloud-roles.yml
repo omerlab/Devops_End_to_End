@@ -1,0 +1,26 @@
+                       Cloud roles :
+
+ On-Premises Roles: ARCHITECT
+    
+    - Enterprise or system Architect : create holistic IT Architecture designs
+    - Application Architect : design applications
+    - Storage Architect : design Storage infrastructure
+    - Network Architect : Design network Architecture
+    - Security Architect : specify security requirements  
+
+On-Premises Roles: System Administrator
+    Responsible for installing, supporting, and maintaining computer systems and servers
+
+     - Hardware : install, repair, replace and maintain
+     - Computer systems : support and maintain
+     - Hardware/Software : monitor performance 
+     - Computer systems  : monitor network
+     - Computer systems : manage log files
+     - Computer systems : Service outage Response 
+     - OS and applications: install/update/patch
+     - File systems  : Manage 
+     - Entire Environment : Back up and Recover 
+     - Users : manage users and access control
+
+
+On-Premises Roles: Application Administrator

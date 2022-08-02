@@ -1,5 +1,33 @@
 My name is Brice, i'am Senior DevOps Engineer working  with Landmark technologies for more 
-than 6 years. I Lead the CI/CD team.It is a small team, we are resposible of the CI/CD tools.
+than 6 years, Landmak Technology is an IT consulting firm where we develop, maintain, deploy and monitor applications for fintech
+e-commerce and some Healthcare customers. As a Devops Eng i had to perform several roles and this roles range for onboarding new project
+where i create repository, create team's members, assign rloes and responsability and also ensure that they are remain our git best practices.
+I had also been in charge of setting up, maintaining and monitoring our CI/CD pipeline. And in the CI/CD pipeline Jenkins is our main automation tool.
+So i intgrate Jenkins with github and automate the process using a trigger mechanism like webhook, pull scm, build periodically so whenever  developer 
+commit a new version of the code jenkins will pull the code and since the code is like a raw material, maven which is our build tool will execute clean package
+goals and we will obtain artifacts. I set up our code quality tool which sonarqube and for each peoject we have benchmark that we follow, for example 
+sonarqube make sure that is no bugs, no vulnerablities. if the code pass our quality gate, we need to back up the artifact in our artifactory in Nexus for disaster recovery.
+Once that is done we complete our CI process, we then prepare for deployment. For Deployment we use Ansible which is our automation tool. so with the use of ansible playbook
+we have been able dockerise the Artifacts to create images from the Dockerfile and push them in our docker registry and once that is done Ansible is also 
+responsible to send and API call to our k8s cluster and in the cluster the API server recieve the call, persist it in ETCD, the scheduler is trigger and check for available node 
+to carry out the job, also the controller manager will be alert then the kubelet in worker node will receive instruction from the master node and will pull down this build image in 
+our docker registry. once that is done the container runtime will run the container and application will go live. And in the same time we have deploy monitoring tool 
+prometheus and grafana, where prometheus is going to scrape the data using node exporter configure in each nodes  and grafana will use those data and we will able to have 
+a nice dashboard on which we can monitor the health of our cluster.
+ 
+ End result of our project: 
+     - we are managing application that will help customer to access their account online and be able to do payment (it was a payment gateway), transfer,
+     - for our banking customer, the result of the project allows customer create an account and for the mortgage departement the could be able to have 
+        information update seamlessly.
+
+    - An application for Healthcare customer helps the company to have all information about the customer, hospitalisation status, medications ...
+    - for insurance company, customer can book insurance online and renew their policy
+     
+ I Lead the CI/CD team.It is a small team, we are resposible of the CI/CD tools.
+   i maintain jenkinsfile, update them when necessary :
+   i also help the infrastructure team to provision infrastructure. we provision the entire environment, we use terraform to autaumate that
+   i akso accomplish project in configuration management writting playbook to maintain different projects.
+   I maintain servers to increase thier uptime
  We deal with github installation, Jenkins integration with Maven which is our build tool since we
  manage java based application ,Sonarqube as code quality and nexus as artifactory.
  we are responsible of bulding, maintaining the service resposible that run the  automation. 
