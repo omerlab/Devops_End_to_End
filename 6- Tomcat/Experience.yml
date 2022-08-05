@@ -1,0 +1,15 @@
+My experience in tomcat is :
+  i have been able to install tomcat server for application Deployment
+
+  i have been able to configure tomcat  :
+     - /opt/tomcat9/conf/tomcat-users.xml : i grant access to authorised users in tis file
+     - /opt/tomcat9/conf/server.xml  : for security by changing the default port
+        when changing tomcat default port i need to restart tomcat.
+             - sh /opt/tomcat9/bin/startup.sh
+             - sh /opt/tomcat9/bin/shutdown.sh
+    -  /opt/tomcat9/webapps/manager/META-INF/context.xml: to access tomcat from another server because by default tomcat is 
+          only available from localhost
+  
+  i manage tomcat from GUI and CLI
+
+  
