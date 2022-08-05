@@ -1,14 +1,14 @@
 My name is Brice, i'am Senior DevOps Engineer working  with Landmark technologies for more 
 than 6 years, Landmak Technology is an IT consulting firm where we develop, maintain, deploy and monitor applications for fintech
 e-commerce and some Healthcare customers. As a Devops Eng i had to perform several roles and this roles range for onboarding new project
-where i create repository, create team's members, assign rloes and responsability and also ensure that they are remain our git best practices.
+where i create repository, create team's members, assign roles and responsability and also ensure that they are remain our git best practices.
 I had also been in charge of setting up, maintaining and monitoring our CI/CD pipeline. And in the CI/CD pipeline Jenkins is our main automation tool.
 So i intgrate Jenkins with github and automate the process using a trigger mechanism like webhook, pull scm, build periodically so whenever  developer 
 commit a new version of the code jenkins will pull the code and since the code is like a raw material, maven which is our build tool will execute clean package
-goals and we will obtain artifacts. I set up our code quality tool which sonarqube and for each peoject we have benchmark that we follow, for example 
+goals and we will obtain artifacts. I set up our code quality tool which is sonarqube and for each peoject we have benchmark that we follow, for example 
 sonarqube make sure that is no bugs, no vulnerablities. if the code pass our quality gate, we need to back up the artifact in our artifactory in Nexus for disaster recovery.
 Once that is done we complete our CI process, we then prepare for deployment. For Deployment we use Ansible which is our automation tool. so with the use of ansible playbook
-we have been able dockerise the Artifacts to create images from the Dockerfile and push them in our docker registry and once that is done Ansible is also 
+we have been able to dockerise the Artifacts to create images from the Dockerfile and push them in our docker registry and once that is done Ansible is also 
 responsible to send and API call to our k8s cluster and in the cluster the API server recieve the call, persist it in ETCD, the scheduler is trigger and check for available node 
 to carry out the job, also the controller manager will be alert then the kubelet in worker node will receive instruction from the master node and will pull down this build image in 
 our docker registry. once that is done the container runtime will run the container and application will go live. And in the same time we have deploy monitoring tool 
