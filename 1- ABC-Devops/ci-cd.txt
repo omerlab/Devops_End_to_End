@@ -1,17 +1,21 @@
+A wise man done at once while a foul will do finally :
+
 ===============CI/CD=============================
 
-CI/CD is the combined process of continuous integration and continuous delivery. CI/CD fills the gaps between development 
-and operation activities. It increases the team's productivity by enforcing automation in building, testing, and deployment
+CI/CD is the combined process of continuous integration and continuous delivery. 
+CI/CD fills the gaps between development and operation activities. It increases 
+the team's productivity by enforcing automation in building, testing, and deployment
  of software applications.
 
-The key competency area includes setting up version control systems and build tools for CI and create a build, test, and
- deploy pipeline for CD.
+The key competency area includes setting up version control systems and build tools for
+ CI and create a build, test, and deploy pipeline for CD.
 
 Key Competencies: 
 
-Knowledge of CICD tools - Fundamental knowledge of tools such as Jenkins, CircleCI, AWS CodeBuild, Azure DevOps, Travis CI,
- etc.
-Knowledge of version control systems - Understanding the basics of various version controls systems like git, svn, etc.
+Knowledge of CICD tools - Fundamental knowledge of tools such as Jenkins, CircleCI,
+ AWS CodeBuild, Azure DevOps, Travis CI, etc.
+Knowledge of version control systems - Understanding the basics of various version controls
+systems like git, svn, etc.
 Knowledge of build tools - Understanding the basics of build tools like maven, Gradle, etc.
-Installation and Administration of CICD Tools - Installation and configuration of a typical CICD tool like Jenkins.
-Setup Build Pipeline - Knowledge of how to set up a build pipeline for CI and CD.
+Installation and Administration of CICD Tools - Installation and configuration of a typical
+ CICD tool like Jenkins. Setup Build Pipeline - Knowledge of how to set up a build pipeline for CI and CD.
