@@ -1,0 +1,1315 @@
+Jenkins
+
+automation - helps to early detection of bugs in the code 
+           - helps to determine code-break
+           - enable continuous deployment
+           - enables automated testing
+           - reduce risk of a longer,tme-comsuming project
+           - increase the quality of software via continuous code quality
+
+Continuous Integration: Continuous Integration (CI) is the process of automating the build
+and testing of code every time a team member commits changes to version control
+
+Continuous Delivery: Any and every successful build that has passed all the relevant 
+automated tests and quality gates can potentially be deployed in to production via fully
+automated one click process.
+
+Continuous Deployment: The practicing of automatically deploying every successful build 
+directly into production without any manual steps is known as Continuous deployment.
+(OR)
+It is closely related to Continuous Integration and refers to keeping your application deployable 
+at any point or even automatically releasing to a test or production environment if the latest 
+version passes all automated tests.
+
+What Jenkins can do?:
+
+• Integrate with many different Version Control Systems (GitHub, CVS, SVN, TFS…)
+• Generate test reports (JUnit), using JaCoCo plugins (Java Code Coverage).
+• It can stop the deployment if code coverage is LESS than 80% or defined 
+threshold.
+• Push the builds to various artifact repositories. JFrog, Nexus.
+• Deploys directly to target environments; production, stage, or test environments.
+• Notify stakeholders of build status (ThroughEmail)
+• Bug tracking with Jira integration
+   automation tool 
+What is Jenkins automating ?:
+  Is an open source CI tool written in java.
+
+How do you use Jenkins for CI/CD automation ?:
+
+In Landmark, we manage federated JAVA based enterprise applications (web.ear) 
+for Fintech Clients/ Departement Of Defense/ Ecommerce
+
+users/customers --------> [paymentApp/zelle/payPal]
+
+Development--->Test+Build-->CodeQuality-->BackUp--->AppServers
+1. Development---> [Git/GitHub,IDE]
+     7 --- REPOSITORIES 
+2. CodeQuality--->
+3. Test+Build-->-->
+4. BackUp--->
+5. AppServers
+6. Notification[email, slack]
+
+users[]--->webServers/LB---->App
+
+https://www.jenkins.io/doc/book/installing/   :
+Installing Jenkins:
+    Docker
+    Kubernetes
+    Linux
+    macOS
+    WAR files
+    Windows
+    Other Systems
+    Offline Installations
+    Initial Settings
+Jenkins installation:
+    1. Accros platform like:
+        Linux 
+        Windows 
+        MacOS  
+        Solaris 
+Jenkins installation in redhat enterprise Linux 8 OS:
+https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
+
+ connect to the jenkins server in AWS CLoud:
+    userName: ec2-user 
+    remoteHost address: 54.159.1.197  
+    password/ssh-keys: dominion.pem 
+    port22 is open in the firewall (security group) 
+   ssh -i dominion ec2-user@54.159.1.197  
+
+   We also need an ssh-client software like: 
+     mobaXterm / 
+     pUTTY
+   WE CAN also USE GIT BASH  or 
+   terminal(macOS users)  
+
+Jenkins-install.sh  
+# CREATE HOSTNAME 
+sudo hostname auto  
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+sudo yum install java-11-openjdk -y 
+sudo yum install jenkins -y 
+sudo systemctl daemon-reload
+# start jenkins 
+# Start Jenkins
+# You can enable the Jenkins service to start at boot with the command:
+sudo systemctl enable jenkins
+#You can start the Jenkins service with the command:=
+sudo systemctl start jenkins
+# You can check the status of the Jenkins service using the command:
+sudo systemctl status jenkins
+
+Jenkins port number = 8080 
+  JenkinsIP:JenkinsPortNumber 
+  JenkinsIP = 54.159.1.197\
+  54.159.1.197:8080   
+  http://54.159.1.197:8080 
+  https://54.159.1.197:8080  
+jenkins url: http://54.159.1.197:8080/
+
+---------------------
+
+https://github.com/LandmakTechnology/maven-web-application [public]
+https://github.com/LandmakTechnology/maven-web-app [private]
+Class of REPOSITORIES in SCM (Github):
+    private-[]
+    public- 
+  Tesla project:
+    Build + Releases + Development---
+Jenkins uses plugins to extent it functionality
+1. Jenkins-Git/Github Integration:
+  1. INSTALL GIT in Jenkins server or 
+        Configure git plugin in Jenkins
+
+  2. Create credentials to access code in Guthub
+     Jenkins should be authorised to clone/pull code 
+     from  REPOSITORIES in SCM [GitHub/GitLab/BitBucket]
+     Configure Github credentials [userName & password/token]
+          userName: LEGAH2045 
+          Password/PAT : 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
+
+
+2. Jenkins-Maven integration: clean install 
+    1. go to  Manage Jenkins
+       go to Global Tool Configuration
+           maven3.8.4 
+
+         choose maven version  maven  
+
+    2. Build and invoke top maven target 
+
+
+3. Jenkins SonarQube Integration;  mvn sonar:sonar :
+  1. modify 'Properties' tag with SonarQube server details in  pom.xml
+    vi pom.xml:
+      <Property>
+        <sonar.host.url>http://3.83.86.27:9000/</sonar.host.url>
+    <sonar.login>class28</sonar.login>
+    <sonar.password>admin</sonar.password>
+      </Property>
+ 2. Open required ports (9000) in SonarQube server 
+    to allow traffic from jenkins server
+ 
+    or Install and configure JaCoCo plugin in Jenkins UI
+
+  Jenkins:
+    git--test--build--CodeQuality-- 
+
+    pom.xml 
+       JUnits 
+       selenium 
+
+
+4. Jenkins Nexus Integration for java projects;
+Jenkins Nexus Integration;  mvn deploy:
+Upload build artifacts:
+--------------------------------------
+1. Create repos in nexus-UI to upload artifacts
+      http://100.26.133.141:8081/repository/paypal-releases/
+      http://100.26.133.141:8081/repository/paypal-snapshop/
+
+      Building /var/lib/jenkins/  workspace/ebay-java-app
+
+2. modify 'distributionManagement' tag with nexus repos details
+   in  pom.xml
+        vi pom.xml
+
+ http://100.26.133.141:8081/repository/paypal-snapshop/
+    status: 401 Unauthorized
+
+   3. modify /maven/conf/setting.xml in maven (JENKINS) server with login credentials
+        
+         # vi //conf/setting.xml
+            <server>
+                <id>nexus</id>
+                <username>admin</username>
+                <password>admin123</password>
+            </server> 
+
+    4. Open required ports in Nexus server to allow traffic from jenkins server
+         mvn deploy 
+
+
+cd /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven3.8.4 
+vi /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven3.8.4/conf/settings.xml
+
+
+
+             
+   3. modify /maven/conf/setting.xml in maven (JENKINS) server with login credentials
+        
+         # vi /nexus/conf/setting.xml
+            <server>
+                <id>nexus</id>
+                <username>admin</username>
+                <password>admin123</password>
+            </server> 
+    
+    4. Open required ports in Nexus server to allow traffic 
+    from jenkins server
+         mvn deploy 
+
+5. JENKINS-TOMCAT INTEGRATION:
+============================= 
+1. INSTALL 'Deploy to container' Plugin on Jenkins UI
+       JENKINS uses plugin to extend it functionality
+
+2. ADD A TOMCAT USER in /tomcat9/conf/tomcat-users.xml 
+   vi /tomcat9/conf/tomcat-users.xml 
+   mylandmark landmark 
+
+<user username="landmark" password="admin123" roles="manager-gui,admin-gui,manager-script"/>  
+<user username="LandmarkTechology" password="admin123" roles="manager-gui,admin-gui"/>
+
+
+Paypal UAT Project:
+    project GitHub repo
+     name: maven-web-application
+             <name>maven-web-application</name>
+     url:  https://github.com/LandmakTechnology/maven-web-application
+            <url>https://github.com/LandmakTechnology/maven-web-application</url>
+
+
+
+IQ:
+  How did you configure Jenkins for email notification?
+  walk me through your Jenkins email notification Configuration?
+
+
+  1. Email Notifications 
+Configuring SMTP Server in Jenkins
+----------------------------------
+1. Log into Jenkins server UI  = http://54.159.1.197:8080/
+   install email notification plugin - 
+    Jenkins--> Manage-Jenkins---> Manage-plugins-->Available
+     1. Jenkins--> Manage-Jenkins-->Configure systems-->Editable Email and configure
+            Extended E-mail Notification
+            E-mail Notification
+     2. Configure email notification for required jobs:
+  
+  SMTP servers = simple mail transfer protocol servers
+  smtp.gmail.com 
+
+  paypal-project@gmail.com 
+  admin@123
+    receipients:
+      all Developers 
+      smtp ports = 25, 
+                   465 and 587   
+
+
+5 years experience in DevOps automation
+
+project Paypal-UAT:
+    did we achieve automation???  
+    Can we improve on this automation?? 
+      How are we running jobs ? Build Now (manual)
+    automating build with build Triggers:
+   Build Triggers
+    Trigger builds remotely (e.g., from scripts) ?
+    Build after other projects are built ?
+       project1: cT = testing  
+       project2: cI = build and release  
+       project3: cD = deployment
+       project4: cM = monitoring   
+
+    Build periodically 
+       * * * * *  Build every minute
+       H * * * *  Build every hour
+       Started by timer [ systems updates / db backups ]
+
+    Poll SCM=github ?  payPal-uat   
+       * * * * *  Build every minute if there are changes in the code
+       H * * * *  Build every hour if there are changes in the code   
+       Started by an SCM change 
+
+    GitHub hook trigger for GITScm polling ?  
+    Github-webhook: 
+         Jenkins --- GitHub INTEGRATION
+         http://54.159.1.197:8080/
+         http://54.159.1.197:8080/github-webhook/
+         Started by GitHub push by legah2045
+
+         SONARCLOUD --- GitHub INTEGRATION
+           Developers-->PUSH/COMMIT--->SONARCLOUD 
+           SaaS  = software AS A SERVICE: 
+                SONARCLOUD
+                GitHub =    
+           IaaS  = infrastructure AS A SERVICE :  SonarQube  = 
+
+   SME = Subject Matter Expert   
+
+
+Started by user Landmark Technologies
+Started by timer
+
+What is the difference b/w Build Periodically and Poll SCM 
+=================================================================
+* * * * *  - Build Periodically - is triggered by timer 
+
+* * * * *  - Poll SCM  - is triggered by  timer/Schedule & SCM change  
+
+What is the difference b/w Github-webhook and Poll SCM 
+
+Walk me through how build and deployment are effected in your projects/env?
+         Continuous integration job: 
+           Build and Release 
+              Developers + Git/GitHub + Jenkins + maven + SonarQube + Nexus 
+         Continuous Delivery job:  
+           deployment with Manual approval   
+             deploys in STAGING + 
+                           Manual approval 
+                                 deploys Production 
+         Continuous monitoring:
+Continuous deployment:
+ Developers + Git/GitHub + Jenkins + maven + SonarQube + Nexus-->UAT---TEST->PROD 
+                                                                       auto  
+Continuous Delivery:
+ Developers + Git/GitHub + Jenkins + maven + SonarQube + Nexus-->UAT---TEST---->PROD 
+                                                                       Manual  
+                                                                       sign 
+Continuous monitoring:
+
+
+Trigger a new build and identify updated files?
+
+Jenkins options:
+  1. Discard Old Build
+
+  2. Disable this project
+      schedule Maintainance of servers 
+      database backup 
+
+  3. Delete workspace before build starts 
+
+  4. Add timestamps to the Console Output 
+      sudo timedatectl set-timezone America/New_York
+
+
+Plugins Management:   
+==================
+ ---Plugins extends the functionality of jenkins, maven, etc.   
+
+Pipeline projects:
+
+PROJECTS: 
+  In LandmakTechnology I work in a Team where we:
+    1. Develop, test, build, secure, deploy, manage & monitor web and enterprise applications
+       for FinTech clients like
+           Paypal, Banks, Insurance, 
+           Money Transfer [zelle, cashApp, interact, MTN-MOMO,
+           VISA, MASTERCard
+    2. We automate the entire process stated above:
+PROJECTS Requirements:
+    Git [git-bash]:
+        IDEs = Integrated Development Environments
+               simplifies the deployment process  
+        vscode, pycharm, eclipes, atom 
+    SCM=GitHub : 
+        Create PROJECT REPOSITORIES and/or organisation  
+        TEAMS with required/minimum permissions/access granted
+        Branching 
+    maven:   
+    SonarQube or SONARCLOUD / 
+    SonarQube  =   3.22.166.76  port 9000 
+        http://3.22.166.76:9000/about [admin/admin]
+    Nexus      = 18.118.29.219  port 8081  
+        18.118.29.219:8081  [admin/admin123]
+        Your admin user password is located in
+         cat /opt/sonatype-work/nexus3/admin.password   on the server.
+    Tomcat     = 18.119.10.206  port 8080
+    Jenkins    =   13.59.86.124 port 8080 
+       If we have 2 services/applications/softwares using the port 
+       The cannot run in the same server because it will cause address binding 
+
+       If this must then we need to change the port of one of the application.   
+
+    It is not recommended to run multiples services/applications in the same server  
+    because that can result to a single point of failure  
+
+  6 hours []
+
+We need an account in aws:
+ Create your infrastructures in aws: 
+    ec2 instrances - servers / virtual manchines[VM]
+ -- NameTAGs are for easy identification   
+    EC2=VM - SonarQube = because we have the SonarQube software installed 
+    EC2=VM - Nexus     = because we have the nexus software installed 
+    EC2=VM - Tomcat    = because we have the tomcat software installed    
+    EC2=VM - Jenkins:  = because we have the jenkins software installed    
+
+  with terraform we create all required infrastructures/servers/ec2 in 1 command 
+  with Ansible we configure infrastructures/servers/ec2 
+
+Infrastructure Engineer:
+  With Jenkins we achieve:
+    Continuous integration     
+
+
+    terraform apply  
+
+
+Plugins Management:
+Plugins Extends jenkins functions 
+• JACOCO = Java Code Coverage  
+• SSH Agent
+        maven-web-app.war
+        TomcatServer -- EC2-Linux-RedHat-Instance 
+    Which protocol is used to copy files/dirs into a Linus server?? SSH 
+            /webapps  
+                        EC2-Windows-Server-Instance 
+• Deploy to container  --- 
+    deploys applications in Tomcat/GlassFish/JBoss servers
+• Deploy WebLogic
+     deploys applications in WebLogic servers
+• Maven Integration
+      spring-boot-mongo-1.0.jar 
+• Safe Restart
+    jobs are running 
+      sudo systemctl restart jenkins
+• Next Build Number
+     1, 2, 3, 4 
+     dev1, dev2 
+     uat1, uat2, uat3 
+• Build Name Setter
+• Email Extension
+• SonarQube Scanner    
+• Audit Trail Plugin
+         = 10 team members 
+        simon 
+        percy 
+        mercy 
+        florence
+• Schedule Build  
+• Artifactory Plugin
+• Cloud Foundry
+• Blue Ocean  
+• Publish Over SSH
+    jenkins --> ansible --deployment
+
+• ThinBackup
+
+• Convert To Pipeline
+
+• Job import plugin 
+    jenkins migration 
+      Jenkins server1  
+      Jenkins server2   
+
+• Maven projects  
+     25 mins 
+  freestyle projects
+     30 mins 
+
+
+Plugins Management:
+Plugins Extends jenkins functions 
+• JACOCO = Java Code Coverage  
+• SSH Agent
+        maven-web-app.war
+        TomcatServer -- EC2-Linux-RedHat-Instance 
+    Which protocol is used to copy files/dirs into a Linus server?? SSH 
+            /webapps  
+                        EC2-Windows-Server-Instance 
+• Deploy to container  --- 
+    deploys applications in Tomcat/GlassFish/JBoss servers
+• Deploy WebLogic
+     deploys applications in WebLogic servers
+• Maven Integration
+      spring-boot-mongo-1.0.jar 
+• Safe Restart
+    jobs are running 
+      sudo systemctl restart jenkins
+• Next Build Number
+     1, 2, 3, 4 
+     dev1, dev2 
+     uat1, uat2, uat3 
+• Build Name Setter
+• Email Extension
+• SonarQube Scanner    
+• Audit Trail Plugin
+         = 10 team members 
+        simon 
+        percy 
+        mercy 
+        florence
+• Schedule Build  
+• Artifactory Plugin
+• Cloud Foundry
+• Blue Ocean  
+• Publish Over SSH
+    jenkins --> ansible --deployment
+
+• ThinBackup
+
+• Convert To Pipeline
+
+• Job import plugin 
+    jenkins migration 
+      Jenkins server1  
+      Jenkins server2   
+
+• Maven projects  
+     25 mins 
+  freestyle projects
+     30 mins 
+
+
+Plugins are used to ease the execution of tasks and/or workloads in IT 
+Processes
+   -- maven [pom.xml]
+         MLR or 
+         MRR or 
+         MCR
+   -- SonarQube [sonar:sonar]
+
+   -- IDEs = plugin  
+
+   Jenkins plugins:
+
+We use Jenkins to automate tasks and run jobs/workloads:
+   ---  freestyle projects
+   ---- maven projects  
+   ---- Pipeline projects    
+Category of projects managed using Jenkins:
+    --- software [builds and testing and deployment ]  
+    --- systems monitorings  
+    --- database backup
+    --- Infrastructure creation / provisioning
+    --- Infrastructure Configuration mgt 
+
+Jenkins Pipeline projects :
+  Jenkins Pipelines are generally written groovy 
+  Jenkins Pipelines scripts are called Jenkinsfile 
+ 
+  we have scripted and 
+  declarative Pipeline scripts
+scripted
+--------
+https://github.com/LandmakTechnology/maven-web-application
+https://github.com/LandmakTechnology/maven-web-app = private  Repo
+Jenkinsfile
+===========
+mvn package [v/c/t/p]
+We can install and run Jenkins in both Linux and Windows OS AND MORE. 
+
+MHD = /opt/maven
+
+node{
+ def mavenHome = tool name: 'maven3.8.6'   
+ stage('1cloneCode'){
+    git credentialsId: 'GitCredentials', url: 'https://github.com/LandmakTechnology/maven-web-app'
+    //git "https://github.com/LandmakTechnology/maven-web-application"
+    //sh "git clone https://github.com/LandmakTechnology/maven-web-application"
+    //bat "git clone https://github.com/LandmakTechnology/maven-web-application"
+ } 
+ stage('2Test&Build'){
+    sh "${mavenHome}/bin/mvn install"
+ } 
+ stage('3CodeQuality'){
+    //sh "${mavenHome}/bin/mvn sonar:sonar"
+ }   
+ stage('4UploadArtifacts'){
+    //sh "${mavenHome}/bin/mvn deploy"
+ } 
+ stage('5deploy_uat'){}
+ stage('6deploy_prod'){}
+ stage('7Notification'){}
+} 
+
+Jenkinsfile-2
+============
+node{
+ def mavenHome = tool name: 'maven3.8.6'   
+ stage('1cloneCode'){
+    sh "echo running a software build and deployment project for payPal"
+    git "https://github.com/LandmakTechnology/maven-web-application"
+ } 
+ stage('2Test&Build'){
+    sh "${mavenHome}/bin/mvn install"
+ } 
+ stage('3CodeQuality'){
+  sh "${mavenHome}/bin/mvn sonar:sonar"
+ }   
+ stage('4UploadArtifacts'){
+  sh "${mavenHome}/bin/mvn deploy"
+ } 
+  stage('5deploy_uat'){
+    //sh "scp "  it will use the ssh plugin to send artifact in to tomcat
+    deploy adapters: [tomcat9(credentialsId: 'tomcatCredentials', path: '', url: 'http://18.119.10.206:8080/')], contextPath: null, war: 'target/*war'
+  }
+ stage('6Approval'){
+    timeout(time:9, unit:'HOURS') {
+        input message: 'Application ready for deployment, Please review and approve'
+    }
+ }
+ stage('7deploy_prod'){
+     deploy adapters: [tomcat9(credentialsId: 'tomcatCredentials', path: '', url: 'http://18.119.10.206:8080/')], contextPath: null, war: 'target/*war'
+ }
+ stage('8Notification'){
+    // Pipeline Syntax 
+    emailext body: '''Build status for frontend application.
+
+Regards,
+Landmark Technologies''', recipientProviders: [buildUser(), developers(), contributor()], subject: 'Build Status', to: 'paypal-team@gmail.com'
+ }
+
+}  
+==============================================
+single line comment :      // 
+Multi line comment  :   /*  */
+
+/*  
+
+*/
+
+We use Jenkins to automate tasks and run jobs/workloads:
+   ---  freestyle projects
+   ---- maven projects  
+   ---- Pipeline projects  
+           scripted 
+           declarative
+  ---- multi branch Pipeline projects ---> multibranch pipeline plugin, we build code form multiple branch
+
+for jenkins to carry out task we need plugins to accomplish that
+
+=====
+node{
+    stage('1cloning'){
+
+    }
+    stage('2testing'){
+
+    }
+    stage('3Build'){
+
+    }
+    stage('4CodeQuality'){}
+    stage('5uploadArtifacts'){}
+    stage('6deploy2uat'){} 
+    stage('7approval'){}
+    stage('8deploy2prod'){}
+    stage('9notification'){}
+}
+
+Jenkins Home directory  
+Jenkins security 
+Jenkins-Master-Slave  
+Declarative Pipeline  
+Jenkins shared libraries 
+
+
+How many Environments do you support??
+   we support 3 Environments
+     dev 
+     staging/testing/UAT  
+     pre-prod   
+     production
+
+Branch
+
+Jenkins Home directory - JHD
+============================
+JHD = /var/lib/jenkins is the default JHD   
+Jenkins installation create a jenkins user automatically.
+such a user called system user
+   sudo vi /etc/passwd  
+  jenkins:x:994:991:Jenkins Automation Server:/var/lib/jenkins:/bin/bash
+
+JHD = /var/lib/jenkins:
+   jobs/payPal/builds/4 5 6 9  
+   logs
+   secrets
+   tools/mavenb maven3.8.6 java git /
+   updates
+   plugins
+   userContent
+   users
+   workspace/payPal/src pom test target 
+  nexus/tomcat/sonarqube     
+
+
+Jenkins security :
+  Create user accounts:
+     Authentication
+         userName and password  
+     Authorisation 
+
+     Bank card:
+        ATM Machine ---    
+         The machine read the card number [userName] 
+         Request for your Pin [password] 
+
+    Withdrawals: 
+        account balance is 50k 
+        1,000  2,000 5,000
+
+  1. Matrix based security strategy  
+  2. Project  based metrics security strategy  
+       dev Environments  
+       uat Environments 
+       production Environments
+
+  3. RBAC = Role based security strategy  
+          plugins   
+
+  4. AD   -- Active Directory  
+     LDAP -- Lightweight Directory Access Protocol
+
+Jenkins-Master-Slave:
+====================
+  
+  how can we avoid a single point of failure if we are managing over 100 jobs ?:
+    we can use the master-slave architecture where we will have a master server with multiple agent servers 
+    in which jenkins can run the jobs. 
+    Jenkins master to establish connection with agents will use tcp/ip and ssh connection.
+      if agent is a windows system jenkins will use RDP(remote desktop protocol)
+      if agent is a linux system it will use tcp and ssh
+
+Explain the differences b/w TCP and UDP:
+                      UDP                                           TCP  :
+Data transfer :      clear text                                    encrypted format 
+       exple:         move $10m                                 gfdasdhgscdkjfkjgfdhf  can not be easily read by human
+
+speed         :      faster                                            fast 
+can we avoid a 
+hand shake     :     no 3way hand shake                            3way hand shake
+
+security      :        less secure                                    more secured       
+
+source[maven]  ---- dest[tomcat]  
+    host                            server    :
+  sync -------------------------->
+       <-------------------------- syncack
+  ack  ------------------------  >
+       
+scp -i key.pem app.war ec2-user@172.0.0.9:/opt/tomcat9/webapps/
+ssh ec2-user@172.0.0.9
+
+Jenkins-Master-Slave:
+    master requirements:
+        install java and jenkins 
+        install the sshAGENT plugin 
+    agent/slave requirements:
+   NB:     install JAVA ONLY  no need of jenkins in the slaves
+        ip-address: 172.31.46.81
+                    3.22.166.76
+        userName: ec2-user    
+        password or sshkey 
+
+What are Jenkins executors?:
+IQ: Jenkins executors ARE USED by Jenkins to run jobs/workload in jenkins agents/slaves.  
+     in the slaves server jenkins need to clone and build code. we don't need to install maven and git 
+     because executor will take charge of that. 
+     
+   
+   we can restrict where project can be executed by selecting agent when configuring jenkins.
+
+Resource optimization:  helps us to avoid restart our servers. that is why we have cooling system to make sure 
+ that our server can run as expected
+ 
+ Speech:  In my environment we use Jenkins for application build and deployment. And we don't run Jenkins as a master
+          we run also agent or slave servers. We are doing that because we want to avoid a single point of failure.
+          we also want to distribute jobs in agents to avoid to slow down the performance of our master server. 
+          To secure my Jenkins server, i configure first of all a single sign on server using LDAP which will help me 
+          to have a single point of access of the jenkins server. Secondly, i configure authentication and authorization
+          using RBAC, Matrix based authorization or project based authorization.
+Declarative Pipeline  
+
+JENKINS Pipeline Projects  :
+        IaC
+Pipeline Project  : 
+================
+    https://github.com/LandmakTechnology/maven-web-app
+    
+   https://github.com/LandmakTechnology/ebay-uat-iaac/blob/master/Jenkinsfile
+   
+   
+Functions
+Variables
+    Global (node level)
+    stage (stage level)
+    
+Pipeline Syntax
+node
+
+CLI 
+1.Jenkins-Scripted-Pipeline:
+=========================
+1. Declarative 
+     - It uses some gui options
+     - Scripts
+
+2. Scripted --> Groovy Script
+     - No Gui options
+     - ONLY SCRIPTS
+  
+  node('master')
+  {
+   def mavenHome = tool name: 'maven3.6.3'
+  stage('1.git clone')
+  {
+  git credentialsId: 'GitCredentials', url: 'https://github.com/LandmakTechnology/maven-web-app'
+  }
+  stage('2.maven-Build')
+  { 
+    sh '${mavenHome}/bin/mvn clean package'
+  }
+  stage('3.CodeQualityReport')
+  {
+  sh '${mavenHome}/bin/mvn sonar:sonar'
+  }
+ stage('4.UploadWarNexus')
+        {
+        //sh '${mavenHome}/bin/mvn clean deploy'
+        }
+ stage('5.DeployTomcat')
+        {
+        deploy adapters: [tomcat9(credentialsId: 'Tomcat_Credentials', path: '', url: 'http://3.85.28.18:7777/')], contextPath: null, war: '**/*.war'
+        }   
+  } 
+  
+
+
+2.scripted-pipeline-projects. IaaC 
+
+
+Multi Pipeline-Project: 
+  Use to manage pipeline projects for multiple branches.
+  It requires MultiBranch pipeline plugin to be installed.
+   dev
+   stage
+   uat/testing/pre-prod
+   master
+https://github.com/mylandmarktechs/web/blob/master/Jenkinsfile
+
+
+What is your branching strategy?   :
+
+   development branch            dev
+   
+   stage                         stage/uat/testing/pre-prod
+   
+   master                        prod
+     feature
+     bug_fix
+
+ master--> mc1--mc2
+                 stage--sc1-->sc2--sc3=sc4
+                                      master--git merge stage
+                                      master--git rebase stage
+  
+Everything is done via pull requests: 
+
+git rebase vs git merge  :
+
+git pull --> remote repo   --> working area
+vs 
+git fetch   --> remote repo   --> local repo    : 
+                                      git merge  working area
+  remote 
+
+ 
+cli 
+
+**
+Explain your CI/CD pipineline EXPERIENCE  ??
+  As DevOps Engineers we have configured Jenkins CI/CD pipelines 
+    Git/GitHub  = Poll changes in our code = 
+                  poll SCM and Github-Webhook 
+    Maven       = Build because we manage java projects 
+                  TCP/IP (ssh) - Master slave 
+                  Global tool Configuration
+    SonarQube   = Code Quality reporting
+                  pom.xml 
+                     <>properties<> 
+                  JaCoCO plugin
+    Nexus       = Artifactory 
+                  pom.xml in Jenkins 
+                  server.xml 
+    Ansible     = Deployment automation
+    Tomcat      = Deployment
+    Email Notifications = bug tracking 
+    Jira        = bug tracking  
+**
+  Continuous INTEGRATION 
+  Continuous Development 
+  Continuous testing 
+  Continuous Delivery 
+  Continuous Deployment 
+  Continuous Monitoring  
+ 
+BOA / TD / RBC / Barclays / 
+
+GET requests 
+    Delta Airlines 
+
+https://www.delta.com/ca/en/
+   400 travellers  - delta447
+
+http://34.239.155.145:7000/maven-web-app/ 
+
+http://34.239.155.145:7000/maven-web-app/services/employee/getEmployeeDetails
+
+https://jsonbeautifier.org/ 
+getEmployeeDetails.Json
+{
+  "Calling Name": "mylandmark",
+  "DOB": "May 1, 2005",
+  "Places he like": "Africa, NA, Bali",
+  "Hobbies": "Praying, Singing, Reading Technical Blogs,
+             Teaching, Helping to Poor People..",
+  "Name": "Landmark Technologies"
+}
+
+
+  RESTFUL API 
+APM = Application Performance Monitoring
+  • Monitoring and learning from 'live site'
+  - Diagnostics and error reporting
+  - usage = zelle / intertact = 30 millions 
+  - Notifications on application performance
+  • Rules for application performance and availability
+  - High availability
+  - Automated scale up/down or out/in
+
+
+•APM Tools
+    • APM tools allow you to target bottleneck swith your applications 
+      framework
+    • New Relic is the reigning market leader which lets you pinpoints 
+      precisely where and when bottlenecks are occurring
+    • AppDynamics is also a great tool, enabling you 
+      to monitor Java, .NET, PHP, and Nodejs applications
+    • Compuware APM & Boundary are enterprise-geared
+      AP M tools which give you a clear view of the user experience, 
+      offering metrics like data transactions performance and user requests
+    * Dynatrace
+    * CloudWatch and SNS 
+
+Application Monitoring
+  • Hypothesis driven development  requires 
+      telemetry = servers (cpu <70% and memory >75%)         
+  • Proactive (not reactive) action
+ 
+ Capacity planning:
+         2018    2019   2020   2021    
+     Q1   100M   110M   120M   135M
+     Q2   80M     85M    90M   100M
+     Q3   90M     97M    105M  120M
+     Q4   150M    165M   180M  200M
+
+ security Gurad  
+ OPP 
+
+Type of monitoring
+- Usage
+- Availability
+- Performance
+- Custom telemetry
+
+ New-Relic
+
+
+
+
+pipeline {
+  agent any 
+  stages{
+   stage('1code') 
+   stage('2build')
+   stage('3test')
+   stage('4deploy')
+   stage('5apm')
+  }
+  post {
+
+  }
+}
+================
+pipeline {
+  agent any 
+  tools{
+    maven "maven3.8.4"
+  }
+  stages{
+   stage('1code') {
+    steps{
+      git branch: 'development', url: 'https://github.com/LandmakTechnology/web-app'
+    }
+
+   }
+  }
+   stage('build') {
+    steps{
+      sh "mvn package"
+}
+}
+
+
+pipeline{
+  agent any 
+  tools{
+    maven "maven3.8.4"
+  }
+  stages{
+    stage('clone'){
+      steps{
+              git branch: 'development', url: 'https://github.com/LandmakTechnology/web-app'
+      }
+    }
+    stage('build'){
+      steps{
+        sh "mvn clean package"
+      }
+    }
+    stage('test'){
+      steps{
+        sh "echo test successful"
+      }
+    }
+    stage('deploy'){
+      steps{
+          sshagent(['tomcat']) {
+          sh "scp -o StrictHostKeyChecking=no target/*war ec2-user@172.31.15.31:/opt/tomcat9/webapps/"
+}
+      }
+    }
+    stage('apm'){
+      steps{
+        //
+      }
+    }
+  }
+}
+
+
+
+
+node{} 
+or 
+node("master") 
+
+pipeline{
+  agent any
+  stages {
+    stage('Hello'){
+
+    }
+    stage('BUILD'){
+       sh "${MHD}/bin/mvn clean package"
+ 
+    }
+  }
+} 
+
+
+
+
+  def MHD = tool name: "maven3.8.4"
+stage('deploy'){
+  sshagent(['tomcat']) {
+  sh "scp -o StrictHostKeyChecking=no target/*war ec2-user@172.31.15.31:/opt/tomcat9/webapps/"
+}
+}
+
+stage('email'){
+emailext body: '''Build is over
+
+Landmark
+437212483''', recipientProviders: [developers(), requestor()], subject: 'Build', to: 'tdapp@gmail.com'
+}
+
+   Code-->Build-->  Test--     Deploy 
+    git   maven   SonarQube    Tomcat
+
+    secure Jenkins 
+    http://18.212.53.48:5555/
+      1. Using a proxy  to connect to jenkins 
+             users/Admins  -->  Nginx  -->Jenkins
+      2. Changing default settings (portNumber, JHD)  
+      3. rbac / Project base security options 
+      4. Jenkins LDAP integration for user mgt 
+
+Pipelines:
+Projects:
+ boa 
+   dev/qa/uat/prod 
+ td-BANK 
+   dev/qa/uat/prod 
+ ebay 
+   dev/qa/uat/prod 
+ alibaba 
+   dev/qa/uat/prod 
+ Barclays 
+   dev/qa/uat/prod
+
+20 pipeline scripts 
+   Avoid duplication in your code
+
+Code --> Build -->  Test --> UploadArtifacts --> Deployment
+
+node{
+  stage('codePullGithub') {
+    sh "echo start of project"
+    sh "echo This is a java project for boa"
+    git 'https://github.com/LandmakTechnology/web-app'
+  }
+  stage('Test+Build') {
+    sh "echo building with maven"
+    //sh "mvn validate" 
+    //sh "mvn compile" 
+    //sh "mvn test"
+    sh "mvn package"
+  }
+  stage('CodeQualityReport') {
+    sh "echo Running Code Quality Report analysis"
+    sh "mvn sonar:sonar"
+  }
+  stage('UploadArtifacts') {
+    sh "echo uploading artifacts in nexus"
+    sh "mvn deploy"
+  }
+  stage('Development') {
+    sh "echo app now ready for deployment"
+    sh "scp app.war ec2-user@172.25.10.2:/opt/tomcat9/webapps/"
+  }
+  stage('Notification') {
+    sh  "mail" 
+    sh "echo slackchannel"
+  }
+}
+
+package (validates. compiles, test before packaging)
+Jenkinsfile Shared Libraries
+
+
+smtp server:
+
+Jenkins Shared Libraries:
+  Jenkins pipeline scripts:
+  Jenkinsfile
+Programming and scripting languages:
+  bash-shell scripting
+  groovy 
+
+
+
+JSL:
+  1. Create Shared Libraries 
+  2. Configure Library 
+       https://github.com/LandmakTechnology/JenkinsSharedLibraries
+  3. use library in pipelines script
+  exple:
+========
+common.groovy
+def call(String stageName){
+  
+  if ("${stageName}" == "Build")
+     {
+       sh "mvn clean package"
+     }
+  else if ("${stageName}" == "SonarQube Report")
+     {
+       sh "echo Running Code Quality Report analysis"
+       sh "mvn clean sonar:sonar"
+     }
+  else if ("${stageName}" == "Upload Into Nexus")
+     {
+       sh "mvn clean deploy"
+     }
+}
+
+My_Experience using JSl: in most of our project i have used JSl, we have so many project that we support 
+     and they are mostly java based. So we are using Maven to build package, sonarqube for code quality, and 
+     Nexus to upload artifact. Since those steps have common stages, i have written a JSL to easy our process
+     and make our Jenkinsfile to create.
+
+Jenkinsfile
+//@Library('LibraryName') _ 
+// Declarative pipeline
+
+@Library('LandmarkSS-sharedlibs') _
+pipeline {
+agent any 
+tools {
+    maven "maven3.8.4"
+
+  }
+stages{
+stage('CheckoutCode'){
+  steps{
+    git 'https://github.com/LandmakTechnology/web-app'
+}
+}
+stage("Build"){ 
+  steps{
+    common("Build")
+}
+}
+
+stage("Execute SonarQube Report"){ 
+  steps{
+    common("SonarQube Report")
+}
+}
+stage("Upload Artifacts Into Nexus"){ 
+  steps{
+    common("Upload Into Nexus")
+}
+}
+//=========================
+}// Stages Close
+} // Pipeline Close
+
+
+common.groovy 
+build.groovy 
+stages.groovy
+
+
+java applications -- java projects 
+
+nodejs applications:  nodeJS Projects
+=======================================
+npm = node package manager 
+
+nodejs-APP   vs   java-app
+--------           -------
+npm =             maven   -->   Build
+package.json      pom.xml -->   Build Script           
+npm install       mvn package =  (creating packages)
+npm test          mvn test      =   run unit test cases 
+npm run sonar     mvn sonar:sonar =  SonarQube CodeQualityReport
+npm publish       mvn deploy       =  uploading artifacts
+npm = node package manager 
+  src + bs + test cases 
+
+ sudo yum install nodejs npm -y  
+
+node{
+  stage('CodeCheckout'){
+    sh "echo running ebay nodeJS project" 
+    git 'https://github.com/LandmakTechnology/nodejs-application'
+  }
+  stage('UnitTest'){
+    //sh "npm test"
+  }
+  stage('Build'){
+    sh "echo creating build artifacts"
+    nodejs(nodeJSInstallationName: 'nodejs17') {
+        sh 'npm install'
+    }
+  }
+  stage('Quality'){
+    sh "echo CodeQualityReport"
+    nodejs(nodeJSInstallationName: 'nodejs17') {
+        sh 'npm run sonar'
+    }
+  }
+    stage('UploadArtifacts'){
+    sh "echo npm packages uploaded"
+    nodejs(nodeJSInstallationName: 'nodejs17') {
+        //sh 'npm publish'
+        // Jenkins nexus intergration 
+        // password = admin123  username = admin 
+        // echo -n 'admin:admin123' | openssl base64
+    }
+  }
+
+  stage('deployment'){
+    sh "echo Deploying applications"
+    nodejs(nodeJSInstallationName: 'nodejs17') {
+        sh 'npm start'
+    }
+  }
+}
+
+RESTFUL API = 
+
+http://18.212.53.48:9981/landmarktechnologies
+http://18.212.53.48:9981/jsonData
+http://18.212.53.48:9981/html 
+http://18.212.53.48:9981/redirect
+http://18.212.53.48:9981/queryparam 
+
+New-Relic 
+  Create monitoring dashboard 
+applications:
+  High availability
+===============
+  New-Relic = 50 MINUTEs 
+  Resume Preparation video = 55 minutes 
+
+ThinBackup plugin --->
+
+
+Jenkins shared libraries

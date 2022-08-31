@@ -1,0 +1,16 @@
+Brice : 
+       is a Devops Engineer with experience in all aspects of software development 
+from project inception to developing scaleable production architectures for
+ large-scale systems during critical, high-risk events such as Black Friday.
+ He has helped many organizations ranging from small startups to Fortune 100 
+ companies take a more strategic approach to adopting and evaluating technology and
+  managing the risks associated with change.
+
+
+Nexus is our Artifactory. we use it to upload our artifacts
+Nexus : 
+       is a repository manager. It allows you to proxy, collect, and manage your 
+dependencies so that you are not constantly juggling a collection of JARs. It makes
+it easy to distribute your software. Internally, you configure your build to publish 
+artifacts to Nexus and they then become available to other developers. You get the benefits 
+of having your own 'central', and there is no easier way to collaborate.

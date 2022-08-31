@@ -1,0 +1,107 @@
+   SDLC
+  Waterfall approch: take long time to release the project
+    - Gather requirements
+    - Design
+    - Implementation
+    - testing
+    - Deployment
+    - Maintainance
+
+  Agile Methodology : depends on the team velocity (dev, devops, QA, )
+     - scrum 
+     - we divide in multiple interations or production periods
+     - a sprint is an iteration that last for about 10WDs
+     - we have meetings 
+                   ---> Sprint planning
+                   ---> Daily standup meeting
+                   ---> restrospect meeting 
+                        - what did we accomplished?
+                        - what did we learned from the sprint?
+                        - what went well, what could have been done better?
+                        
+
+    with devops implemented in a team :
+      - improved collaboration
+      - rapid delivery
+      - reliability
+      - security
+      - scale
+      - speed
+      - we can deploy frequently
+      - shorter lead time 
+      -fewer failure
+      - faster recovery   
+      devops culture means that dev and ops work together, there is no silos between teams ecause their shared responsibility,
+       ownership and we can have high visibility about the project. Also communucation is fluent between team
+      moving from large monolithic architecture to microservice.
+
+  Flaws of docker:
+   - scaling
+   - no network 
+
+  Benefits:
+   - portable 
+   - seamlessly deployment
+   - lightweight
+   - super good for micro-service
+
+   
+Automation:
+  - Application development: build, testing, deployment and management/monitoring, security
+  - Infrastructure creation : provisionning, configuration, and security
+
+How are we automating?:
+
+  - Commands [cli vs GUI]
+  - scripts [bash-shell, python, groovy/jenkinsfile, yaml/manifestfile]
+  - Jenkins [Git/Github]
+  - Kubernetes with Helm 
+  - Cloud Computing
+  - Terraform 
+  - Ansible
+
+  Application deployment can take place in :
+
+   - VM (Tomcat or Jboss) 
+   -  containers (K8s, Ecs, docker-swarm,
+            Lambda function, Fargate)
+
+  Infrastructure Mgt/Engineering:
+
+  centrix Zen : is the hypervisor software that allow a singl machine to host system
+  hypervisor : HyperV, virtualBox, VmWare
+
+  we make api call to deploy workloads or taks in k8s
+    exple: kubectl create/apply/exec/expose/describe
+
+  Admins/developpers required authentication and authorizationto make api-call
+     - Authentication is made via kube-config 
+     - Authorization is made via RBAC/IAM
+
+  we are deploying an application with a database:
+   we will deploy for that 
+    - app-deploy.yml
+    - hpa.-deploy
+    - appsvc.yml
+    - configmap.yml
+    - rbac.yml
+    - svcaccount.yml
+
+
+    with manifest file we have to write the file by yourself 
+    with Helm Chart we have an embedded number of maniffest file that you can save in your 
+     SCm and can be used for multiple deployement.       
+
+  we use configuration mgt tools to manages:
+    - files
+    - users
+    - services
+    - packages
+    - security
+    - 
+     Ansible is an open source configuration management, provisionning and deployement tool maintained by Redhat
+     ansible is agentless means that 
+
+     connection plugins:
+       linux= SSH = openssh
+       windows = WINRM

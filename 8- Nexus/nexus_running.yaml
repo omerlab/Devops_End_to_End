@@ -1,0 +1,355 @@
+Deploying a Fault tolerant Architecture / Infrastructure:
+Deploying a Highly available Architecture / Infrastructure:
+  Upload Artifacts Nexus/JFrog AWScodeArtifact jar/war/ear
+  Artifacts = 1: 
+    maven = jar, war or ear 
+
+  Artifacts = 2: 
+    maven = jar, war or ear  
+    nexus = jar, war or ear 
+
+Coding: 
+  Git for versioning 
+  GitHub/GitLab/Bitbucket as a SCM tool 
+
+Build: 
+  maven create artifacts (deployable packages 
+    that deployment(Tomcat/JBoss) servers can interprets )
+  Runs JUnitTest cases written by developers 
+
+Lifecycle:
+    1.  clean Lifecycle 
+       mvn clean  --- delete old artifacts
+    2.  site/swagger Lifecycle
+       site --- Create java classes 
+    3.  default Lifecycle
+        mvn validate 
+        mvn compile 
+        mvn test 
+        mvn package (target/*war, app.war. app.jar, app.ear)
+        mvn install 
+            (target/*war, app.war. app.jar, app.ear)
+            (MHD/*war, app.war. app.jar, app.ear)
+        mvn sonar:sonar 
+            sonar = plugin
+            sonar = goal
+        mvn deploy 
+
+SonarQube / codeQuality Analysis:
+  Benchmarks for code Quality [Quality software]
+ Quality Gate
+    code coverage ---  89% 
+    duplicate lines --  3% 
+    code smells     --  5 
+    vulnerabilities  -- 1
+    bugs             -- 0
+Quality Profiles:
+  collection of Rules 
+    java codes 
+    xml code  
+    jsp 
+
+DEPLOY:
+  tomcat/
+     webapps/app.war app
+  JBoss 
+     deployment/app.war app
+mvn package [We assume that developers have written their 
+             codes with best practices]
+
+What can be done if the packages are deleted IN MAVEN?
+What can be done if the packages can't be access because the build is down?
+
+Disaster management:
+  We need to create backups for artifacts 
+
+Coding:
+  Local computers (Laptops) 
+  What will happened if a developers lapt or env't breakdowns 
+  developers commits changes in code in their local Repository 
+  developers push their commits to the remote Repository in GitHub
+
+Artifactory Repository:
+  maven Repository []
+  yum Repository  
+  NodeJs Repository  
+  apt Repository
+----------------------
+ maven create artifacts = jar / war / ear 
+   target directory  = maven server 
+   mavenLocalRepo    = maven server 
+
+artifacts depends on the project / language:
+  java   --> app.jar, maven-web-app.war, boa.ear 
+  docker -->  Docker Image 
+               docker build
+               docker run 
+  NodeJs  -- > NPM Packages
+  yum --- > yum Packages  =  
+            yum install maven git httpd tree
+            yum is a package manager for Redhat and CentOS  
+  
+  apt  -->  apt install tree 
+            apt is a package manager for Ubuntu
+
+  chocolatey --> choco install terraform 
+      --> chocolatey is a package manager for windows
+  helm-->  is a package manager for kubernetes
+
+  pip --> is a is a package manager for python 
+
+-----
+How do you use Nexus in your environment?
+Nexus: Is an Open source Artifactory Repository
+       It is used to store and retrieve build artifacts
+       We can retrieve artifacts when needed
+       Nexus acts as a Disaster recovery server for maven    
+
+JFrog: Is an  Artifactory Repository
+       It is used to store and retrieve build artifacts 
+
+Amazon CodeArtifacts:
+     It is used to store and retrieve build artifacts 
+
+We support Java based application dev't.
+
+maven goals:
+ mvn package  
+    Creates artifacts in the target directory
+mvn install 
+   Creates and store artifacts in maven-local-repo 
+
+ what is the difference between target and /target dir 
+ what is the difference between mkdir dirName and sudo mkdir /dirName  
+   mkdir app [this create app dir in your PWD] 
+   mkdir /app [this create app dir in your the root dir]  
+
+
+mvn deploy: uploads the build artifacts to maven remote repository (nexus)
+    - validate
+    - compile
+    - test
+    - create package in target directory
+    - Packages created in mavenlocalrepo   
+    - uploads THE PACKAGE to Nexus (Maven remote-repo)
+
+How do your developers connect with your SCM repos in GitHub?
+ via authentication: ssh or PAT 
+  git push alaisName branchName  
+
+How will MAVEN connect with nexus?
+maven and nexus intergration: 
+
+nexus Installation:
+-------------
+ https://www.sonatype.com/download-oss-sonatype
+
+  connecting via ssh:
+   ipAddress = 54.90.50.76 
+   userName  = ec2-user 
+   authentication = 
+     sshKey   = dominion.pem  
+     password =   
+   open required ports:
+      sshPort   = 22  
+      nexusPort = 8081   
+
+
+Nexus home directory: /opt/nexus
+  This is where the Nexus software is extracted
+     tar  -xvf nexus-3.15.0.gz.tar    
+     unzip nexus-3.15.0.gz.tar
+   ls  /opt/nexus 
+       /app/nexus 
+       /software/nexus 
+
+bin  --- contains binary files [nexus, nexus.rc]   
+etc --- contains configuration files 
+  nexus-default.properties
+  default port number for nexus = 8081  
+
+http://100.26.133.141:8081/  
+http://100.26.133.141:8081
+ default:
+  userName: admin
+  password: admin123
+
+
+Fintech:
+ 1. clone the code 
+ 2. maven clean packe = build artifacts 
+ 3. codeQuality with sonarqube
+ 4. upload artifacts into Nexus 
+      Created a nexus server 
+      configure the serve  
+      Intergrating Maven with nexus 
+fintech client  
+Maven SonarQube Integration:  mvn sonar:sonar
+   54.236.232.85
+   172.31.0.41
+   PORT = 9000
+ 1. vi pom.xml and check for "properties" tag
+mvn package  
+Maven Nexus Integration:
+  1. Create maven remote repo in nexus   :
+     http://100.26.133.141:8081/repository/paypal-snapshot/  
+     http://100.26.133.141:8081/repository/paypal-releases/
+
+  2.   privateIP = 172.31.0.78
+       publicIP  = 100.26.133.141
+       port= 8081  
+  3. vi pom.xml and check for "distributionManagement" tag
+            <distributionManagement>
+            <repository>
+              <id>nexus</id>
+              <name>Landmark Technologies Releases Nexus Repository</name>
+              <url>http://172.31.0.78:8081/repository/paypal-releases/</url>
+            </repository>
+
+            <snapshotRepository>
+              <id>nexus</id>
+              <name>Landmark Technologies Snapshot Nexus Repository </name>
+              <url>http://172.31.0.78:8081/repository/paypal-snapshot/</url>
+            </snapshotRepository>
+
+        </distributionManagement>
+
+ 4. sudo vi /opt/maven/conf/settings.xml and modify the "server" tag
+              userName  --- admin
+              Password   admin123
+ 
+    <server>
+      <id>nexus</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+
+http://100.26.133.141:8081/repository/paypal-snapshot/com/mt/maven-web-application/0.0.1-SNAPSHOT/maven-web-application-0.0.1-20220610.014017-1.war
+
+com/mt/maven-web-application/0.0.1-SNAPSHOT/maven-web-application-0.0.1-20220610.014017-1.war
+
+
+mvn clean sonar:sonar deploy
+
+Expected results:
+  1. *Contract job paying $85/hr and $3,842/week and $199,784/yr* 
+
+  2. *Contract job paying $90/hr and $4,068/week and $211,536/yr*
+
+  3. *Full-time $180,000/YR [$4,400] B-WEEKLY* 
+
+Making over $40k/month.
+My recommendation as mentor.
+
+
+Nexus: 
+  what is nexus = It is an Artifactory Repository
+  GitHub/SCM    = source-codes Repository   
+  why nexus = Serves as an Artifactory repo
+              It is a remote repository for maven  
+              opon source 
+  Substitute:
+    JFrog / AmazonCodeArtifacts
+  installation:
+    where = We can install nexus in any platform 
+            Linux[/opt] / windows / macOS / Solaris 
+    how : CLI(Commands) / Bash Shell Script / ansible-playbook
+          40%                 60%                90%
+  
+  configuration:
+    who should securely manage nexus ? nexus-user   
+  security : The root user should not manage nexus server that is why we need to create a nexus user
+
+     run_as_user="nexus"
+     
+  integration
+  management 
+    snapshots nexus Artifactory Repository
+       dev / stage 
+    releases nexus Artifactory Repository
+       master 
+  upgrades
+
+ 400 Repository does not allow updating assets:
+
+ How are packages created in maven?? 
+
+ What is required to create packages / artifacts in maven?? 
+   - dependencies  
+   - plugins 
+
+ How can we get project dependencies in maven build projects??
+   - maven-local-repo 
+     maven-remote-repo [nexus]  
+     maven-proxy-repo [] 
+     maven-remote-repo and maven-proxy-repo
+     MAVEN CENTRAL Repository
+
+ Dependencies are defined in the project file buildScript pom.xml
+
+ <dependency>
+  <groupId>com.mt</groupId>
+  <artifactId>maven-web-application</artifactId>
+  <version>0.0.1-20220610.014017-1</version>
+  <type>war</type>
+</dependency>
+
+vi pom.xml 
+ <repositories>
+    <repository> 
+      <id>nexus</id>
+      <name>nexus remote Repo</name>
+      <url>http://100.26.133.141:8081/repository/paypal-snapshot/</url>
+    </repository>
+ </repositories>
+
+sudo vim /opt/maven/conf/settings.xml    
+
+and modify the mirror tag with the remote-repo details    
+
+
+proxy-repo:
+https://repo.maven.apache.org/maven2/ 
+
+http://100.26.133.141:8081/repository/paypal-proxy-repo/ 
+
+ <repositories>
+    <repository> 
+      <id>nexus</id>
+      <name>nexus proxy Repo</name>
+      <url>http://100.26.133.141:8081/repository/paypal-proxy-repo/</url>
+    </repository>
+ </repositories>
+
+     http://100.26.133.141:8081/repository/paypal-snapshot/  
+     http://100.26.133.141:8081/repository/paypal-releases/
+
+ sudo vim /opt/maven/conf/settings.xml    
+
+and modify the mirror tag with the remote-repo details   
+  <url>http://100.26.133.141:8081/repository/paypal-proxy-repo/</url> 
+
+
+https://github.com/LandmakTechnology/maven-web-application
+
+   - maven-local-repo 
+     maven-remote-repo [nexus]  
+     maven-proxy-repo [] 
+     maven-group-repo
+        maven-remote-repo  
+        maven-proxy-repo
+     MAVEN CENTRAL Repository
+
+
+http://100.26.133.141:8081/repository/paypal-group-repo/
+   vi pom.xml  
+   sudo vim /opt/maven/conf/settings.xml 
+
+Admin tasks:
+  That 
+  
+  current tasks  
+     jenkins --- 
+  backlog 
+     nexus   
+     linux    

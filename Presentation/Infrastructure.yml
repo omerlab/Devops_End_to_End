@@ -1,0 +1,57 @@
+In Landmark is they for our peoject
+When you deploy your application nowadays there some keys concepts that you need to keep in mind
+  - continuous configuration
+  - continuous development
+  - continuous integration
+  - continuous testing
+  - continuous delivery
+  - continuous deployment
+  - continuous security
+  - continuous monitoring
+
+To accomplish these tasks abose you need infrastructure which can on-prem or cloud based.
+We sit in meeting to talk about the kind of infrastructure me need to setup for the project.
+ 1- IDE = vscode, cloud9, eclipse, intelligent
+ 2- platform to use can be linux, windows
+ 3- workstation configuration = macos, windows, Sandbox, jumpserver, we configure Dev, UAT, Prod environment
+                                [git, aws, maven, sonarqube, nexus, jenkins, Tomcat, proxies, lb, k8s]
+                                git helps for versioning and for data intergrity
+                                as a devops eng i make sure that developper never commit in the master branch
+
+      we are using ansible to configure differents infrastructure:
+         - jenkins master and slave
+         - tomcat and jboss (appservers)
+      NB: we can also use script for configuration but ansible is powerfull betocause it can automate the pprocess 
+         in multiple host at the time.
+         In ansible we are using module to configure
+      we are using Terraform to create the infrastructure:
+       we use variables, modules, workspaces to provision resources in multiple environment
+
+In all the process, security is our priority
+To access our servers in the private subnet(jenkins, maven...) we configure bastion host or jumpserver. we configure 
+proxies,LB ,webservers. noted that the jumbserver has it security group so if Jenkins want to perform a tasks, 
+since it has only private ip  it can not normally run build so to access him we need to ssh in to the jumpserver 
+( port 22 need to be open ) in which we will allow traffic from authenticated users ip@ only. from the jumperserver
+ he ssh into the appserver(port 8080 need to be open) in the private subnet.
+
+for server in private subnet to be access via  internet by end-user need  proxies server, ELB, Webserver ( port 80/443 need 
+to be open). 
+Appserver can only receive traffic coming from the webServers/LB/ELB
+
+we can also use VPN to create a trustee connection with private subnet.
+ to establish private network between 2 vpc we can use vpc peering
+
+for security we configure NACL at the subnet level and SG at the instance level.
+ in NACL we configure rules to allow traffic allow to go in our subnet and check what traffic is going out.
+ 
+ To patch our servers in the private subnet, we can use ansible server configure in the public subnet, and with 
+  the help of copy module it will ssh into server in the private subnet and paste the file use for patches.
+
+How do you measure your performance as a devops:
+how much time it take to test, maintain, deploy
+how many deployement are you doing is an indicator of performance
+how many failure do you have
+what is the ratio b/w success build and fail
+implementing latest technologies in development process
+
+Jenkins is our main automation tool. we integrated other tool as  plugin to make him more efficient

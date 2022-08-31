@@ -1,0 +1,446 @@
+Landmark Technology 
+DevOps -- 
+  Automation  
+  Automating:
+    application development, build, testing, deployment and mgt/monitoring, security
+    Infrastructure creation, provisioning, configuration & security  
+
+How are we Automating???
+   -- Technology stack:
+        - Commands [cli VS GUI]
+        - scripts [bash-shell, python, groovy/Jenkinsfile, Yaml/manifestFiles/,
+                    .tf, docker-compose, XML, ] 
+        - Jenkins [Git/GITHUB, ]
+        - Kubernetes with Helm  
+        - Cloud Computing - AWS 
+        - Terraform   
+        - ANSIBLE 
+        - AWS SERVICES : EC2, ELB, VPC, EKS, S3, EBS, EFS, IAM, ACM, ECS, Cloudwatch, SNS,    
+                         Route53, ecr, Fargate, Lambda, ASG/LC/LT, RDS, DynamoDB, SQS, 
+
+AWS DevOps Guru - :
+Azure DevOps : - GIT/MAVEN/
+ 
+ application deployment: 
+      VMs: [Tomcat/JBoss] or 
+      Containers : [docker, k8s, ecs, docker-swarm, Lambda Function, Fargate] 
+
+  Physical Machine 
+
+Infrastructure Mgt/Engineering  
+        On-prem
+        Cloud = AWS
+ Platform -  
+  Linux - RedHat, Ubuntu, Alpine, CentOS
+  Windows
+  Solaris
+
+Dev-Ops Foundation
+    SDLC - 
+  Waterfall
+      Requirements, Design, Implementation, testing, deployment, maintainance -- 6months
+  Agile methodology:
+    scrum ---> 120 features 
+    iterations or production periods 
+      a sprint is an iterations that last for about 10WDs 
+      sprint 1   20 features 
+      sprint 2   20 features 
+      sprint 3   14 features 
+      sprint 4   20 features
+      sprint 5   20 features 
+      sprint 6   20 features  
+
+ Depends on the team velocity:
+  6developers, 2DE, 1DEVSECOPS, SM, TL, QA  =  sprint 1 
+  4developers, 2DE, 1DEVSECOPS, SM, TL, QA  =  sprint 2   
+ Meetins: 
+  Sprint planning 
+  Daily scrum/standup meeting 
+  restrospect meeting 
+     - What did we accpmplished  
+     - What did we learned from the sprint 
+     - What could have been done better
+score: 7/10, 8/10, 9/10, 10/10   
+Amazing:
+  Daily devotion 6am-8am for 90 days
+
+    meetings :
+      sprint PLANNING MEETING 
+      DAILY STAND-UPS MEETINGS - 15minutes 
+      Restrospect 
+        HOW WAS EXPECTED FROM US IN THIS SPRINT 
+        HOW DID WE REALISED OUR TARGETS / DELIVERABLES
+        IS THERE ANYWAY BETTER WE WOULD HAVE PERFORMED
+        LESSON LEARNT
+        What went well and what can be done better for the next sprint
+    documentation:
+       JIRA - ticketing  
+       CONFLEUNCE - documentation 
+  Dev-Ops
+=======
+SCM:
+   Git/GitHub = SRC / BS // Unit TEST CASES
+   SVN
+   GitLab
+   BitBucket
+Testing:
+   TestNG
+   Selenium = 
+CodeQuality:
+  SonarCube
+  SonarCloud
+Build:
+  Maven / ANt / Graddle
+  MSBuild
+  npm 
+Artifacts Repository:
+  Nexus
+  JFrog
+Application Servers/VM:
+  Tomcat
+  Wildfly/JBoss
+
+USERS  ------>  webServers/LB/ELB ---> Tomcat/App
+WebServers/LB  :
+  ELB 
+  Nginx Ingress
+  HAProxy
+  NGINX 
+
+CI/CD  :
+  Jenkins/CloudBeesJenkins
+  Bamboo
+  CirCle CI
+  Travis CI
+  CruiseControl
+  GITLAB 
+  BitBucket
+    DEV 
+    STAGE / QA / UAT / PRE-PROD
+    PROD   
+  users ---> webservers/LB -------->  Tomcat
+             apache/nginx/HAProxy/ELB 
+
+Monolithic Architecture for application:
+=========================================  
+CONTAINERISATION   :
+  Docker  - 85%
+  Rocket
+  CoreOS
+  CONTAINER-D
+Flaws:  
+  scaling problems
+  no multihost network 
+
+Benefits:
+  seamless deployments   
+  poratble deployments  
+  lightweights 
+  super good in micro-services Architecture
+
+  
+CONTAINER ORCHESTRATION    :
+   Docker Swarm
+   Kubernetes:
+      kubeadm / kops / eks/ aks / gke / IKS / DOCKER-DESKTOP / Minikube   
+   OpenShift
+
+Cloud PROVIDERS    :
+   AWS = AWS Solution  
+   AZURE
+   GCP
+   IBM
+   VMWARE  
+Infrastructure can be provisioned and managed using:
+    GUI -   Console  
+    CLI -   aws s3 mb s3://class27  
+    IaC: Terraform / CloudFormation / Ansible   
+ Engineers need required permissions to create and manage resources in AWS:
+ Permissions are granted using AWS IAM :    
+  Types of permissions: readAccees, WriteAccess, FullAccess
+    Olu is tasks to check EC2 instances - EC2ReadOnlyAccess
+      least permission privilege
+    GRACE is tasks to create EC2 instances - EC2FULLAccess 
+
+   console access using = userName/Password  
+   programatic access using = accessKey/SecretAccessKEY 
+
+Infrastructure as a code - IaaC   :
+
+   Terraform
+      AWS :
+      aws configure
+         Access key 
+         Scret Access key
+   CloudFormation 
+==================
+CONTAINER ORCHESTRATION    :
+   Docker Swarm
+   Kubernetes:
+      kubeadm / kops / eks/ aks / gke / IKS / DOCKER-DESKTOP / Minikube   
+   OpenShift
+Kubernetes:
+ Architecture:
+  master node/control plane  :
+    apiServer/etcd/scheduler/ controller managers
+  worker nodes:
+    kubelet/container-RunTime, kube-proxy
+  pods--containers:
+    kubeadm / 
+    DOCKER-DESKTOP / Minikube  
+    kops / 
+    eks/ aks / gke / IKS / 
+Kubernetes admin:
+
+We make api calls to deploy workloads/tasks in Kubernetes.  
+   kubectl create/apply/run/exec/expose/delete/edit   
+   kubectl get/describe/logs/  
+
+admins/developers requires authentication and authorisation to make api-calls 
+   authentication = kube-config file   
+   authorisation  = RBAC/IAM   
+
+ k8s security objects:
+     namespace:  
+     RBAC:
+     Role, RoleBinding, ServiceAccounts, 
+     ClusterRole - ClusterRoleBinding
+
+
+kind: Role  
+apiVersion:   
+metadata:
+  name: myrole
+Role:
+  api-Resources: [ * ]
+  apiVersion: [ * ]
+  verb: [ * ]
+    - create
+    - describe
+    - delete
+    - edit
+
+kind: user  
+apiVersion:   
+metadata:
+  name: simon  
+
+Simon can now make api calls to deploy workloads/tasks in Kubernetes.  
+   kubectl create/apply/run/exec/expose/delete/edit   
+   kubectl get/describe/logs/  
+We are deploying an application with a database:
+  kubectl apply -f app-deploy.yml   =  
+  kubectl apply -f hpa-deploy.yml 
+  kubectl apply -f appsvc.yml   =   
+  kubectl apply -f db-rs.yml   =  
+  kubectl apply -f configmap.yml   = 
+  kubectl apply -f secret.yml   =      
+  kubectl apply -f dbsvc.yml   =   
+  kubectl apply -f pv.yml -f pvc.yml   =   
+  kubectl apply -f rbac.yml 
+  kubectl apply -f sa.yml 
+
+What is the composition of your manifest file:
+answer = kams
+kind:
+apiVersion:  
+metadata: 
+spec:
+Explain the difference b/w manifest files and helm charts:
+  helm create springapp 
+  git is use for versioning 
+
+Kubernetes:
+  Architecture  
+  Installation   
+  objects: 
+    pods / RC/ RS/ DS / deployment / SS /  
+    PV / pvc   
+  service Discovery :
+    ClusterIP  
+    NodePort 
+    LB  
+    ExternalName   
+    nginx-ingress 
+    serviceMesh [ 8apps with 8 micro-services ]    
+  
+     users ----> service/LB ----> 5pod[appCon]
+
+  security  
+  Pods  
+  Nodes  
+  EndPoints  
+  HPA , 
+  VPA, 
+  Metric server:    
+  CAS:
+    min nodes = 5 
+    max nodes = 50
+  NS
+HELM2 -- TILER
+HELM3
+  engine  
+  charts  
+  repository 
+Ansible:
+-------
+Configuration Management -   :
+  Localhost: = 1 server / SINGLE HOST 
+      Manually using the  GUI  
+      Automated with:
+         COMMANDS 
+         SCRIPTS = (SHELL, POWERSHELL, python, GROOVY) 
+           apt/yum update    
+  Mult-hosts env with 900 servers :
+    Tools
+
+        Ansible - 
+              PUSH & AGENTLESS mechanism  --
+        Chef
+        Puppet
+        SaltStack
+        ssm  
+
+  80-appServers
+  80-webServers
+  30-dbServers
+we use configuration mgt tools to manages:
+    Files   
+    users 
+    services  
+    packages  
+    security
+    monitoring    
+
+We created an EC2 instance/VM in AWS:
+=====================================  
+
+
+Ansible is an open source configuration Management, 
+provisioning and deployment tool maintained by Redhat. 
+
+  multi-hosts 
+
+Connection Plugins:
+  Linux   = ssh  = openSSH
+  Windows = WINRM
+
+InventoryFile:
+[web]
+10.10.0.8
+10.10.0.9
+10.10.0.52
+
+[app]
+10.10.0.18
+10.10.0.29
+10.10.0.12
+
+[db]
+10.10.0.11
+10.10.0.22
+10.10.0.24
+
+#1 Ansible installation in ubuntu using python3-pip
+sudo useradd ansible
+sudo passwd ansible
+ echo "ansible  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
+sudo su - ansible
+sudo apt install python3
+sudo apt update
+sudo apt install python3-pip
+pip3 install ansible --user
+sudo apt update
+sudo apt install sshpass
+sudo mkdir /etc/ansible
+sudo chown -R ansible:ansible /etc/ansible/
+vi  /etc/ansible/ansible.cfg
+vi  /etc/ansible/hosts
+
+
+#2 Ansible installation in ubuntu using apt repo
+Ansible installation in ubuntu
+ sudo adduser ansible
+ echo "ansible  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
+ sudo su - ansible
+ sudo apt-add-repository ppa:ansible/ansible  
+ sudo apt install ansible  -y 
+
+===============================================
+#3 Ansible installation in redhat using python3-pip
+1)     SSH to Redhat System & Switch to ansible user
+       sudo su - ansible
+      
+2)     Install python
+       sudo yum install python3 -y
+      
+3)    Update python alaternatives
+       sudo alternatives --set python /usr/bin/python3
+      
+4)    Verify Python Version
+         python --version
+ 
+5)    Install PIP
+       sudo yum -y install python3-pip
+      
+6)    Install ansible using PIP
+       pip3 install ansible --user
+      
+7)    Verify Ansible version
+       ansible --version
+      
+8)    Create ansible folder under /etc
+       sudo mkdir /etc/ansible
+       sudo chown -R ansible:ansible /etc/ansible/
+      
+9)    create ansible.cfg file under /etc/ansible ., and paste complete content from below git link.
+      https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg
+      https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg
+  
+        vi  /etc/ansible/ansible.cfg
+
+10)   Create hosts file under /etc/ansible.
+        Sample content can found in below git link.
+        https://raw.githubusercontent.com/ansible/ansible/devel/examples/hosts
+ 
+        vi  /etc/ansible/hosts       
+
+[docker] 
+52.90.91.206  ansible_user=ubuntu ansible_ssh_private_key_file=/tmp/class28key.pem 
+52.90.91.206  ansible_user=ubuntu ansible_ssh_private_key_file=/tmp/class28key.pem 
+
+[appServer] 
+204.236.158.60 ansible_user=ec2-user ansible_ssh_private_key_file=/tmp/class29key.pem 
+172.31.21.95   ansible_user=ec2-user ansible_ssh_private_key_file=/tmp/class29key.pem 
+
+[WEB]  
+172.31.13.70  ansible_user=ec2-user ansible_ssh_private_key_file=/tmp/class29key.pem 
+172.31.13.70  ansible_user=ec2-user ansible_ssh_private_key_file=/tmp/class29key.pem 
+[db]
+3.101.53.49 ansible_user=ec2-user ansible_ssh_private_key_file=/tmp/class29key.pem 
+172.31.13.70  ansible_user=ec2-user ansible_ssh_private_key_file=/tmp/class29key.pem 
+
+
+
+modules:
+  ping 
+  ansible hosts - modules
+  ansible k8s -m ping 
+  ansible localhost -m ping 
+
+ ansible all -m ping -i myhosts 
+  ansible db -m shell -a "dh -h" -i myhosts 
+  ansible db -m shell -a "free -m" -i myhosts
+  ansible db -m shell -a "uname -a" -i myhosts
+  ansible db -m command "dh -h" -i myhosts 
+  ansible-playbook -i myhosts 
+  sh test.sh 
+  ansible all -m ping 
+  ansible all -m ping
+  ansible localhost -m ping
+
+
+ansible-playbook dev.yml --check : use to check the syntax
+
+tasks: are executed from top to bottom
+handler: will only run if there is a change in a task

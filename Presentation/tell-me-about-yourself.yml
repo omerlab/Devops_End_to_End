@@ -1,6 +1,7 @@
-My name is Brice, i'am Senior DevOps Engineer working  with Landmark technologies for more 
-than 6 years, Landmak Technology is an IT consulting firm where we develop, maintain, deploy and monitor applications for fintech
-e-commerce and some Healthcare customers. As a Devops Eng i had to perform several roles and this roles range for onboarding new project
+ 
+My name is Brice,  total of 8 years of industrial working experience in which 6 years as a Devops Engineer  with Landmark technologies  
+which is an IT consulting firm where we develop, maintain, deploy and monitor applications for fintech
+e-commerce and some Healthcare customers.  As a Devops Eng i had to perform several roles and this roles range for onboarding new project
 where i create repository, create team's members, assign roles and responsability and also ensure that they are remain our git best practices.
 I had also been in charge of setting up, maintaining and monitoring our CI/CD pipeline. And in the CI/CD pipeline Jenkins is our main automation tool.
 So i intgrate Jenkins with github and automate the process using a trigger mechanism like webhook, pull scm, build periodically so whenever  developer 
@@ -15,6 +16,12 @@ our docker registry. once that is done the container runtime will run the contai
 prometheus and grafana, where prometheus is going to scrape the data using node exporter configure in each nodes  and grafana will use those data and we will able to have 
 a nice dashboard on which we can monitor the health of our cluster.
  
+
+ I'm a devops Eng with more than 6years experience working on fintech project, paiement gateway  and industrial scale project. I also worked 
+ on some project that onbarding hospitalities solutions and in all of this i also ensure compliances to federal and global information 
+ security standard within my environment. i worked in an agile environment where we have every morning a daily startup meeting during which
+ we discuss what we did the day before and the pb we encountered and  what we are going to do on that day and what we are ahead.
+
  End result of our project: 
      - we are managing application that will help customer to access their account online and be able to do payment (it was a payment gateway), transfer,
      - for our banking customer, the result of the project allows customer create an account and for the mortgage departement the could be able to have 
@@ -83,3 +90,20 @@ Stay current with industry trends and source new ways for our business to improv
 Manage and participate in an on-call rotation with other engineer
 
 
+
+Je m'appelle Brice, je suis ingénieur DevOps senior travaillant avec les technologies Landmark depuis plus
+de 6 ans, Landmak Technology est une société de conseil informatique où nous développons, maintenons, déployons et surveillons des applications pour la fintech
+e-commerce et certains clients de la santé. En tant qu'ingénieur Devops, j'ai dû jouer plusieurs rôles et cette gamme de rôles pour l'intégration d'un nouveau projet
+où je crée un référentiel, crée les membres de l'équipe, attribue des rôles et des responsabilités et veille également à ce qu'ils restent nos meilleures pratiques git.
+J'avais également été en charge de la mise en place, de la maintenance et du suivi de notre pipeline CI/CD. Et dans le pipeline CI/CD, Jenkins est notre principal outil d'automatisation.
+J'intègre donc Jenkins avec github et automatise le processus à l'aide d'un mécanisme de déclenchement tel que webhook, pull scm, construit périodiquement à chaque fois que le développeur
+valider une nouvelle version du code jenkins extraira le code et puisque le code est comme une matière première, maven qui est notre outil de construction exécutera un package propre
+objectifs et nous obtiendrons des artefacts. J'ai mis en place notre outil de qualité de code qui est sonarqube et pour chaque projet nous avons des benchmark que nous suivons par exemple
+sonarqube s'assure qu'il n'y a pas de bugs, pas de vulnérabilités. si le code passe notre porte de qualité, nous devons sauvegarder l'artefact dans notre artefact dans Nexus pour la reprise après sinistre.
+Une fois cela fait, nous terminons notre processus CI, puis nous préparons le déploiement. Pour le déploiement, nous utilisons Ansible qui est notre outil d'automatisation. donc avec l'utilisation d'ansible playbook
+nous avons pu dockeriser les artefacts pour créer des images à partir du Dockerfile et les pousser dans notre registre docker et une fois cela fait, Ansible est également
+responsable d'envoyer et d'appeler l'API à notre cluster k8s et dans le cluster, le serveur API reçoit l'appel, le persiste dans ETCD, le planificateur est déclenché et vérifie le nœud disponible
+pour effectuer le travail, le gestionnaire de contrôleur sera également alerté, puis le kubelet dans le nœud de travail recevra des instructions du nœud maître et réduira cette image de construction dans
+notre registre docker. une fois cela fait, le runtime du conteneur exécutera le conteneur et l'application sera mise en ligne. Et en même temps, nous avons déployé un outil de surveillance
+prometheus et grafana, où prometheus va récupérer les données à l'aide de la configuration de l'exportateur de nœuds dans chaque nœud et grafana utilisera ces données et nous pourrons avoir
+un joli tableau de bord sur lequel nous pouvons surveiller la santé de notre cluster.

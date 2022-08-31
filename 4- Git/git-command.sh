@@ -8,3 +8,12 @@
 
   # git config –list
   # git config --global –list
+
+   sudo ssh-keygen
+$ cat /root/.ssh/id_rsa.pub 
+
+$ git init
+$ git add file
+$ git commit -m "add first file"
+$ git remote add origin git@gitlab.com:user/example.git 
+$ git push -u origin master
