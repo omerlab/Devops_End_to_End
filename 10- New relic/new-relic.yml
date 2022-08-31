@@ -1,0 +1,52 @@
+Application Performance Management:
+
+Helps website and application owners track the perfomance of their services.
+
+- We can bring your data together from across your entire technology stack (including metrics, events, logs, and traces).
+ Get all your data at your fingertips to find the root cause of problems and optimize your systems
+
+- analyzing your infrastructure in minutes
+
+- how much time is take for customers in particular region to access our application
+   we can  adjust our configuration to reduce latency. 
+
+New Relic :
+
+ provides flexible, dynamic observability of your entire infrastructure, from services running in the cloud
+or on dedicated hosts to containers running in orchestrated environments. You can connect the health and performance
+ of all your hosts to application context, logs, and configuration changes.
+
+Start monitoring applications and services in minutes
+Analyze real-time and trending data about your web applications and services. Spot trends, troubleshoot problems, and optimize performance.
+
+With infrastructure monitoring, modern operations teams get complete observability of complex and hybrid systems, 
+from a datacenter to thousands of Amazon, Google Cloud, or Azure instances.
+
+Get an end-to-end picture of your apps. Analyze your Android and iOS performance, find unexpected lag, and troubleshoot crashes.
+
+Gain deeper insight into your client-side experience. Start measuring page load timing, session performance, AJAX requests, 
+SPA-architecture root changes, and JavaScript errors.
+
+Find problems before they reach your customers
+Simulate user traffic to detect and resolve outages and performance problems with URLs, APIs, and critical services. 
+Create a synthetic monitor in minutes
+
+Create workloads to group your data
+Isolate and browse the most relevant data for your team or project. Group entities however you like to connect front-end and back-end 
+data across your entire stack.
+
+
+With our infrastructure monitoring tools you can:
+
+Query your data to drill down into your infrastructure events and build custom dashboards that you can share with your team.
+Troubleshoot performance issues, no matter where the issue occurs—server-side or application-side—thanks to APM data
+ connection with infrastructure monitoring.
+Create, view, or update alert settings directly from the relevant infrastructure chart. For example, you can create a 
+host not reporting alert condition.
+
+Benefits:
+- High availability
+- reduce latency
+- Achieve 0 downtime
+- Application running as expected
+- we can check the percentage of connection failure

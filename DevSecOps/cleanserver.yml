@@ -1,0 +1,33 @@
+# Get rid of packages that are no longer required [Recommended]
+sudo apt-get autoremove --purge
+
+#  Clean up APT cache in Ubuntu
+ sudo du -sh /var/cache/apt  
+
+- two ways to clean the APT cache :
+    
+    sudo apt-get autoclean 
+
+
+- delete apt cache :
+
+   sudo apt-get clean
+
+# Clear systemd journal logs [Intermediate knowledge]
+
+journalctl --disk-usage
+
+# clean systemd journal logs
+# The easiest for you is to clear the logs that are older than certain days
+
+  sudo journalctl --vacuum-time=3d
+
+# Remove older versions of Snap applications [Intermediate knowledge]
+
+  du -h /var/lib/snapd/snaps
+
+
+# Clean the thumbnail cache [Intermediate knowledge]
+
+  du -sh ~/.cache/thumbnails
+

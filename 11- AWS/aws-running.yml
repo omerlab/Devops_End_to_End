@@ -1,0 +1,296 @@
+Platforms:   Platform Engineer (Linux )
+             Multi- Platform Engineer (Linux/WINDOWS/Solaris/mcOS)
+
+Ticket: Install and configure Jenkins Server??? 10wd 
+  3. which platform do you want me to use?
+        --- Linux OS [70%]
+        --- WINDOWS  [20%]
+            MacOS    [10%]
+
+  Which class of Laptop do you have:
+    HardWare component = dell/HP/Lenovo /  
+
+  1. Where can Jenkins be installed -- Linux/WINDOWS/Solaris
+
+What is your experience in Open source technologies???
+  Linux   === 
+    We can develop, build, test, monitore, secure, 
+    backup and deploy applications
+      development
+        CODING === IDEs [vscode, Eclipse], [Pycharm, ]
+        versioning  === [git/github], [gitlab, bitBucket] 
+      Testing === [Selenium,] 
+
+  WINDOWS === 
+    We can build, test, monitore, secure, backup and deployment applications
+
+Open source OS:
+1.  Linux -- Distributions 
+      Redhat -- Redhat (8,6,7)
+      CentOS -- 
+      UBUNTU
+      Alpine 
+      amazon LINUX 2/1
+
+  Managing Linux OS: 
+  Run levels ---- : differents option that you have to run tasks in linux
+
+   Run level 5 : Multi user --> laptop run at this level
+      Graphical User Interface (GUI) - 
+      Commands- CLI 
+
+   Run level 3 : - Multi user (CLI)  --> muliti can be connect at the same time
+       Linux Commands 
+       Shell SCRIPTING 
+       ec2-user / simon / landmark
+
+   Run level 1 : - Single user (CLI) ---> only one indivual can perform tasks
+
+What have we use to access and run tasks on our Linux servers??
+   COMMANDS    = CLI   
+
+   
+What are using using to access and run tasks on your workstation?: = GUI  
+
+   mobaXterm === Helps you to connet to your server as an SSH-CLIENT      
+
+   Laptop (PC):  Run level 5 Multi user
+    CentOS (Linux)
+
+     shell are used to excute command. they act as interpreters to the OS
+       bash / sh / csh /ksh /tsh /zch
+       touch class28 
+    macOS 
+       zch
+    WINDOWS 
+
+2.  WINDOWS
+      Powershell
+      GitBash 
+Platform Engineer (Linux ):
+  creating servers (vm in aws )
+  patching servers (yum remove / upgrade / update)
+  volume mgt (OS +  Storage + applications)
+              RedhatOS  ebs
+                        df -h 
+          LVM
+  users mgt / file mgt /  
+  Firewall mgt  
+
+Building applications
+applications development
+   Git ---  versioning
+            tracks changes in files 
+Coding:
+Building applications
+  Java  = 
+   developers write  src, buildScript, JUnitTestCases  
+  Python
+  NodeJS
+  .NET
+  versioning -  Git 
+  SCM = GitHub / GitLab / BitBucket / CodeCommit 
+  SCM = Source code management/managers    
+  IDEs = Intergrated Development Environments
+          VS CODE
+          Eclipse
+          Atom
+          AWS Cloud9
+
+Build tools:
+  pyBuilder -- Python
+  MSBuild   -- .NET
+  Maven, Gradle, ANt  --- java   
+    mvn package
+        validation = ok 
+        complitation = ok  (javac)
+        testing  = ok =passed  (Artifacts can be trusted)
+        packaging = ok
+Code Quality:  ok
+  SonarQube need a Server            = IaaS
+  SonarCloud does not need a server  = SaaS 
+
+    Code Coverage = 70% = 80%
+       src                10000 lines 
+       unit test cases    7000 test cases
+  -  code smells
+  -  bugs
+  -  vulnerabilities
+  -  duplicate lines
+
+  USPS       --->   mailBox
+  CanadaPost --->   mailBox
+  CamPost    --->   mailBox
+
+  yahoomail  --->       = SaaS
+  gmail                 = SaaS
+  gmail                 = SaaS
+
+
+=====
+  NewRelic ---> does not need a server  = SaaS
+  GitHub    ---> does not need a server = SaaS
+
+Landmark Group = Shareholders / Stake holders: 
+Accountants / Directors  
+   Accountants -- Internal   
+      P/L  = $400B 
+      BS   = $2TB  
+
+   Auditors -- External person  
+      Express an opinion 
+
+  mvn package      == 
+      mvn test
+
+  mvn sonar:sonar  ==  
+
+
+Build and Release :
+ ci job completed :
+  Nexus / JFrog / 
+     maven remote repo 
+       pom.xml 
+         dependencies (openJDK) 
+         plugins (log4j, JUNIT, Selenium, )
+         mvn package 
+            localRepo -->
+            group-repo   
+              proxy-repo (Nexus)   ---- CentralRepo
+              remoteRepo (Nexus)   ---- CentralRepo
+     maven proxy repo 
+     maven group repo 
+Deploy  :
+  Tomcat (/webapps)
+  JBoss (deployment)
+Docker / k8s 60 hours :
+  apiServer
+    cli = kubectl
+    UI = k8s dashboard
+
+DevOps E. Degree Master Class     :
+  Invest $3,500  -----> 380,000 USD [40k/yr --- 380k] 
+  average yearly salary  $300,000 
+
+$1M  Lottery ticket:  GE  === 
+  1st week salary = 8k - 10k
+100% policy 
+
+year = e-commerce 
+
+AWS:
+======
+Datacenter:
+  1. Applications
+  2. Database-storage 
+  3. OS 
+  4. HardWare
+
+mylandmarktech.com      
+
+Dominion Systems   === 
+Infrastructure types:
+  1. On-prem Datacenter
+    Organisation owns ,manages and maintains all infrastructures (servers, networks, storages)
+
+on-prem Db Poses Scaling issues: 
+ Year1   1000 customers =  20 servers
+ Year2   2000 customers =  40 servers
+ Year3   5000 customers =  100 servers
+ Year4   2000 customers = 
+
+ to manage a datecenter you need :
+    - dedicated space 
+    -  High bandwith/superfast internet
+    - redundant power supply
+    - support availability linux admins
+    - capacity planning
+    - higher maintainance efforts.
+    - time consuming
+    - leadership experience
+
+    Business requirements:
+
+    - High availability
+    - Fault tolerant  ---> withstand failure if one or more system components go down
+    - scalability  ---> add and reduce resources dynamically
+    - elasticity
+
+CAPEX  = CAPITAL EXPENDITURES
+OPEX   = OPERATING EXPENDITURES
+
+
+
+Cloud Providers = AWS / GCP / AZURE 
+What are they providing???
+
+   AWS S
+   APPLE 
+  IaaS -- Infrastructure  as a service  
+    ec2 
+  
+  PaaS--  Platform  as a service  
+    EKS 
+  
+  SaaS -- Software as a service
+    CloudWatch 
+    SonarCloud 
+    NewRelic 
+    GitHub
+    DockerHub
+
+IQ: Explain your experience in SaaS delivery???
+
+AWS  Global Infrastructure:
+https://aws.amazon.com/about-aws/global-infrastructure/
+
+  Region: us-east-1  = N-Virginia  
+          us-east-2  = Ohio  
+  Availability ZONES :  collection of one  or more Datacenter
+    us-east-1a --- Arlington
+    us-east-1b --- Fairfax
+    us-east-1c --- London 
+    us-east-1f --- Prince William
+
+, , , and Prince William
+
+What to consider before creating/hosting resources in aws:
+What to consider before choosing a region in AWS:
+ 
+ Availability --- EC2/EKS/S3/ECS  
+    us-east-1 
+    af-west-1    
+        High Availability:
+          1. Deploy using Multi AZs   
+          2. Deploy using Multi Regions     
+          3. Multi-cloud -- AWS/GCP/AZURE   
+          4. Multi INSTANCE  [Tomcat  or 4 Tomcat Servers ]
+
+ Latency = users--->connect  ---> how long it takes to our customer to access our application
+           us-west-1 --- 
+           uk-east-1
+
+  Complaince / Regulations [] 
+  Customer Location  
+  Security  
+  Price  
+
+ google.com  === 10ms  / 4ms 
+  
+
+Class: 8am --- 10:30am 
+=======================
+11:45 AM-- 2:45PM
+   DevOps Demo is everybody  
+   Matriculation class29
+   Graduation class27  
+   Testimonies, praise, prayers and impartation
+   3 TIMES  === ctr c  ====
+
+Graduation : Class28 Graduation  = October 8,     
+October 29, 2022. Ontario Canada 
+
+
+A million dollar ticket  
+===================================================  
+

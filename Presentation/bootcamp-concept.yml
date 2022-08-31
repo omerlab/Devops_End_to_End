@@ -1,0 +1,35 @@
+Bootcamp-class27:
+  - videos:
+     08/17/22 
+        ---> 25min : decoupled in microservices
+
+        ---> 32min : how long a project can last 
+                  - it depends on the client Requirements
+                  - it depends on the teams size 
+                  - it depends on the tools that we have or the client has
+                  - it depends on the number of microservice the client wants
+                  - it depends on time we will documentate and be able to do proof of concept (POC)
+                  - evry project vary and depends on the tasks
+
+        ---> 45min: Benefits of using fargate 
+                  - it helps to reduce cost
+                  - it give less job to the teams in term of infrastructure maintenance
+                  - aws take care of patching, versioning, networking
+        
+        ---> 1h25min: type of ec2 instance you use
+                  - on demand instance
+                  - spot instance (cheap but not always available, so we use it for short term project)
+                  - reserve instance for long run project
+
+        ---> 1h34min: github principal best practices
+                  - never commit code into master
+                  - we block the master after the first push
+                  - we create feature,bugfix branch to work on code before merging back into the master
+                  - commit via a pull resquest
+                  - write meaningfull commit message 
+                  - we use private repositories to be authenticate before getting access
+
+        ---> 1h44min: package management
+                  - it is a tool which helps you by going in the application repo get the app bring it to your system 
+                     and install it for you.
+Bootcamp-class25:
