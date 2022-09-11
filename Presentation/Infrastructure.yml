@@ -21,7 +21,7 @@ We sit in meeting to talk about the kind of infrastructure me need to setup for 
       we are using ansible to configure differents infrastructure:
          - jenkins master and slave
          - tomcat and jboss (appservers)
-      NB: we can also use script for configuration but ansible is powerfull betocause it can automate the pprocess 
+      NB: we can also use script for configuration but ansible is powerfull because it can automate the process 
          in multiple host at the time.
          In ansible we are using module to configure
       we are using Terraform to create the infrastructure:
@@ -30,7 +30,7 @@ We sit in meeting to talk about the kind of infrastructure me need to setup for 
 In all the process, security is our priority
 To access our servers in the private subnet(jenkins, maven...) we configure bastion host or jumpserver. we configure 
 proxies,LB ,webservers. noted that the jumbserver has it security group so if Jenkins want to perform a tasks, 
-since it has only private ip  it can not normally run build so to access him we need to ssh in to the jumpserver 
+since it has only private ip  it can not normally run build so to access it we need to ssh in to the jumpserver 
 ( port 22 need to be open ) in which we will allow traffic from authenticated users ip@ only. from the jumperserver
  he ssh into the appserver(port 8080 need to be open) in the private subnet.
 
@@ -54,4 +54,4 @@ how many failure do you have
 what is the ratio b/w success build and fail
 implementing latest technologies in development process
 
-Jenkins is our main automation tool. we integrated other tool as  plugin to make him more efficient
+Jenkins is our main automation tool. we integrated other tool as  plugin to make it more efficient

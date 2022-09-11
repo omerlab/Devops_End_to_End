@@ -1,0 +1,31 @@
+Leverage architecture best practices to design, develop and maintain business critical cloud infrastructure solutions at scale, in support of continuous
+ secure software development and delivery of high-quality releases.
+
+Plan and execute cloud infrastructure implementations, maintenance, including information security configurations, deployments.
+
+Configure, deploy, and manage cloud-based infrastructure including VPCs, Security Groups, EC2 instances, RDS services, IPSec tunnels, etc.
+
+Contribute to microservices application code bases, image repositories and infrastructure libraries with a focus on optimization for performance, 
+
+reliability, scalability, security, observability, cost (which includes the design, development, support of builds, deployment, installation scripts & IaC pipelines).
+
+Leverage software defined network patterns and manage internal and external DNS services using Microsoft DNS, AWS route 53 and DNS Made Easy (Constellix).
+
+Experience with IAM concepts, secrets management (ex: ability to configure SSO and app integrations using Okta for user access to services, managing enterprise vaults etc.).
+
+Configure and maintain cloud infrastructure systems monitoring (using tools such as NewRelic, Splunk, AWS Cloud Watch etc.) to effectively capture infra/app telemetry,
+
+logs, events driving towards proactive incidence alerting, response, remedy patterns for peak system security, resiliency, and availability.
+
+Continually evaluate service and infrastructure usage to effectively manage performance, capacity, and cost - automating solutions, removing toil wherever possible.
+
+Collaborate with the Information security team to drive towards zero trust frameworks in configurations and operations in cloud.
+
+Provide digital reporting supporting compliance, access and security audits and drive towards automation driven controls in SDLC for SOX and PCI compliance.
+
+Provide support to the various technology teams and the company in general, including contributing to technical documents/runbooks, off-hours support and participate in an on-call rotation.
+
+Advise the technology teams and other internal stakeholders on technology standards, methodologies, and processes.
+
+Share your passion for staying on top of tech trends, experimenting with, and learning new technologies, participating in internal & external technology communities,
+ mentoring other members of our engineering community.

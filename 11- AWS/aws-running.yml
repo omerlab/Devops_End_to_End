@@ -192,6 +192,7 @@ Dominion Systems   ===
 Infrastructure types:
   1. On-prem Datacenter
     Organisation owns ,manages and maintains all infrastructures (servers, networks, storages)
+     This heavy lifting because we have to manage infrastructures and it poses scaling issues.
 
 on-prem Db Poses Scaling issues: 
  Year1   1000 customers =  20 servers
@@ -201,24 +202,41 @@ on-prem Db Poses Scaling issues:
 
  to manage a datecenter you need :
     - dedicated space 
-    -  High bandwith/superfast internet
-    - redundant power supply
-    - support availability linux admins
-    - capacity planning
+    -  High bandwith/superfast internet (at very high cost)
+    - redundant power supply (electricity at very high cost)
+    - support availability linux admins (employed more support to manage it)
+    - capacity planning (how many server to buy)
     - higher maintainance efforts.
-    - time consuming
+    - time consuming (take time on something which didn't add value to the business)
     - leadership experience
 
     Business requirements:
 
-    - High availability
-    - Fault tolerant  ---> withstand failure if one or more system components go down
-    - scalability  ---> add and reduce resources dynamically
-    - elasticity
+    - High availability --> we can always access our data in the cloud
+    - Fault tolerant  ---> withstand failure if one or more system components go down. we nwwd to still be in business
+    - scalability  ---> add and reduce resources dynamically. Handle the changing needs of an application
+    - elasticity  --> 
 
 CAPEX  = CAPITAL EXPENDITURES
 OPEX   = OPERATING EXPENDITURES
+ Cloud service : is any service made available to users on demand via internet from a cloud computing provider's servers
 
+ Cloud computing : is the delivring of computing services including servers, storage, databases,networking, Software
+
+ advantages of cloud:
+
+   - cost 
+   - speed 
+   - scalability and elasticity
+   - high availability and reliablity
+   - deploy globally in minutes 
+
+Types of cloud computing:
+
+   -  public cloud
+   -  private cloud
+   -  hybrid cloud
+   -  multi cloud
 
 
 Cloud Providers = AWS / GCP / AZURE 
@@ -226,27 +244,44 @@ What are they providing???
 
    AWS S
    APPLE 
-  IaaS -- Infrastructure  as a service  
-    ec2 
+  IaaS -- Infrastructure  as a service  : 
+  YOU        : ---> O/S, middleware, runtime, data, application
+  AWS manage : ---> networking, storage, servers, virtualization
+
+     best users are admins
+     exple:  ec2 
   
-  PaaS--  Platform  as a service  
-    EKS 
+  PaaS--  Platform  as a service  :
+  YOU        : --->  data, application
+  AWS manage : ---> networking, storage, servers, virtualization, O/S, middleware, runtime 
+
+     best users are developers
+      exple : EKS , MYSQL, Tomcat, ELB
   
-  SaaS -- Software as a service
+  SaaS -- Software as a service ---> everything is managed by the cloud providers:
     CloudWatch 
     SonarCloud 
     NewRelic 
     GitHub
     DockerHub
+   best users are Ends users
 
-IQ: Explain your experience in SaaS delivery???
+  On premises:
+  YOU manages everything
+
+
+IQ: Explain your experience in SaaS delivery???  
+aws advantages
 
 AWS  Global Infrastructure:
 https://aws.amazon.com/about-aws/global-infrastructure/
 
-  Region: us-east-1  = N-Virginia  
+  Region: 26
+   are logical name made up of multiple AZ which are physical location
+   us-east-1  = N-Virginia  
           us-east-2  = Ohio  
-  Availability ZONES :  collection of one  or more Datacenter
+  Availability ZONES : 84
+    collection of one  or more Datacenters
     us-east-1a --- Arlington
     us-east-1b --- Fairfax
     us-east-1c --- London 
@@ -257,23 +292,24 @@ https://aws.amazon.com/about-aws/global-infrastructure/
 What to consider before creating/hosting resources in aws:
 What to consider before choosing a region in AWS:
  
- Availability --- EC2/EKS/S3/ECS  
+ - Availability : --- EC2/EKS/S3/ECS  
     us-east-1 
     af-west-1    
-        High Availability:
+         for High Availability we can:
           1. Deploy using Multi AZs   
           2. Deploy using Multi Regions     
           3. Multi-cloud -- AWS/GCP/AZURE   
           4. Multi INSTANCE  [Tomcat  or 4 Tomcat Servers ]
 
- Latency = users--->connect  ---> how long it takes to our customer to access our application
+ - Latency : = users--->connect  ---> how long it takes to our customer to access our application
            us-west-1 --- 
            uk-east-1
 
-  Complaince / Regulations [] 
-  Customer Location  
-  Security  
-  Price  
+ - Complaince / Regulations [] :
+ - Data residency :
+ - Customer Location  :
+ - Security  :
+ -  Price  :
 
  google.com  === 10ms  / 4ms 
   
@@ -293,4 +329,1012 @@ October 29, 2022. Ontario Canada
 
 A million dollar ticket  
 ===================================================  
+
+                          EC2---:
+  Basic Computer vs      aws-EC2 
+  OS     ----            AMI (OS + Additional Softwares) 
+  Hard Drive             EBS (Elastic Block Store)\
+  RAM                    RAM
+  CPUs[1, 2, 16 core]    Instance type[t2.mirco, t2.medium]
+  Network CARD           IP Addressing 
+  Firewall               Security Groups
+
+
+ My computer cannot connect to the internet:
+  -- network card need to properly installed 
+  -- softwares [network drivers] requiring updates 
+  -- External issues:
+       ISP  =  Rogers -- 4am -- 8pm 
+
+Purchasing options EC2 instances:
+ - On-demand 
+ 
+    - most expensive
+    - most flexible 
+    - pay as you use
+ - Reserved
+    - pay instances for a set of time (1/3 yrs)
+    - significant price discount
+    - once you buy, you are responsible for the entire price 
+   Exple: we use it for production
+
+ - Spot instances
+   - charged by hours 
+   - spot price fluctuate based on supply 
+   - Servers unused are bid for a short amount of time
+80% of AWS Capacity is ce onsumed by her 10m clients. 
+10% goes for bid 
+--- 10% Capacity is about $100M/hr  
+
+we can use spot instance for testing
+Exple: We have Tomcat and JBoss application servers
+     develop --- Testing -- Build --- deploy-UAT---Deploy-PROD 
+
+
+mtn    -- 10M 
+rogers -- 15M 
+boa    -- 18M 
+
+Apple  -- 40M
+tesla  -- 25M  
+==============
+  Our cost depends on:
+  - Purchasing options         
+  -  Instance types ---> the network performance depends of the type (vcpu, memory)
+     - general puropse
+     - compute optimized
+     - GPU optimized
+     - memory optimized
+     - storage optimized
+  - EBS optimized 
+  - AMI type (linux/windows)
+  - data transfer
+  - Regions
+
+    AMI : --- is a preconfigured package required to launch an ec2 inst, it includes an o/s, software packages and others
+             we can launch as many instances from the AMI as you need
+  User data :
+ #!/bin/bash
+ sudo yum install httpd -y 
+ sudo systemctl start httpd
+ sudo systemctl enable httpd 
+ sudo echo "<h1>Welcome To Omerlab</h1>" >> /var/www/html/index.html
+ sudo echo "DevOps is good" >> /var/www/html/index.html
+
+
+user data was used to install and start apache webserver
+  public   ip: 3.19.60.199
+  Private IPv4 : 172.31.45.203
+
+Firewall/ Security Groups:
+  ssh  --- 22 
+  http --- 80
+     3.19.60.199:80
+
+Attached SGs to Instances  
+
+IQ: How many Security Groups can be assigned to one Instance --- 10   
+      sg1_ssh
+      sg2_http  
+
+  to connect to an ec2 instance we use for 
+    windows: remote desktop protocol rdp=3389
+    linux : via ssh=22
+IQ: What is metadata?
+    data about a data
+      - ip address
+      - kind of architecture
+      - storage
+      - vpc id
+   
+       15GB
+  EBS volume : is a block storage use to mount root file system
+    Home directory of jenkins is /var/lib/jenkins. we can decide to create another mount point 
+
+    We can increase volume if we are running low of resources
+    we can also add EBS storage to an instance.
+    For security it is good to create a different volume for home directory of softwares
+    we can Attach multiple volume on a ec2 instance
+    the maximun volume that we can create is 16TB
+    Ebs need to be create in the same AZ 
+
+     To change the default configuration (home directory, port, user) of jenkins 
+    for ubuntu :  /etc/default/jenkins  
+    for redhat :  /etc/sysconfig/jenkins 
+
+- Creating ebs volume    
+  
+- Attaching EBS  
+- Mounting ebs:
+      lsblk : ---> use to list the volume we have and if there are mounted or not
+      df -h : ---> use to check the share file system
+    
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
+      - we need format the filr system
+          * sudo file -s /dev/xvdf            :
+
+      - to create a mount point on cli
+          * sudo mkdir /data                  :
+
+      - mount the volume 
+          * sudo mount /dev/xvdf /data        :
+
+  we can only increase the size of volume not reduce
+  
+  we can not attach a volume on different ec2 instance
+
+  Use case of volume :
+    - we want to add an additional volume on the jenkins server to do special tasks and we want 
+      to encrypt that volume in the same time
+    
+    - for security reason because no everybody has access to the root file system. You need elevated  
+      priviledge
+    
+    - We can access EBS volume anytime even if we shut down the instance. we just have to attach 
+       to another instance
+
+    - we use it for disaster recorvery by unmount the volume which the key was lost by the new volume with a new key
+    
+    Benefits:
+     - reliable and secure storage: each of the ebs will automatically respond to its availabilty zone to protect 
+                                     from component failure
+     - secure : - amazon's flexible access control policies allows to specify who can access which ebs volumes 
+                - access control plus encryption offers a strong defense in depth security for data
+     - higher performance: it uses ssd technology to deliver data result with consistent i/o performance app
+     - easy data backup: taking point in time snapshot 
+
+Using snapshot we can create :
+  - another snapshot
+  - an IAM
+  - a lifecycle policy for how snapshot with be taken
+  - for data migration 
+  
+
+storage solutions:
+  ebs volume  = block storage
+       Required mounting    
+       
+  efs  volume = file storage
+       Required mounting 
+       sudo yum install nfs-utils
+     
+  s3 bucket   = object storage 
+
+  ebs: limitation is that it is attach to one server, so it can be synchronise in case we have multiple servers.
+        you pay based on the capacity of volume
+
+
+  efs : bring scalability, elastic file system. Help to create a resilient, disaster recorvery environment.
+        you pay as you upload data
+        we synchronize data accross multiple servers at the same time. It make database backup easy because we 
+          just need to create data in one server and it will synchronize in others.
+        Data are distributed 
+        amazon is in charge of configuration.
+        It does not work for windows machine. We use FXs for windows 
+
+VOLUME:
+  xvda1 202:1    0  11G  0 part /
+
+   The OPERATING system boot from the root file system 
+     / 
+/bin  /home  /opt  /etc 
+
+ Jenkins Server 
+  12  /var/lib/jenkins 
+
+  sudo mount /dev/xvdf /data
+
+  sudo mount /dev/xvdf /var/lib/jenkins 
+
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
+
+    1  clear
+    2  curl http://169.254.169.254/latest/meta-data
+    3  curl http://169.254.169.254/latest/meta-data/ami-id
+    4  curl http://169.254.169.254/latest/meta-data/ami-id/hostname
+    5  curl http://169.254.169.254/latest/meta-data/ami-id/local-hostname
+    6  clear
+    7  curl http://169.254.169.254/latest/meta-data/ami-id/
+    8  curl http://169.254.169.254/latest/meta-data/local-hostname
+    9  curl http://169.254.169.254/latest/meta-data
+   10  curl ifconfig.me
+   11  curl ifconfig.co
+   12  clear
+   13  lsblk'
+   14  lsblk
+   15  df -H
+   16  lsblk
+   17  ls /var/lib/jenkins
+   18  sudo mkdir /var/lib/jenkins
+   19  sudo file -s /dev/xvdf
+   20  sudo mkfs -t xfs /dev/xvdf
+   21  sudo mount /dev/xvdf /var/lib/jenkins
+   22  lsblk
+   23  df -h
+
+ 
+Where will ebs-snapshot be store?
+
+can we modify ebs volume while ib use? 
+
+Can we attach one ebs to multiple ec2? 
+
+can we attached ebs to ec2 in different AZs?
+
+
+sudo dnf install nfs-utils nfs4-acl-tools -y 
+
+services:
+  Servers = ec2, lambda
+  storage = ebs, efs, s3 
+  LoadBalancers 
+  ASG 
+  VPC
+  ROUTE53
+  IAM 
+
+AWS Solutions Architect  =  
+
+storage services:
+  BLOCK Storage  = ebs, 
+  File storage   =  efs, \
+  Object storage =  s3 
+
+BLOCK Storage  = ebs,  
+  Data base backup or 
+  data persistency 
+  volume expansion (20G to 20+G) 
+  Snapshots 
+
+  How to implement data migration 
+  moving data from one az to another
+  disaster recovery 
+
+Create lifecycle policy  - UI
+  Every mid night backup my data bases 
+
+ Lambda FUNCTION
+    It create Snapshots daily and keeps 5 Snapshots 
+    The Snapshots are backup in another aws ACCOUNTS
+    Delete expired Snapshots
+
+  AGE = 30 DAYS 
+
+Lambda FUNCTION:
+    That does volume expansion 
+
+1. Create Snapshots 
+2. create volumes from Snapshots 
+
+Where are Snapshots stored in AWS??
+   S3 Bucket
+
+Recovering ssh private keys:
+  ssh -i key.pem 
+
+  ssh -i "cicd.pem" ec2-user@54.161.211.233
+
+  ssh -i cicd.pem ec2-user@54.161.211.233
+
+  ssh ec2-user@54.161.211.233
+
+File storage   =  :
+  Amazon efs is regional service 
+    Scalable, elastic, cloud-native NFS file system
+  NFS 
+  SAMBA
+
+  sudo dnf install nfs-utils nfs4-acl-tools -y 
+  sudo yum install nfs-utils nfs4-acl-tools -y 
+
+
+      build server
+      jenkins servere 
+      appServer 
+=====================================
+Object storage =  s3 :
+  we don't need to mount It
+  when configuring kops s3 is use as our key value store
+  we use it to stores
+    - images and 
+    - videos
+    - logs  for your website
+    - Snapshots 
+
+Maximum Object size for s3: 5000GB (5TB) 
+
+list.txt:
+  simon
+  paul 
+  mary 
+  olu 
+snapshot2
+
+list.txt:
+  simon
+  paul 
+  mary 
+  olu 
+snapshot2
+
+list.txt:
+  simon
+  paul 
+  mary 
+  olu 
+snapshot2
+
+EBS  = Elastic Block Storage = RW0 : (read-write-one) 
+  you can only mount ebs to one server at time
+  Block storage can't shared data with mulitple servers at once
+  however it is FAST, CHEAP
+  DATA Must be mounted 
+  We can't access data without mounting
+  Maximum capacity = 16000GB = 16TB
+      MC<=16TB
+    Maximum capacity root volume is 1023GB is   WRO
+
+
+EFS   = File Storage: = RWX (read-write-many)
+  you can only mount ebs on many servers at time
+  it is highly scalable
+  Maximum capacity = x > 1GB 
+  READ  = FASTER
+  WRITE = SLOW
+  mounting required
+  Can be shared/mounted with multiple servers
+
+S3  = object storage = we can r/w(read-write) from anywhere without mounting
+  Charges depends on data size, transfer and storage class 
+  Stores: 900TB = 900,000GB
+
+  To store data in our s3 bucket we have different storage class
+    Standard                :           = 25,000$/MONTH * 1000   120 DAYS  ---> most use by users
+    IA  (infrequent access) :           = 15,000$/month          120 DAYS  ---> netflix for certain movies
+    RRS  (reduce redundancy storage) :  =  5,000$/MONTH           80 DAYS
+    Glacier                    :        =  1,000$/MONTH          360 DAYS  ---> use for archives 
+  
+  as a devops eng i make sure that our cost is reduce. I can create a lifecycle policy on my storage class.
+  without mounting you can access data
+  each object in S3 will have a unique end point to access
+
+ S3 is A regional service 
+    us-east-1 = NV 
+    us-east-2 = Ohio 
+    us-west-1 = CA 
+    us-WEST-2 = oregon   
+ s3 bucket name must be globally unigue accross aws 
+    test 
+security:
+   Block Public Access settings for this bucket. By default bucket is block to public
+   Access control list  = ACL is use to block access to our bucket
+
+   Fven if the bucket is configte to have  public access, the object inside the bucket can remain
+    block to public access until you give to object the right to be public
+
+versioning:
+  enabled allows us to upload multiple version of an object inside the bucket
+  logs 
+
+AWS Networking & Content Delivery:              storage:                       Compute:  
+VPC                                              S3                             EC2
+CloudFront                                       EFS                            Lambda
+Route 53                                         EBS                            Elastic Beanstalk
+API Gateway                                      FSx                            Serverless Application Repository
+Direct Connect                                   S3 Glacier                     EC2 Image Builder
+AWS App Mesh                                     Storage Gateway                AWS Outposts
+AWS Cloud Map                                    AWS Backup                     AWS App Runner
+Global Accelerator                               AWS Elastic Disaster Recovery  Batch, Lightsail
+Amazon VPC IP Address Manager
+AWS Private 5G
+
+Security, Identity, & Compliance :                  
+
+IAM                   -  Resource Access Manager       - Cognito
+Secrets Manager       -  GuardDuty                     - Inspector
+Amazon Macie          - IAM Identity Center (successor to AWS Single Sign-On)
+Certificate Manager   - Key Management Service        - CloudHSM
+Directory Service     - WAF & Shield                  - AWS Firewall Manager
+Artifact              - Security Hub                  - Detective
+AWS Signer            - AWS Network Firewall          - AWS Audit Manager                                          
+
+Database:                        
+RDS                               
+ElastiCache
+Neptune
+Amazon QLDB
+Amazon DocumentDB
+Amazon Keyspaces
+Amazon Timestream
+DynamoDB
+Amazon MemoryDB for Redis
+
+Management & Governance:
+AWS Organizations
+CloudWatch
+AWS Auto Scaling
+CloudFormation
+Config
+Systems Manager
+AWS AppConfig
+Trusted Advisor
+AWS Health Dashboard
+AWS Compute Optimizer
+Incident Manager
+CloudTrail
+
+
+
+
+
+Our resources are created inside a public cloud which is aws. We created VPC inside which we created differents
+ subnets in differents AZ for high availability and we created ec2 instances for web server, appserver and database
+  servers. We configured security at the subnet level(NACL) and at the instance level (SG) to protect our environment.
+ 
+ VPC has :
+   - vpc user defined adddress space up to 16
+   - subnets : 200 user defined subnet up to 16
+   - route tables : define how traffic should be routed from/to each subnet
+   - access control lists : stateless network filtering between subnets
+   - internet gateway: logical device enabling traffic to be routed to/from the public internet
+   - NAT : provide network address translation to private instances for 10gbps traffic
+
+  Access all departments - VPC 
+      payroll - Subnet 
+      accounts - Subnet
+      logistics - Subnet
+      customer service - Subnet
+
+  Offices - VPC  10.10.0.0/24
+      MD - Subnet 
+         200 ec2-instances [200 ips ] 
+      TX - Subnet
+         210 ec2-instances [210 ips ] 
+      NY - Subnet
+         500 ec2-instances [500 ips ] 
+      GA  - Subnet
+         180 ec2-instances [180 ips ] 
+ip Addresses = 200 + 210 + 180 + 500 = 1090
+
+What resources / services can hace we created in AWS 
+   ec2-instances 
+Infrastructure planning meeting:
+CIDR block 
+  vpc :
+       8  8 8 8 = 32bites 
+      10.10.0.0/n where n [16,17,18,...32]
+      172.10.0.0/n
+      10.10.0.0/16 
+      no of resources = 2^32-n 
+  cidr block     n      32-n      no Resources 
+  10.10.0.0/16   16  [32-16] 16   2^16 = 65536
+  10.10.0.0/20   20  [32-20] 12   2^12 = 4096
+  10.10.0.0/24   24  [32-24] 8    2^8  = 256
+  10.10.0.0/32   28  [32-32] 0    2^0  = 1
+
+ipv-4  = 32 bites
+   no of resources = 2^32-n 
+ipv-6  = 128 bites 
+   no of resources = 2^128-n 
+   if n = 16, resources = 2^128-16 = 2^112
+2001:4860:4860::8888
+
+vpc27 cidr   = 172.0.0.0/20   = 4096/256  = 16
+   privateSN = 172.0.0.0/24   
+      172.0.0.0, 172.0.0.1, ..., 172.0.0.255 --- 256 
+   PublicSN  = 172.0.1.0/24   
+      172.0.1.0, 172.0.1.1, ... 172.0.1.255
+
+ 10.10.0.0/24 
+
+dbServer:
+  ssh -i "2022key.pem" ec2-user@172.0.0.184
+webserver: 
+  from External network:
+    ssh -i "2022key.pem" ec2-user@18.234.106.128
+  from internal network:
+    ssh -i "2022key.pem" ec2-user@172.0.1.194
+
+   To access server in the private subnet we always go through a webserver or bastion host because servers in the private
+     subnet do not have route to internet
+
+     how db server get access to internet when you want to patch or update? :
+
+       - we can configure a on way internet traffic called NAT(network address transfert protocol) gateway. It can only be created in the 
+         public subnet, because it will receive traffic from internet and routed it into the public subnet.
+ping google.com
+icmp 
+ssh 
+
+
+VPC --- 256 resources (IP Addresses) 
+      10.0.0.0/24 
+  Subnets 
+    Subnet1 --- 64 resources
+       10.0.0.0/26  [.0, .1,... .63 ]
+    Subnet2 --- 128 resources
+       10.0.0.64/25 
+    Subnet3 --- 256 - 64 -128 = 64 resources
+       10.0.0.192/26 
+
+VPC --- > 
+   private 
+   public
+
+privateIP
+
+publicIP
+
+EC2-INSTANCES 
+     AWS Global Resources :
+          IAM 
+    Regional Resources : VPC
+         VPC = us-east-1 = NV 
+         s3  
+         EFS 
+
+  availability zones resources[DATACENTERS] : 
+         Subnets - us-east-1a
+         ec2-instances
+         EBS 
+
+VPC PEERING CONNECTION: it enables communication between 2 or more vpc 
+   what is vpc peering?
+   when do we need it?
+   how have you apply it in landmark?
+
+   i was task to create private connection between ours vpc for our servers to communicate in a private and secure environment.
+     It is more secure for our infrastruture to communicate using private ip.
+  
+  it  can be interregion or intra-region
+   Intra region VPC PEERING CONNECTION :
+      us-east-1 = NV 
+         vpc1 --- accounts 
+         vpc2 --- customers service 
+   Inter region VPC PEERING CONNECTION:
+           us-east-1 = NV 
+              vpc1 --- accounts 
+           us-east-2 = OH 
+              vpc2 --- customers service 
+ 
+ benefits of peering:
+   - no need of IGW 
+   - no need of vpn 
+   - save cost because vpc peering is free
+  
+  precautions when establishing peering:
+   - Avoid cidr block overlapping 
+
+   vpc27a = 10.0.0.0/24
+      dbServer = 10.0.0.25
+   vpc27c = 10.0.0.0/24
+      appServer = 10.0.0.25
+
+   vpc27a = 10.0.0.0/24
+      10.0.0.29
+      54.92.197.158
+   vpc27b = 172.0.0.0/20 
+      webserver:
+         ssh -i key.pem ec2-user@10.0.0.29
+         ssh -i key.pem ec2-user@54.92.197.158
+ 
+  To connect 2 clouds providers network and on premise we need to ensure high level security for communication.
+    
+    in GCP, vpc is a global service
+    in AWS, vpc is regional
+
+  Firewall :
+1. vpc27b Request/Create a peering request to vpc27a 
+2. vpc27a accept the request 
+3. Edit the routes (route tables)
+security at the subnet level is NACL which is stateless
+security at the instance Level is SG which is stateful
+route table boost security also because when we associate a route to a subnet only the define route 
+ will have access to the subnet. There is no way to recieve traffic from a route non define.
+
+
+ Internet Gateway: is use to expose our private network to internet
+ Nat Gateway: use to connect our private subnet to internet. It is set up in the public subnet and translate the 
+    source ip to is ip before routing it to the IGW which will talk to internet.
+#!/bin/bash
+sudo yum install httpd -y  
+sudo service httpd start  
+sudo chkconfig httpd on
+sudo echo "This is my web server" > /var/www/html/index.html  
+echo successful
+
+   Cloud computing Engineer : helps company to make their resources availaible in the cloud to run their businesses.
+    Provision, secure and  Manage resources   
+
+
+   servers listen on protocols and ports
+
+LoadBalancers: are servers that forward traffic to multiple servers downstream. users don't know which backend server there 
+                are connect on because the LB receive traffic and spread load across downstream instances .
+  -  For end users to access our Appservers, there will go through LB(Nginx, Haproxy) which will either accept or 
+       reject the traffic. It acts as a security guard in frontend. If it accepts the request, it will route
+       the traffic to the appserver in the backend.
+  -  To route that traffic, LB needs follows a number of principles or rules. The Lb will check at the rules edited
+       to decide where to route the traffic
+  -  Lb looks for target group with target in backend and check the health of targets before routing the traffic.
+  -  LB to receive traffic need to have listeners configure. 
+  -  LB do regular health checks to your instances. it is done on a port(80) and route (/app)
+  -  Provide SSl termination (https) for your websites
+  -  Enforces stickiness with cookies
+  -  Separate public traffic from privat traffic
+  -  Expose a single point of access (DNS) to your application
+  -  By default Lb listen on port 80 and 443 and protocols TCP, Http and Https 
+
+                Eslastic LB : is a managed LB, less cost and intergrated with aws services
+
+        As a cloud engineer i need to make sure that the webservers are running and healthy as well as appservers.
+    - ELB bring a solution to ensure that our LB will be up and running at any point of time because AWS will 
+     create 2 instances in 2 differents AZ, it will install and configure LB software for us.
+    -  One target group can content up to 1000s target
+
+    - Scalability : means that an application/system can handle greater loads by adapting (vertical and  horizontal)
+        *vertical= increase the size of instance common use case is  for database (RDS, elasticache). 
+        *horizontal= increasing the number of instance common use case web application/ modern app
+    
+    - High availability:  running your apps or system in at least 2 data center(AZ) to be able to survive a data center 
+                        loss. It works hand in hand with horizontal scaling. It can be passive (for RDS multiple AZs 
+                        ) or active(for horizontal scaling). you need to set up ASG multi-AZ and LB multi-AZ
+        
+    For security Ec2 instances recieves traffic only from LB, so the source of the traffic in the Sg table of the lb not 
+    and ip@ range as it is in the SG of the lB which allow traffic from anywhere
+
+        LB types : 
+         Application LoadBalancers: 
+          - allows for multiple services to be hosted behind a single LoadBalancer
+          - Application Load Balancers support HTTP, HTTPS and WebSocket
+          - support redirect
+          - route traffic based on Contents allows requests to be routed to different application
+             behind a single LB
+          - route traffic based on path in url  
+          - route traffic based on hostname in url
+          - route traffic based on query string, headers
+          - improved health checks and additional cloudwatch metrics
+          - support for microservices and container based applications
+          - Has port mapping features to redirect to a dynamic port in ecs
+          - support SSL/TLS termination which will encrypt data during the communication
+          - Registered targets in a Target Groups for an Application Load Balancer can be Lambda, ec2, private ip
+
+         Nb : The application server don't see the IP of the client directly , it talk with the LB using the private 
+               IP. to know the client Ip we need to check in the header X-Forworded-for, X-Forworded-port, X-Forworded-proto
+              
+              Network Load Balancer has one static IP address per AZ and you can attach an Elastic IP address to it.
+               Application Load Balancers and Classic Load Balancers have a static DNS name.
+
+              The following cookie names are reserved by the ELB (AWSALB, AWSALBAPP, AWSALBTG).
+     
+         Network LoadBalancers: 
+          - support tcp/udp protocols ; tcp = src and destination
+          - can handles millions of requests per second while maintaining ultra-low latencies 
+          - operates at the connection level (level4)
+          - has one static ip per AZ and support assigning elastic Ip
+          - the target group can be ec3 and private Ip
+          - it can be place infront of the ALB 
+          - route connection to target = ec2, microservices, conatainers within VPC based on Ip protocol data
+          - optimized to handled sudden and volatile traffic patterns
+          - route traffic to a specific target group
+          - it is dedicated for transport because it operates at layer 4(transport) of OSI model
+        
+         Gateway LoadBalancers:
+          - uses to deploy,scale  and manage a fleet of 3rd party network virtual appliances in aws
+                   Exple: firewall, intrusion detection and prevention system, payload manipulation
+          - Operates at layer 3 (network layer)
+          - combines 
+            when traffic comes to our vpc it is route to the GLB which is setup in front of a target group(ec2,ip) which 
+            contains 3rd party security virtual appliances, the appliances will analyze the traffic and 
+            if everything is ok, it will route the traffic to our application servers.
+             
+          - Uses the GENEVE protocol on port 6081 
+
+         Listeners:
+          - define the port and protocol which the load balancer must be listen on
+          - each ALB need at least one listener to accept traffic.
+          - we can create up to 50 listener
+          - routing rules are defined on listener
+      
+         Rules: 
+          - each listener can have one or more rules for routing requests to target groups
+          - Rules consist of conditions and actions 
+          - When a request meets the condition of the rules, the action is taken 
+          - Rules can forward requests to a specified target group
+          - Conditions can be specified in a path pattern format
+          - A path pattern is case sensitive, can be up to 255 characters in length
+
+         Health checks:
+          - allows traffic to be shift away from failed instances 
+          - support for HTTP and HTTPS health checks
+          - customize the frequency and failure threshold
+          - consider the depth and accuracy of your health checkks
+          - ping and curl command help us to check the heatlh of a target
+          - the NLB supports HTTP health checks as well as TCP and HTTPS
+          
+          Route 53 :     
+           to manage multiple LB in differents regions we need to integrate route 53   
+           LB before routing traffic does a DNS resolution to identify to which server the request need to be second.
+           with the help of dns record, we can map the dns name of the LB to a simple and readable name .
+            A record ---> hostname map to ip@
+            C-name record ---> name map to a name 
+           
+         
+        Certificates is a data encrypted software which helps to encrypt data between end users and application servers 
+           It use SSL/TLS protocols.
+            Exple:  aws-certificates manager
+         you can create and import a Certificate
+
+        Stickiness :
+          - Use To bind the user session to a specific instance within a target group 
+          - thsi works for CLB and ALB
+          - the cookie used for stickiness has expiration  date you control
+          - It is use to make sure that user doesn't lose his session data
+          - we have application based cookie and duration based cookie to specify how cookie will be manage
+        
+        Cross-zone LB: 
+          - with CZLB each LB instance distributes evenly accross all registered instances in all AZ
+          - without CZLB request are distributed in the instances of the node of the ELB. traffic are route to the target
+              under a specific LB
+
+        SSL/TLS Certificates:
+             
+          - allows traffic between your clients and your LB to be encrypted while in transit
+          - using SNI(server name certificate) you can load multiple ssl certificate  onto one  website
+             (to server multiple website). When traffic come to the LB it will check all the certificate name 
+              using SNI and will route the traffic encripted to that server.
+          - only ALB and NLB support SNI
+          - Godaddy, comodo, Globalsign are public certificate authorities 
+          - you can manage certificates using ACM
+          SNI:  allows Application Load Balancers and Network Load Balancers  to load multiple
+           SSL certificates on one listener
+        
+Auto scaling:
+    Our bisness needs change constantly that is why everything needs to be automate
+    ASG maintains the availability of our application
+     if there is a spike in our environment how can we automate the process of scaling infrastructures?
+     we have 2 types of ASG
+       - Horizontal 
+       - Vertical   
+
+    Benefits:
+      - Better fault tolerance  ---> detect inhealthy instances terminate them and launch an instance to replace it 
+      - Better availability ---> ensure that app alaways has the right amount of capacity to handle the current traffic demand
+      - Better cost management ---> can dynamically increase and decrease capacity as needed. pay only for what you used.
+    
+    ASG concepts:
+      it comes with
+      - auto scaling groups : --> define the minimum, maximun and desired number of running ec2 instances 
+      - Launch configuration/ launch template : 
+           --> provides info about:  AMI and ec2-instance type/size, SG, ssh keys,  user data 
+      - scaling plan : --> tell ASG when and how to scale
+    A scaling policy is define to decide how instances will be create and terminate.
+    - Instances are created based on cpu and memory usage. we define our target value
+    - Launch template can be version
+    - we can attach Asg to 
+      ---> a Lb :  for traffic routing to scale in /out instances. if the Lb check the health of an instance and determine 
+         it unheathy the ASG will dertminate it and recreate it
+       --> cloudwatch for logs: an alarm will  be triggered based on metrics or average cpu
+       --> sns  for notification:
+    - we can create a scale in/out policies to increase and decrease instance
+    - It can also performs health checks
+
+     Dyanamic scaling plolicies:
+
+       Target tracking scaling: -- track cpu utlization, to define a Scaling Policy that will ensure the average
+          number of connections to your EC2 instances
+
+       Simple/ step scaling : -- step cloudwatch based on high or low cpu
+
+       schedule actions : -- based on known usage pattern
+
+       Predictive scaling : -- continuously analyse (IA)load and schedule scaling
+
+     Metrics to scale on:
+       - CPU utilization across instances
+       - request counter make sure that the number of request per ec2 is stable
+       - average network in/out
+       - any custom metric set up in combinassion with cloudwatch
+
+   NB:
+     - Only Network Load Balancer provides both static DNS name and static IP. While, Application Load Balancer   
+     provides a static DNS name but it does NOT provide a static IP. The reason being that AWS wants your Elastic 
+     Load Balancer to be accessible using a static endpoint, even if the underlying infrastructure that AWS manages changes.
+
+     - The Auto Scaling Group can't go over the maximum capacity (you configured) during scale-out events.
+     - You can configure the Auto Scaling Group to determine the EC2 instances' health based on Application
+        Load Balancer Health Checks instead of EC2 Status Checks (default). When an EC2 instance fails the 
+        ALB Health Checks, it is marked unhealthy and will be terminated while the ASG launches a new EC2 instance.
+     
+     - There's no CloudWatch Metric for "requests per minute" for backend-to-database connections. 
+         You need to create a CloudWatch Custom Metric, then create a CloudWatch Alarm.
+ Migration to aws and other cloud Providers:
+
+server services:
+  ec2 (VM) are created to run applications or  perform specific tasks and store data with attached volumes 
+      to run app you need to install  java  + tomcat + start tomcat 
+      after installation you need to  copy the applications    
+       Code Quality 
+     sonarqube has as components:    webServer + compute engine + scanner + database (h2) 
+       UploadArtifacts 
+
+Install and configure a mySQL database? 
+
+Services services:
+  Lambda --> serverless environment
+     we can create a Lambda Function to trigger SNS(Simple notification service)
+  FARGET Profiles --> 
+     provide serverless enviroment to deploy and run application within an eks. 
+     It is serverless because you don't have access to the server bacause aws managed everything.
+
+storage services:
+  EBS 
+  EFS 
+  SSS = S3 
+ Container of data = databases 
+  RDS : managed database service
+  and noRDS 
+
+VPC:
+
+ ELB 
+ ASG 
+ 
+ TIER
+
+ USERS -----> (hostName==elb ---> applications ----> databases 
+
+IAM  = Identity and ACCESS Managment :
+
+   who should be granted access to our infrastructure?:
+
+200 Team members 
+  DevOps Engineers:  --->Percy, Hilma, Mercy
+     VpcFullAccess,  EC2FULLACCESS, Route53FULLAccess
+  Developers: -->Bode, Olu, Paul   --> 
+      VpcReadAccess,  EC2READLACCESS,  EC2CREATEACCESS
+  Testers: ---> Peter, Simon, John -->
+  QA: -- Eric, Chima, Chichi  
+
+  Policies  --> are Specific Permissions on AWS resources
+      Route53
+      VpcReadAccess  
+      EC2READLACCESS
+  
+  Roles  --> Policies attach to aws resources 
+            ec2 for it to manage other resources
+  
+  Users -->  members managing or accessing AWS SERVICES 
+  Groups  --> Policies are attached to groups. 
+     Groups only contains users
+        Engineers
+        Developera
+        Testers 
+              Users in such group inherit those policies
+
+   users or groups can be assigned Json document called policies
+    least priviledge need to be assigned to users for security
+    policy consists of :
+      - version
+      - id 
+      - statements 
+           - statement ID
+           - effect
+           - action
+           - resource
+            
+   Inline policy: is a policy attach to a single user
+
+   to protect users and groups we can use 
+    password policy : reusability , uppercase and lowercase, period, minimum length
+    Multifactor authentication : password you know + security device you own
+
+There are 3 options to access aws:
+   - aws management Console
+   - aws cli ---> using command to access and management resources in aws
+   - aws software development kit(sdk) --> access and managed aws service programatically
+
+Access key - Programmatic access
+Enables an access key ID and secret access key 
+     for the .
+Password - AWS Management Console access
+Enables a password that allows users to sign-in to the AWS Management Console.
+
+
+  1. Programmatic access
+      access key ID: AKIAYE6GSHF3QNNLATP3
+      secret access key: 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
+ 
+        AWS API, --> JAVA / Python
+        AWS CLI,:
+            aws s3 ls 
+            aws ec2 describe instances 
+        SDK, :
+            boto and boto3 
+        and other development tools
+         terraform 
+         ANSIBLE 
+
+  2. AWS Management Console access
+       Username-iamUser: iamUserUserName PERCY 
+       Username-rootUser: bode@gmail.com 
+       Password: admin123654
+       Account: 560372791671
+   https://560372791671.signin.aws.amazon.com/console 
+
+  secret access key
+ 
+Roles:
+   allows services  to perfom action 
+
+IAM best practices:
+  - don't use the root account
+  - assign users to a groups and assign permissions to groups
+  - create a strong password policy for security
+  - use and enforce the use of MFA for security
+  - create and use roles for giving permissions to aws services
+  - use access keys for programatic  to access aws
+  - audit permission of all your user using credentials report (
+      cIAM Credentials report lists all your AWS Account's IAM Users and the status of their various credentials.)
+  - use IAM advisor to audit a specific user if he has been used his credential recently 
+   
+   Notes:
+   ======
+- IAM Users access AWS services using their own credentials (username & password or Access Keys).
+- Use the root account only to create your first IAM User and a few account/service management tasks.
+ For everyday tasks, use an IAM User. 
+
+- When you enable MFA, this adds another layer of security. Even if your password is stolen, 
+ lost, or hacked your account is not compromised.
+
+- IAM User Groups can contain only IAM Users.
+
+- A statement in an IAM Policy consists of Sid, Effect, Principal, Action, Resource, and Condition.
+  Version is part of the IAM Policy itself, not the statement.
+
+
+Identity FEDERATION: 
+  Indentiy Providers (LDAP, OpenID Connect, SSO)
+
+Install-AWS:
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+aws ec2 create-vpc --cidr-block 10.88.0.0/16
+
+
+aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.88.0.0/24 --availability-zone us-east-1e
+
+aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.88.1.0/24 --availability-zone us-east-1f
+
+aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.88.2.0/24 --availability-zone us-east-1e
+
+aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.88.3.0/24 --availability-zone us-east-1f
+
+aws ec2 create-internet-gateway
+
+aws ec2 attach-internet-gateway --vpc-id $VPC_ID --internet-gateway-id $IGW
+
+aws ec2 create-route-table --vpc-id $VPC_ID
+
+aws ec2 create-route --route-table-id $RTB --destination-cidr-block 0.0.0.0/0 --gateway-id $IGW
+
+aws ec2 allocate-address --domain vpc
+
+aws ec2 create-nat-gateway --subnet-id $PUBLIC_SUBNET --allocation-id $EIP
+
+aws ec2 create-route-table --vpc-id $VPC_ID
+
+aws ec2 create-route --route-table-id $RTB_PRIVATE --destination-cidr-block 0.0.0.0/0 --gateway-id $NGW
+
+aws ec2 associate-route-table --subnet-id $PUBLIC_SUBNET0 --route-table-id $RTB_PUB
+
+aws ec2 associate-route-table --subnet-id $PUBLIC_SUBNET1 --route-table-id $RTB_PUB
+
+aws ec2 associate-route-table --subnet-id $PRIVATE_SUBNET2 --route-table-id $RTB_PRIV
+
+aws ec2 associate-route-table --subnet-id $PRIVATE_SUBNET3 --route-table-id $RTB_PRIV
+
+
 

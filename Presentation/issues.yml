@@ -1,0 +1,54 @@
+Case1:
+You are running a website on 10 EC2 instances fronted by an Elastic Load Balancer. 
+Your users are complaining about the fact that the website always asks them to re-authenticate 
+when they are moving between website pages. You are puzzled because it's working just fine 
+on your machine and in the Dev environment with 1 EC2 instance. What could be the reason?
+   
+   Answer: ELB Sticky Session feature ensures traffic for the same client is always redirected 
+           to the same target (e.g., EC2 instance). This helps that the client does not lose his session data.
+
+
+Case2: 
+You are using an Application Load Balancer to distribute traffic to your website hosted on EC2 instances. 
+It turns out that your website only sees traffic coming from private IPv4 addresses which are in fact your 
+Application Load Balancer's IP addresses. What should you do to get the IP address of clients connected to 
+your website?
+   
+     Answer: When using an Application Load Balancer to distribute traffic to your EC2 instances, 
+             the IP address you'll receive requests from will be the ALB's private IP addresses.
+              To get the client's IP address, ALB adds an additional header called "X-Forwarded-For" 
+              contains the client's IP address.
+
+
+Case3:
+You hosted an application on a set of EC2 instances fronted by an Elastic Load Balancer. A week later, 
+users begin complaining that sometimes the application just doesn't work. You investigate the issue and 
+found that some EC2 instances crash from time to time. What should you do to protect users from connecting 
+to the EC2 instances that are crashing?
+
+    Answer: When you enable ELB Health Checks, your ELB won't send traffic to unhealthy (crashed) EC2 instances.
+
+Case4:
+you are required to design an architecture for a high-performance, low-latency application that will receive
+ millions of requests per second. Which type of Elastic Load Balancer should you choose?
+
+     Answer: Network Load Balancer provides the highest performance and lowest latency if your application needs 
+     
+
+Case5:
+You have a Network Load Balancer that distributes traffic across a set of EC2 instances in us-east-1.
+ You have 2 EC2 instances in us-east-1b AZ and 5 EC2 instances in us-east-1e AZ. You have noticed that 
+ the CPU utilization is higher in the EC2 instances in us-east-1b AZ. After more investigation,
+  you noticed that the traffic is equally distributed across the two AZs. How would you solve this problem?
+
+    Answer: When Cross-Zone Load Balancing is enabled, ELB distributes traffic evenly across all 
+            registered EC2 instances in all AZs.
+
+Case6:
+You have an Application Load Balancer that is configured to redirect traffic to 3 Target Groups based 
+ on the following hostnames, users.example.com, api.external.example.com, and checkout.example.com. 
+ You would like to configure HTTPS for each of these hostnames. How do you configure the ALB to make this work?
+
+    Answer: Server Name Indication (SNI) allows you to expose multiple HTTPS applications each with its 
+             own SSL certificate on the same listener. Read more here
+              https://aws.amazon.com/blogs/aws/new-application-load-balancer-sni/
