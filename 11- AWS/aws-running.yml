@@ -256,7 +256,7 @@ What are they providing???
   AWS manage : ---> networking, storage, servers, virtualization, O/S, middleware, runtime 
 
      best users are developers
-      exple : EKS , MYSQL, Tomcat, ELB
+      exple : EKS , MYSQL, Tomcat, ELB,openshift, aws Beanstalk
   
   SaaS -- Software as a service ---> everything is managed by the cloud providers:
     CloudWatch 

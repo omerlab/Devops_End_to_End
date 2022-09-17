@@ -1,0 +1,47 @@
+HTML Basics
+So you've created your first, although basic, "HELLO WORLD" website and we've reviewed the structure of an HTML document. 
+I want to take a moment to drill home what we talked about in the last lesson so that you know the most important building blocks of html.
+
+First off HTML vs. CSS... HTML is a markup language and it controls the structure of the site's code. CSS is the style of a site - so it controls how the site looks on the screen.
+
+An HTML element is everything from the start tag to the end tag. Below is an example of an h1 HTML element. HTML elements start with 
+an "opening tag" and end with a "closing tag". Both tags have the same keyword that determines what type of HTML element it is (in this case h1) 
+and the only difference is that the closing tag has a "/". In between the the two tags is the content that will show on the screen - in this case Hello, world!.
+
+
+There are some HTML elements that don't have a closing tag as seen here with the link tag.
+
+
+Also seen above are HTML attributes. HTML elements can have attributes. Attributes are always defined in the opening tag and come in name/value pairs. 
+In the above case the names are href and rel and the values are "css/bootstrap.min.css" and "stylesheet" respectively.
+
+The HTML Document. It may have looked confusing in the last video, but as you can see below, once we remove the parts that I told you to ignore its actually quite simple and easy to understand.
+
+
+The doctype declaration must be the first thing in the HTML document and it is not a tag. It simply tells the browser what version of HTML the page is written in.
+
+
+The HTML tag tells the browser that this is an HTML document.
+
+
+The head section is where all the background info of the document is. This section can include links to other documents (css, javascript, favicons, and others), 
+the title of the web page, SEO information and many other types of behind the scenes info.
+
+
+The title tag tells the browser the title of the document. This title will show in the browsers toolbar
+
+
+and will be the title of the page showing in search-engine results.
+
+The link tag defines the relationship between the html document and the external resource. In this example the href attribute specifies the location of the external 
+document (in this case in relation to the current document) and the rel attribute tells the HTML document its relationship to that external document. In this case,
+ as is most common with link tags, the relationship is that the external document is a stylesheet for our HTML document.
+
+
+The body section of the document is (for the most part) where you put everything you see on the screen. There is a couple circumstances, for instance like the chunk I said 
+to ignore in the last lesson where you can link to javascript in the body so that particular chunk won't show, but for the most part everything in the body shows on the screen.
+
+
+And that's it! We'll be learning about different types of HTML tags, but for now we already know <h1>, <h2>, and <p>.
+
+Lets move on to building our site!

@@ -1,7 +1,8 @@
 AWS WEB SERVICES:
+ i used services that related to 
   1. server resources 
       ec2-instances
-  2. serverles resources 
+  2. serverless resources 
        Lambda 
        fargate profile 
   3. storage recources
@@ -11,7 +12,8 @@ AWS WEB SERVICES:
          The R/W speed is very fast with EBS
          It is use equally to boot-up (start) servers  
 
-       EFS/NFS = ELASTIC FILE SYSTEM 
+       EFS/NFS = ELASTIC FILE SYSTEM: we can create a distributed files system
+         data will b
           dbServer1 
              /app
              touch names.txt 
@@ -19,22 +21,25 @@ AWS WEB SERVICES:
              /app
           dbServer3 
             /app        
-       S3  =  object storage
-              log files / audio files / videos / 
-              archives -- 2010logs.zip 
-              artifacts -- app.war
-              data migration 
-              versioning   
-              costing strategy:
+
+       S3  =  object storage:
+        In S3 we can store without need to mount anything,
+             -- log files / audio files / videos / 
+             -- archives -- 2010logs.zip 
+             -- artifacts -- app.war
+             -- data migration 
+             -- support versioning   
+             --  costing strategy:
+                    s3 storgae classes:
+                    you pay based on request made to S3 
                    standard=Frequent access ---> $50
                    IA - InFrequent access        $25
                    Reduce redundancy             $15
-                   Glacier                       $5               s3 storgae classes:
-
+                   Glacier                       $5              
   Netflix ---> 
   4. security resources:
        IAM ---> 
-       VPC and its components ---> 
+       VPC and its components ---> are equally good for security
          private subnets 
          Route Tables 
        Security Groups 
@@ -63,25 +68,44 @@ IAM --->
 
   manages:
     1. How to access AWS resources 
-         Console access-GUI [username and password]
+      some users are restricted to access aws account via console, some via cli 
+        - Console access-GUI [username and password]
          Sign in as IAM user
             account no: 800894970101 
             username: landmark 
             password: admin@12345...!@@#
             multi-factor authenticator 
-         Pragramatic access[CLI, sdk, terraform]
-            access-Key: @@##$NHGFDASHgggfd
-            secret-access-key:@@##$%%*&<MJKJHHGTDSRTEOPOI{OIKOIUG
+
+        - Programatic access[CLI, sdk, terraform]
+            access-Key:        @@##$NHGFDASHgggfd
+            secret-access-key: @@##$%%*&<MJKJHHGTDSRTEOPOI{OIKOIUG
     2. Who can access AWS resources / services 
 AWS Organisation:
   account no1: 800894970101 
   account no2: 800894970155
   account no3: 560372791671  
 
-Docker 
-======
-Docker is a containerisation software used to package 
-applications and all its dependencies. 
+                              || Docker :||
+                               ==========
+          we used to deploy our application using virtual machine created in aws datacenter.
+          that server run with an OS on top of hardware. To enable virtualization it used on top of OS 
+          a hypervisor called Centrix Zen or virtual box. When a customer want to create a VM, the Hypervisor 
+          helps to create differents VM with differents OS called guest OS(ubuntu,redhat,centos,). When VM 
+          are create we can deploy our application
+      NB : when creating a VM it created on the host system his binary files(/bin/lib/vars/opt)same thing with 
+           guest system which also create is binary file and make the system heavy and non portable. that why 
+           company want to use containarization technologies(docker, CoreOS, containerD)
+   
+   why docker is lightweight and portable? :
+      - we don't need an entire OS to run a container
+      - container run as an isolate process in user space of host system
+      - contanair can run in any platform
+         size        |
+         startup     |>>> container is better in all this point
+         integration |
+
+Docker : is a containerisation software used to package applications and all its dependencies. 
+
 With docker applications runs seamlessly in all Environments. 
   app.war        = application code 
   tomcat/java    = dependencies 
@@ -112,9 +136,8 @@ We maintain a minimun of 3 ENVIRONMENTS =
    --> deploy (VM)
          NOT running well
   
- Tomcat appServer
-    patching 
-    installation
+ if you have a Tomcat appServer, 
+  you have to do patching, and installation
 
     scp app.war tomcat@tomcat/webapps/app.war 
 
@@ -123,10 +146,9 @@ We maintain a minimun of 3 ENVIRONMENTS =
      java
 
  --> image ---> contianer 
-docker image = app + dependencies 
+docker image = is application + dependencies 
                app.war + tomcat 
-               myapp.jar + java
-                 javac myapp.jar
+               myapp.jar + java to start jar package we do "javac myapp.jar"
                app.ear + Jboss
 Docker Editions:
     Docker CE --> Comunity Edition --> Open Source (Free)
@@ -219,7 +241,7 @@ Docker commands need admins right or
 
 docker comes with:
   engine/daemon --- That performs tasks  
-  cli    --- docker 
+  cli    --- docker commands
 Docker commands:
   docker info 
   docker --version 
@@ -235,23 +257,25 @@ https://github.com/LandmakTechnology/java-web-app
 applications code:  web-app.war  
 dependencies: tomcat:8.0.20-jre8
 
-Dockerfile  --- Instructions used to create docker images  
+Dockerfile : --- Instructions used to create docker images  
 
   FROM tomcat:8.0.20-jre8
   COPY target/web-app.war /usr/local/tomcat/webapps/web-app.war
 
   COPY target/web-app.war /opt/tomcat9/webapps/web-app.war
 
-FROM is use for the minimal base image 
+FROM : is use for the minimal base image 
   FROM tomcat:jdk17-temurin-focal
 
 The default name for dockerfile is 'Dockerfile'
 Docker images
-  docker build   = create a docker images 
+  docker build   = create a docker images :
      docker build -t appimage:1 .  
-          build from default name
-     docker build -t appimage:1 -f Dockerfile-jboss . 
-         -f flag when building from custom name
+          build from default name :      
+     docker build -t appimage:1 -f Dockerkfile-jboss . 
+
+    -f flag when building from custom name
+
   docker images  = list docker images 
 Docker Containers --- This is a running instance of docker images 
  docker run  = will create and start a container  
@@ -326,9 +350,7 @@ version of windows:
 pay@mylandmarktech.com 
 
 https://github.com/LandmakTechnology/maven-web-application
-Dockerfile
-FROM tomcat:8.0.20-jre8
-COPY target/*.war /usr/local/tomcat/webapps/maven-web-app.war
+
 
 Dockerfile
 With Dockerfile docker images are created :
@@ -339,7 +361,13 @@ docker images commands
     docker tag  
     docker imags ls  
     docker images   
-Docker images commands:
+Docker images commands: 
+   to create a docker images, we need a Dockerfile.
+     Dockerfile contains a list of instructions
+     Exple:
+          Dockerfile
+          FROM tomcat:8.0.20-jre8   --->     :                           tomcat is the base image which contains tomcat and java as dependencies
+          COPY target/*.war /usr/local/tomcat/webapps/maven-web-app.war:   
   docker build   = create images  
   docker tag  = assigns repository name to images 
   docker images    = list images
@@ -355,7 +383,7 @@ Docker images commands:
 Docker containers related commands:
   docker pull mylandmarktech/maven-web-app:12 
   docker scan mylandmarktech/maven-web-app:12
-  docker run = docker create  + docker start     
+  docker run  : = docker create  + docker start     
   docker run -d -p 3000:8080 mylandmarktech/maven-web-app:12
   docker run --name webapp -d -p 80:80 mylandmarktech/hello  
   docker run [pull, create and start]
@@ -363,11 +391,11 @@ Docker containers related commands:
       docker pull,
       docker create and 
       docker start
-  docker ps -          = list running containers 
-  docker container ls  = list running containers 
-  docker ps -q = list running containers IDs 
-  docker ps -a  = list running & stopped/excited containers
-  docker ps -aq = list running & stopped/excited containers IDs 
+  docker ps -        : = list running containers 
+  docker container ls :  = list running containers 
+  docker ps -q: = list running containers IDs 
+  docker ps -a : = list running & stopped/excited containers
+  docker ps -aq : = list running & stopped/excited containers IDs 
 
 List ONLY stopped Containers
 =================================
@@ -391,31 +419,33 @@ docker ps -q
 docker container ls -q
 
 
-List all container ids
+List all container ids:
 ==============================
 docker ps -aq
 docker container ls -aq
 
-Delete excited/stopped Containers
+Delete excited/stopped Containers:
 ================================
   docker rm containerId/Name
 
-Delete running Containers
+Delete running Containers:
 ================================
   docker rm -f containerId/Name
   docker stop containerId/Name && docker rm containerId/Name
 
-Delete all Containers
+Delete all Containers:
 ================================
   How to delete all containers
   docker rm -f $(docker ps -aq)
+ 
+ docker rm -f $(docker ps -aq --filter status="exited")
 
 
-Start the container
+Start the container:
 ===================
 docker start <containerId/Name>
 
-stop/kill the container
+stop/kill the container:
 ========================
   docker stop <containerId/Name>
       gives warning before stopping the container process 
@@ -433,8 +463,6 @@ docker run -d -p 3000:8080 mylandmarktech/maven-web-app:12
    portable 
 localhost:3000 
 
-How to resolves issues occuring in a docker container??
-
 version of windows:
   windows 10 Home
   windows 10 professional 
@@ -447,12 +475,12 @@ http://3.84.86.211:8000/java-web-app/
 http://3.84.86.211:8080/maven-web-app/
 
 How to resolves issues occuring in a docker container??:
-  docker ps to ensure the container is running  
-  docker ps -a to ensure that the container exist 
-  docker inspect app   
-  docker logs app 
-  docker exec      
-  docker top 
+  docker ps :            to ensure the container is running  
+  docker ps -a :         to ensure that the container exist but in exited state
+  docker inspect app:     give configuration info about the container   
+  docker logs app :
+  docker exec CONTAINER ID :          go inside the container to execute command
+  docker top CONTAINER ID :  show all running process in the container
 
 How to trouble shoot or debug applications running as a container? :
 1. docker inspect myimage/container  
@@ -477,7 +505,7 @@ How to trouble shoot or debug applications running as a container? :
 3. docker top  RAM 256MB ROM 1GB
       insufficient / Limited resources 
 
-4. docker stats 
+4. docker stats : 
        e0845ab3308e   app       97% cpu  98% mem 
 
 5. docker exec <containerId/Name> 
@@ -497,7 +525,7 @@ It will display resource(RAM,CPU) consumption details.
 Execute commands on a running container.
    docker exec <containerId/Name> <cmd>
 
-How to copy files from container to host system or host system to container?
+How to copy files from container to host system or host system to container?:
   docker cp app:/usr/local/tomcat/logs . 
     from container to host system
 
@@ -557,7 +585,7 @@ COPY target/*.war /opt/jboss/wildfly/standalone/deployments/app.war
 
 http://3.92.188.138:5000/app/
 
-Dockerfile Keywords:
+Dockerfile Keywords: 
 ======================
 MAINTAINER 
 FROM 
@@ -847,8 +875,10 @@ Best practices in writing Dockerfiles:
       &&  yum install git wget unzip tree nano zip -y \
       && git clone  github/maven-web-app 
 
-     docker history    
+     docker history
 
+  Docker best practices
+  ======================
 3. Use only official images in docker hub for base image
    docker inc. 
 
@@ -993,3 +1023,478 @@ docker run --name spingapp -d -p 80:8080 --network fintech \
 docker run --name mongodb -d --network fintech \
     -e MONGO_INITDB_ROOT_USERNAME=devdb \
     -e MONGO_INITDB_ROOT_PASSWORD=dev@123  mongo 
+
+
+Bricelab-deployment
+====================
+ =====================================================================================================================================================================================
+     ===application===
+    docker run --name lyb -d -p 80:8080 --network lab -e MONGO_INITDB_ROOT_USERNAME=devdb -e MONGO_INITDB_ROOT_PASSWORD=dev@123  -e MONGO_DB_HOSTNAME=mongodb  bricelab21/alybibaf:1
+
+    ===database====
+    docker run --name mongodb -d --network lab \
+    -e MONGO_INITDB_ROOT_USERNAME=devdb \
+    -e MONGO_INITDB_ROOT_PASSWORD=dev@123  mongo 
+=======================================================================================================================================================================================
+
+    docker run  -d --name mongodb --network fintech -e MONGO_INITDB_ROOT_USERNAME=uatdb -e MONGO_INITDB_ROOT_PASSWORD=uatdb123  mongo
+
+docker run -d -p 8000:8080 --name springapp -e MONGO_DB_HOSTNAME=mongodb -e MONGO_DB_USERNAME=uatdb -e MONGO_DB_PASSWORD=uatdb123 --network fintech mylandmarktech/spring-boot-mongo  
+
+ebay.java --- ebay.war ---- tomcat
+
+ebay.java  = 
+     login  - 40m 
+     registration - 10
+     create a cart - 7m 
+     payment - 4m
+     order - 3.5m
+
+monoloithic architecture 
+microservices  
+     login  - 40m 
+     registration - 10
+     create a cart - 7m 
+     payment - 4m
+     order - 3.5m
+     database    
+
+How is communication established: networking 
+
+1st = 180k + 5%
+2nd = 170k +
+3rd = 180k + 
+
+====
+docker run  -d --name mongodb --network fintech -e MONGO_INITDB_ROOT_USERNAME=uatdb -e MONGO_INITDB_ROOT_PASSWORD=uatdb123  mongo
+
+docker run -d -p 8000:8080 --name springapp -e MONGO_DB_HOSTNAME=mongodb -e MONGO_DB_USERNAME=uatdb -e MONGO_DB_PASSWORD=uatdb123 --network fintech mylandmarktech/spring-boot-mongo  
+
+deploy stateless applications:
+springapp
+=============================
+docker run --name springapp -d -p 80:8080 --network fintech -e MONGO_DB_USERNAME=devdb -e MONGO_DB_PASSWORD=dev@123 -e MONGO_DB_HOSTNAME=mongodb mylandmarktech/spring-boot-mongo
+# docker run --name springapp -d -p 80:8080 --network fintech -e MONGO_DB_USERNAME=devdb -e MONGO_DB_PASSWORD=dev@123 -e MONGO_DB_HOSTNAME=mongodb bricelab21/alybibaf:1
+# docker run -d --name mongodb --network fintech -e MONGO_INITDB_ROOT_USERNAME=devdb -e MONGO_INITDB_ROOT_PASSWORD=dev@123 mongo 
+
+mongo database:
+deploy statefull applications:
+===============================  
+docker run -d --name mongodb --network fintech -e MONGO_INITDB_ROOT_USERNAME=devdb -e MONGO_INITDB_ROOT_PASSWORD=dev@123 mongo 
+# docker run -d --name mongodb --network fintech -e MONGO_INITDB_ROOT_USERNAME=devdb -e MONGO_INITDB_ROOT_PASSWORD=dev@123 mongo
+$ docker run -d --network some-network --name some-mongo \
+    -e MONGO_INITDB_ROOT_USERNAME=mongoadmin \
+    -e MONGO_INITDB_ROOT_PASSWORD=secret \
+    mongo
+
+users---webServer/LB----> appServers/containers----> DATABASES
+
+stateful  = mongodb
+==================
+ SQL  / RDS
+--------
+  oracle 
+  mySQL 
+  PostgreSQL 
+  MariaDB 
+  aurora
+STORES DATA IN ROWS AND COLUMNS (TABLES) 
+   ID      Name      AGE 
+   ID24    SIMON     55
+   ID27    Evet      66 
+
+non-RDS (noSQL)
+---------------
+  mongo 
+  casandra 
+  dynamoDB 
+  REDSHIFT
+stores data in JSON
+   {
+    name: 'simon'
+    id: 'id20145'
+    age: 55
+   }
+
+SELF MANAGED DB:
+  create an EC2 Server 
+    install mySQL / PostgreSQL / oracle         
+            mongo / casandra 
+    create DB username and password 
+           username = admin 
+           password = admin123 
+    login into the db using 
+
+managed rds :
+
+How can docker containers communicate with each other???
+   docker containers communicate Via docker Networking
+  # docker containers communicate can ONLY communicate if they are in the same network
+
+ubuntu@buildServer:~$ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+456c2263e715   bridge    bridge    local
+d95852f9ebfb   ebay      bridge    local
+c3ff56962fc2   fintech   bridge    local
+a505adf682e2   host      host      local
+fd5308ed7730   none      null      local
+
+docker network create -d 
+docker network create -d 
+
+Networks:
+ bridge [ default, custom] 
+ host 
+ null 
+
+java-app:
+========
+custom bridge Networks  
+  docker run -d --network fintech -p 800:8080 mylandmarktech/maven-web-app
+  docker run --name java-app -d --network fintech -p 700:8080 mylandmarktech/java-web-app
+
+# host Networks
+=============
+  docker run --name myapp -d --network host mylandmarktech/maven-web-app
+      http://3.92.188.138:8080
+  docker run --name java-app -d --network host mylandmarktech/java-web-app
+      http://3.92.188.138:8080
+
+# null Networks:
+============
+  Container created in the null network cannot communicate with other containers 
+  Container created in the null network doesn't have IPs  
+
+# Docker volumes:
+==============
+  docker run --name mongodb -v /tmp/mydata:/data/db -d mongo  
+
+  docker run -d --name mongodb --network fintech -e MONGO_INITDB_ROOT_USERNAME=devdb -e MONGO_INITDB_ROOT_PASSWORD=dev@123 -v /tmp/mydata:/data/db mongo   
+
+applications need to talk to the database:
+  1. Networking 
+  2. Environmental varaibles 
+================
+Bind Mounts:
+Bind mounts may stored data anywhere on the host system. 
+They may even be important system files or directories. 
+Non-Docker processes on the Docker host or a Docker container can modify them at any time.
+ hostnames --- 
+
+docker run -d --name mongodb --network fintech -e MONGO_INITDB_ROOT_USERNAME=devdb -e MONGO_INITDB_ROOT_PASSWORD=dev@123 -v /home/ubuntu/data:/data/db mongo  
+
+
+Persistent volume
+================
+  This is a piece of storage managed by the docker service
+ docker volume create volumeName -d driver 
+ docker volume create data28  
+
+MountPoint: /var/lib/docker/volumes/data28/_data
+  DHD = /var/lib/docker/ 
+
+docker run -d --name mongodb --network fintech -e MONGO_INITDB_ROOT_USERNAME=devdb -e MONGO_INITDB_ROOT_PASSWORD=dev@123 -v data28:/data/db mongo  
+
+
+ docker volume create data27 
+ docker volume create data27 -d local 
+ Jenkins-home-directory = /var/lib/jenkins 
+ docker home directory  = /var/lib/docker    
+
+
+ docker run -d --network fintech --name mongodb \ 
+   -v data27:/data/db \ 
+   -v ebs27b:/data/db \
+   -v /app/db:/data/db \
+   -e MONGO_INITDB_ROOT_USERNAME=devdb \
+   -e MONGO_INITDB_ROOT_PASSWORD=dev@123 \
+   mongo 
+
+https://rexray.readthedocs.io/en/v0.8.2/user-guide/docker-plugins/
+Rexray docker-plugins:
+
+docker plugin install rexray/ebs EBS_ACCESSKEY=access_key EBS_SECRETKEY=secret_key
+
+EBS:
+docker plugin install rexray/ebs \
+  EBS_ACCESSKEY=AKIAVA7MDXUT7BSKVJNA \
+  EBS_SECRETKEY=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
+
+
+Access Key ID:
+AKIAVA7MDXUT7BSKVJNA
+Secret Access Key:
+sEGWor7rKwmiXNUs5JkcrnNtW4LgXKVgBAzyFxD5
+
+
+EFS:
+$ docker plugin install rexray/efs \
+  EFS_ACCESSKEY=abc \
+  EFS_SECRETKEY=123 \
+  EFS_SECURITYGROUPS="sg-123 sg-456" \
+  EFS_TAG=rexray
+
+ebs
+===
+docker plugin install rexray/ebs EBS_ACCESSKEY=AKIAVA7MDXUT7BSKVJNA EBS_SECRETKEY=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
+
+docker run -d --name mongodb --network fintech -e MONGO_INITDB_ROOT_USERNAME=devdb -e MONGO_INITDB_ROOT_PASSWORD=dev@123 -v ebs28:/data/db mongo  
+
+
+docker run --name springapp -d -p 80:8080 --network fintech -e MONGO_DB_USERNAME=devdb -e MONGO_DB_PASSWORD=dev@123 -e MONGO_DB_HOSTNAME=mongodb mylandmarktech/spring-boot-mongo
+
+Docker Volumes
+Volumes are stored in a part of the host filesystem which is managed by Docker service (/var/lib/docker/volumes/ on Linux).
+Non-Docker processes should not modify this part of the filesystem. Volumes are the best way to persist data in Docker.
+5) Create a volume a Local Volume(Execute docker volume ls to check existing volumes)
+
+     docker volume create DBbackup
+   # To list volumes
+   docker volume ls
+   
+6) Use above volume while creating container.
+
+     docker run -d --name mongo -v DBbackup:/data/db   -e MONGO_INITDB_ROOT_USERNAME=devdb -e MONGO_INITDB_ROOT_PASSWORD=devdb1234  --network ebay-network mongo
+   
+7) Access Spring application & insert data it will be inserted to mongodb. Delete and recreate mongo container with the same volume mapping and you can retrieve your data.
+   
+ 
+docker-compose  
+docker swarm / Kubernetes 
+// Programming language data types
+*/
+interger
+  age: 55 
+float 
+  price: 60.55
+string
+  name: 'landmark'
+
+dictionary (key and value pairs)
+  age: 60 
+  pob: "buea"
+  country: "Canada"
+list/arrays:
+   students:
+       - name: simon
+         age: 
+         pob:
+       - name: paul 
+       - name: keren
+objects
+maps 
+/*
+
+
+version: '3.1'
+services: 
+  mongo:
+    image: mylandmarktech/spring-boot-mongo
+    restart: always
+    networks:
+    - fintech
+    volumes:
+    - springapp-vol:/data/db
+    environment:
+    - MONGO_DB_USERNAME=devdb
+    - MONGO_DB_PASSWORD=devdb123
+  springapp:
+    image: mylandmarktech/spring-boot-mongo
+    networks:
+    - fintech
+    ports: 
+    - 7000:8080
+    environment:
+    - MONGO_DB_HOSTNAME=mongo
+    - MONGO_DB_USERNAME=devdb
+    - MONGO_DB_PASSWORD=devdb123
+    depends_on:
+    - mongo 
+
+  //payment:
+
+volumes:
+  springapp-vol:
+    driver: rex/ray
+    
+networks:
+  fintech:
+    external: true
+
+===============================
+version: '3.1'
+
+services:
+  springapp:
+    image: mylandmarktech/spring-boot-mongo:latest
+    restart: always # This will be ignored if we deploy in docker swarm
+    environment:
+    - MONGO_DB_HOSTNAME=mongo
+    - MONGO_DB_USERNAME=devdb
+    - MONGO_DB_PASSWORD=devdb123
+    ports:
+      - 9000:8080
+    working_dir: /opt/app
+    depends_on:
+      - mongo
+    networks:
+    - aws-network  
+    deploy:  # This will be considered only in docker swarm.
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 20s
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+
+  mongo:
+    image: mongo
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=devdb
+    - MONGO_INITDB_ROOT_PASSWORD=devdb123
+    volumes:
+      - mongodb:/data/db
+    restart: always
+    networks:
+    - aws-network
+    
+volumes:
+  mongodb:
+    driver: local
+    
+networks:
+  fintech:
+
+
+docker stack deploy --compose-file dc.yml springmongo  
+
+
+January 2022 good report:
+26 NEW Jobs offers and counting to
+20 Landmark DevOps and Cloud Engineers 
+   Making up to $400,000/year.
+
+To God be the glory.
+
+Landmark Technologies
+Tel: 437 215 2483
+
+
+yaml 
+xml 
+
+<servers>
+  <server>
+    <id>nexus</id>
+    <login>admin</login>
+    <password>$pwd</password>
+  </server>
+  <server>
+    <id>jenkins</id>
+    <login>jenkins</jenkins>
+    <password>admin123</password>
+  </server> 
+</servers>
+
+yaml 
+====
+data types 
+  interger 
+     age: 60
+  string 
+     name: "landmark"
+  dictionary (key:value pairs)
+     name: "simon"
+     age: 55 
+     pob: "buea"
+  list/array 
+   students:
+       - name: simon
+         age:
+         salary:
+
+       - name: paul 
+       - name: keren
+
+  maps 
+  objects 
+  class 
+
+ docker run -d -p 27017:27017 -v ebsvolume:/data/db 
+  --name mongo -e MONGO_INITDB_ROOT_USERNAME=devdb 
+  -e MONGO_INITDB_ROOT_PASSWORD=devdb1234  --network ebs-network mongo
+
+docker-compose.yml 
+version: '3.1'
+services:
+  mongodb:
+    image: mongo 
+    restart: always
+    networks:
+    - ecommerce 
+    - fintech
+    volumes:
+    -  mongo-data:/data/db
+    environment:
+    - MONGO_DB_USERNAME=devdb
+    - MONGO_DB_PASSWORD=devdb123
+  springapp:
+    image: mylandmarktech/spring-boot-mongo
+    restart: always
+    networks:
+    - ecommerce 
+    - fintech
+    ports:
+    - 6000:8080
+    environment:
+    - MONGO_DB_HOSTNAME=mongodb
+    - MONGO_DB_USERNAME=devdb
+    - MONGO_DB_PASSWORD=devdb123
+    depends_on:
+    - mongodb
+volumes:
+  mongo-data:
+    driver: local
+  ebs-data:
+    driver: rexray
+networks:
+  ecommerce:
+    driver: bridge
+  fintech:
+    external: true
+
+docker-compose-myapp.yml 
+version: '3.1'
+services:
+  login: 
+    image: 
+    networks:
+  registration: 
+    image:
+    networks:
+  payment: 
+    image:
+    networks:
+  order: 
+    image:
+    networks:
+  mongodb:
+    image:
+    networks:
+
+dns resolution is done using service names and IP 
+=============
+
+=============
+Commands
+# Syntax Check
+docker-compose config 
+# Create Services/Contianers
+docker-compose up -d  
+  
+# Remove Services/Contianers 
+docker-compose down  
+
+jenkins docker - docker swarm intergration:

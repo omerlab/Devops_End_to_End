@@ -1,0 +1,40 @@
+Blue/Green deployment: is run the new version of a microservices without bringing down the old version.
+when the new version is fully available, it will reroute traffic to the new version by reconfiguring the 
+LoadBalancer service.
+
+When should I use what?:
+Once we understand the differences between the three types of services and the Ingress, we need to understand when should I use what? 
+The following sections summarize this for you.
+
+Cluster IP:
+Here my thoughts about this service type:
+
+Debugging your services, or connecting to them directly from your laptop for some reason using Kubernetes proxy.
+Allowing internal traffic so that other applications in the same cluster can contact the service.
+Designed to be NOT accessible from the external of the cluster.
+
+NodePort:
+Here my thoughts about this service type:
+
+Very convenient to create a service easily contactable from the external on your laptop during the tests.
+You can only have one service per port.
+You can only use ports 30000–32767.
+If your Node/VM IP address change, you need to deal with that.
+For reasons 3 and 4, don’t use this method in production. If you are running a service for demo purpose or temporary that 
+doesn’t have to be always available, this method will work for you.
+
+Load Balancer:
+Here my thoughts about this service type:
+
+If you have the possibility to use this type of service, go fo it.
+All traffic on the port you specify will be forwarded to the service. There is no filtering, no routing, etc.
+The big downside of it is that it is usually only available on a Cloud environment where you have to pay to allocate a Load Balancer for your service.
+You have an IP for each service.
+It’s expensive.
+Ingress
+Here my thoughts about the Ingress:
+
+Ingress is the most useful if you want to expose multiple services under the same IP address using path-based or subdomains routing.
+On the local Kubernetes cluster, it is useful to bypass some NodePort limitation like the port number (you can use 80 port), use a hostname to bypass the VM IP change.
+On a production system, where Load Balancer is not available, you can bypass the problem exposing one or more services via NodePort and 
+then use an Ingress in front of them to manage the traffic.

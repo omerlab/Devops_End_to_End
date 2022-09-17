@@ -1,0 +1,349 @@
+Containerization --> 
+    Docker - 80%, 
+       Build applications by creating images  via Dockerfile
+       With docker we publish/upload applications images to DockerHub, etc.
+       Deploy applications by running containers 
+          we deploy in a single node   
+    Container-D
+    Rocket(Rkt)
+
+Container Orchestration Tools :
+   Docker Swarm,
+      OVERLAY  Network  plugin permit multi-hosts    
+   Kubernetes,
+      CNI: weave, flannel, calico, etc. multi-hosts 
+
+   OpenShift
+Docker CE  
+    docker build -t mylandmarktech/hello  -f Dockerfile  .  
+    docker push mylandmarktech/hello
+    DOCKERHUB IMAGES:  mylandmarktech/hello   
+    docker run -d -p 80:80  --name myapp mylandmarktech/hello   
+Docker EE 
+kubernetes:
+  is an open-source orchestration platform/engine 
+  deployment of Containerized applications, 
+  scaling & 
+  descaling of containers  &
+  container load balancing.
+   CNCF(Cloud native computing  foundation) in 2014. 
+
+   kubectl create deployment --replicas 100  myapp mylandmarktech/hello    
+
+1 Node      Multi Nodes
+  app.java  == paypal 
+  roll-out: 
+      version 10 of the application is running 
+      version 11 of the application is running
+      version 12 of the application is running
+  roll-back: 
+      version 12 of the application is running
+      version 11 of the application is running
+Horizontal Scaling: HPA 
+  10 replicas of the application is running = 5m requests 
+  20 replicas of the application is running = 10m requests 
+
+Load Balancing: 
+  DOCKER:
+    name=myapp, ip-address=172.13.0.9 
+    how many replicas = 1 can receive 10,000 requests 
+    how many replicas = 1 can receive 40,000 requests
+      docker cli:
+        docker run/create/build 
+        docker run image2   
+  
+    service---->20Pods
+---
+
+Kubernetes Architecture: 
+  The kubernetes cluster (k8s) comprises of
+  master node(s) = control plane:
+    api-Server is the frontend of the control plane 
+               is the administrator 
+  worker nodes:
+    node1 [Container runtime] 
+    node12 
+nodes are servers(ec2-instances)
+
+How to deploy work load in Kubernetes?
+  kubectl create deployment --replicas 100  myapp mylandmarktech/hello 
+
+How to make api call in our Kubernetes cluster (k8s) 
+     cli = kubectl  
+        kubectl create deploy    
+     ui  = kubernetes dashboard
+
+Installation
+============
+Installing and configuring kubernetes cluster :
+ Control Plane (Master Node)
+ Worker nodes
+
+Self Managed K8s Cluster:
+ minikube --> Single Node K8's Cluster.
+ Docker Desktop --> Single Node K8's Cluster.
+ kubeadm --> We can setup multi node k8s cluster using kubeadm.
+
+Assignment install docker Desktop on your laptop.
+
+Cloud Managed (Managed Services):
+The Control Plane (Master Node) is managed by a third party [aws, GCP, AZURE]
+EKS --> Elastic Kubernetes Service(AWS)
+AKS --> Azure Kubernetes Service(Azure)
+GKE --> Google Kubernetes Engine(GCP)
+        apiServer
+        controllers 
+        scheduler 
+        etcd 
+
+KOPS --> Is a Kubernetes Operations software use to create production ready
+highly available kubenetes services in Cloud like AWS.
+
+kubectl create  
+docker run  
+
+Installing & configuring  Self Managed kubenetes Cluster using a kubeadm:
+  1. Install control plane packages 
+      kubelet kubeadm  containerd kubectl
+  2. run kubeadm init to initialise the cluster control plane 
+  3. Create the .kube/config file as a normal user  and 
+  4. Create the token that worker nodes will user to join the control plane
+      # Get token
+       kubeadm token create --print-join-command
+  6. Install worker nodes packages  
+  8. Copy kubeadm join token from the master and 
+     execute in Worker Nodes to join to cluster
+
+Deploy/run/create workloads in Kubernetes:
+ 1. Ensure authentication and authorisation is configured via 
+     .kube/config  file 
+ 2. make authorise api calls to the api-Server e.g 
+
+   kubectl create   
+
+Pod: containers run/housed in pods 
+     cluster --- nodes --- Pods --- containers
+
+What is the difference between Ports and Pods 
+
+Deploy Sample Application:
+==========================
+kubectl run nginx-demo --image=nginx --port=80 
+
+kubectl expose pod nginx-demo --port=80 --type=NodePort
+
+kubectl run webapp --image=mylandmarktech/hello --port=80 
+kubectl expose pod webapp --port=80 --type=NodePort
+
+kubectl: making api-calls in the k8s 
+  create 
+  run 
+  apply 
+  get 
+  describe 
+  delete
+  expose 
+  scale 
+  edit 
+  start 
+  logs
+  exec 
+  top  
+
+docker build/pusl/pull/run/create/ps/exec/inspect/rmi/rm/scan/logs/prune
+
+docker: 
+ imperative   = docker run   
+ declarative  = docker-compose.yml 
+                docker-compose up -d
+
+
+2 ways to create/deploy workloads in k8s:
+
+1)imperative approach: using commands ONLY
+   kubectl run apps --image=mylandmarktech/hello --port=80 
+   kubectl expose pod webapp --port=80 --type=NodePort
+       master-node   = 18.212.233.133:31830
+       worker-node1  = 3.235.98.76:31830
+       worker-node12 = 44.200.243.163:31830
+ 
+ 2) declarative approach: 
+       USING FILES (kube-manifest files) and 
+       commands  
+
+kubectl objects:
+  Pods [where Container are housed]
+    Nodes [where pods are housed] 
+      Cluster [a collection of master and worker nodes] 
+  Controller:
+    Replication Controller
+    ReplicaSet
+    DaemonSet
+    Deployment
+    StatefulSet
+
+  Service
+  ClusterIP
+  NodePort
+  Volume
+  Job
+
+Namespace: --> is a virtual cluster within your cluster 
+             IT IS Use to isolate environments/projects/teams
+             This is use for securing the k8s
+
+NameSpaces: Virtual kubenetes clusters within the cluster
+  1. isolation
+  2. security 
+  3. resources allocation 
+
+  Consulting --> Landmak Technology
+      payPal
+      ebay 
+      Facebook 
+kubectl create namespace <nameSpaceName>
+kubectl create ns <nameSpaceName>
+
+  kubectl create ns ebay  
+  kubectl create ns facebook
+  kubectl create ns dev  
+  kubectl create ns uat 
+  kubectl create ns testing  
+  kubectl create ns prod  
+
+Cluster resources:
+  10 nodes of 32GB RAM each = 320gb RAM 
+  10 nodes of 400GB of SSD  = 4000GB disk space  
+Environments: paypal       
+  dev [mem:32GB, cpu:400gb]
+  uat [mem:64GB, cpu:800gb]
+  prod [mem:192GB, cpu:2400gb]
+
+ClusterRole & ClusterRoleBinding grants namespace access: RBAC
+Engineers can access and manage workloads in all namespaces
+
+role & roleBinding grants namespace access: RBAC 
+  Developers can ONLY access and manage workloads in the dev namespace
+  QA can ONLY access and manage workloads in the UAT namespace
+
+ubuntu@master:~$ kubectl get ns
+NAME              STATUS   AGE
+default           Active   70m
+kube-node-lease   Active   70m
+kube-public       Active   70m
+kube-system       Active   70m
+
+Pods:
+ SingleContainerPods:
+    99% of the time we will go with SingleContainerPods
+   
+MultiContainerPods: 
+  appsContainer    SpringApp
+  logContainer     Splunk /ELK / EFK  / 
+  containers in the pods share the same network, filesystem 
+
+Declarative approach:
+  This make use of very simple yaml/yml files  
+  This files are kubernetes manifests  
+kams or akms: 
+---
+key value pair = 
+   name: simon  
+   age: 25
+= dictionary 
+
+1. MultiContainerPods:
+apiVersion: v1   
+kind: Pod 
+metdata:   
+  name: myapp    
+  namespace: dev  
+  labels:
+    app: myapp 
+    tier: backend   
+    env: dev  
+spec:
+  containers:
+  - name: webapp 
+    image: mylandmarktech/spring-boot-mongo  
+    ports:
+    - containerPort: 8080    
+  - name: log
+    image: splunk
+    ports:
+    - containerPort: 9007  
+
+2. Single Container pod::
+apiVersion: v1   
+kind: Pod 
+metdata:   
+  name: myapp    
+  namespace: dev  
+  labels:
+    app: myapp 
+spec:
+  containers:
+  - name: webapp 
+    image: mylandmarktech/spring-boot-mongo  
+    ports:
+    - containerPort: 8080    
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+    name: myapp
+spec:
+  containers:
+  - name: myapp
+    image: mylandmarktech/spring-boot-mongo 
+    ports:
+      - containerPort: 8080
+
+Priority:     0
+
+Pod Afinity===== Priority:     0 
+  app1  --- High 
+  app2  --- Medium
+  app3  --- Low 
+
+  prod application  -- app1  --- High Priority 
+  dev application   -- app3  --- Low  Priority
+  uat application   -- app2  --- Medium Priority
+
+
+
+kubectl get pod 
+kubectl get pod -o yaml
+kubectl get pod -o wide 
+kubectl describe pod app 
+kubectl get pod -n dev
+kubectl get pod -n default    
+
+kubectl apply -f pod.yml --dry-run=client
+kubectl apply -f pod.yml --dry-run=true
+kubectl apply -f pod.yml 
+========================
+
+==========
+kubectl apply -f <fileName.yml>
+kubectl get all 
+kubectl get pods 
+kubectl get pods --show-labels
+kubectl get pods -o wide
+kubectl get pods -o wide --show-labels
+Note: If we don't mention -n <namespace>
+      it will refer to the default namespace.
+
+in the .kube/config the context is set the default namespace   
+simon: run workloads in the test names 
+  kubectl get pod -n test 
+If required we can change name space context.
+kubectl config set-context --current --namespace=<namespace>
+
+Container runtime = containerd 
+
+kubectl api-resources  
+kubectl api-resources | grep -i pod 

@@ -1,3 +1,0 @@
-Blue/Green deployment: is run the new version of a microservices without bringing down the old version.
-when the new version is fully available, it will reroute traffic to the new version by reconfiguring the 
-LoadBalancer service.

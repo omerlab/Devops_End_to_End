@@ -96,6 +96,26 @@ Manage and participate in an on-call rotation with other engineer
 
 
 
+
+
+I will say I spent  40% of time into coding 60% into applications operations.
+
+2. I have enough experience using Jenkins shared library written in groovy. I have written and modified jenkins pipeline using libraries in the past
+
+3. I have experienced working in all 3 cloud environments but have more experience with Awa and azure. I have used GCP but not a lot.
+
+4. I have work for large corporations with large code base and I was able to get to speed and used this code a to do work. I used their Jenkins library which was huge to write more pipelines to fit the need at that time. I created a branch from the library and modified it. I also used this terraform code which was large and configured in modules to create resources after few modifications. I was able to build this application that was large with maven and deployed them into k8s cluster
+
+4. I have created and configured kubernetes clusters. Managed and debugged issues on applications running in the clusters. I have administered k8s cluster hosting 1000s of applications. With this I can say I have considerable knowledge of cluster administration. I also have much knowledge on docker SAML,SSO,Oauth for authorization for authentications related configuration.
+
+5 . I have experience monitoring running applications using Prometheus and grafana ,signalfx  istio and kiali. 
+
+6. I have knowledge of istio and service mesh which uses  envoy proxy. Also worked on Fault ingestion, circuit breaker config, virtual service and gateway configuration, destination rules config,time-out config and monitoring etc
+
+7. I have strong Linux knowledge and can build using maven and gradle.
+
+
+
 Je m'appelle Brice, je suis ingénieur DevOps senior travaillant avec les technologies Landmark depuis plus
 de 6 ans, Landmak Technology est une société de conseil informatique où nous développons, maintenons, déployons et surveillons des applications pour la fintech
 e-commerce et certains clients de la santé. En tant qu'ingénieur Devops, j'ai dû jouer plusieurs rôles et cette gamme de rôles pour l'intégration d'un nouveau projet
@@ -112,3 +132,5 @@ pour effectuer le travail, le gestionnaire de contrôleur sera également alert�
 notre registre docker. une fois cela fait, le runtime du conteneur exécutera le conteneur et l'application sera mise en ligne. Et en même temps, nous avons déployé un outil de surveillance
 prometheus et grafana, où prometheus va récupérer les données à l'aide de la configuration de l'exportateur de nœuds dans chaque nœud et grafana utilisera ces données et nous pourrons avoir
 un joli tableau de bord sur lequel nous pouvons surveiller la santé de notre cluster.
+
+
