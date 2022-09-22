@@ -1,0 +1,129 @@
+kubernetes-master:
+====================
+1- Install Docker
+
+   sudo apt update
+   sudo apt install docker.io
+
+2- Start the service
+  
+   sudo systemctl start docker
+   sudo systemctl enable docker
+
+3- Install Kubernetes
+
+  $ sudo apt install apt-transport-https curl
+
+
+ 4- Kubernetes signing key
+
+   curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+
+ 5- Add the Kubernetes package repository
+
+   sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+
+   sudo apt install kubeadm kubelet kubectl kubernetes-cni
+
+ 6- Disable swap memory
+
+    sudo swapoff -a
+
+   
+
+    sudo vi /etc/fstab  
+  comment out the /swapfile to make it persist until the system reboot
+
+ 7- Initialize the master
+
+   $ sudo kubeadm init
+  
+
+The output from above also advises us to run several commands as a regular user to start using the Kubernetes cluster. Run those three commands on the master node
+
+ 8- Deploy a pod network
+
+     kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+     kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+
+
+  9- Check if the node is ready 
+
+   $ kubectl get pods --all-namespaces
+
+
+   
+
+kubernetes-worker:
+====================
+
+$ sudo apt update
+$ sudo apt install docker.io
+
+$ sudo systemctl start docker
+$ sudo systemctl enable docker
+
+1- Install Kubernetes
+
+  $ sudo apt install apt-transport-https curl
+
+2- Kubernetes signing key
+
+  $ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+
+3- Add the Kubernetes package repository
+
+  $ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+
+  $ sudo apt install kubeadm kubelet kubectl kubernetes-cni
+
+4- Disable swap memory
+
+  $ sudo swapoff -a
+
+  $ sudo vi /etc/fstab  
+  comment out the /swapfile to make it persist until the system reboot
+
+
+5- Set the hostname
+  
+  $ sudo hostnamectl set-hostname worker1
+
+
+6- Deploy a pod network
+
+   $ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+   $ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+
+7- Join the Kubernetes cluster
+
+  $ sudo kubeadm join -------
+
+
+
+======================================================================
+User-Data-installation
+===================
+sudo hostnamectl set-hostname worker1
+sudo apt update
+sudo apt install docker.io
+
+sudo systemctl start docker
+sudo systemctl enable docker
+
+sudo apt install apt-transport-https curl
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+
+sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+
+sudo apt install kubeadm kubelet kubectl kubernetes-cni
+
+sudo swapoff -a
+
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+
+===============================================================================================================================
