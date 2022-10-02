@@ -38,3 +38,12 @@ Ingress is the most useful if you want to expose multiple services under the sam
 On the local Kubernetes cluster, it is useful to bypass some NodePort limitation like the port number (you can use 80 port), use a hostname to bypass the VM IP change.
 On a production system, where Load Balancer is not available, you can bypass the problem exposing one or more services via NodePort and 
 then use an Ingress in front of them to manage the traffic.
+
+StatefulSet : 
+represents a set of pods with consistent identities. Identities
+     are defined as:
+     - Network: A single stable DNS and hostname.
+     - Storage: As many VolumeClaims as requested.
+
+     The StatefulSet guarantees that a given network identity will always map to
+     the same storage identity.

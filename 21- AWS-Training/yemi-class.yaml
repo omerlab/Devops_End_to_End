@@ -1,0 +1,4 @@
+In security there are theme that need to be ahead in mind when configure your system
+  - confidentiality : Only people with requiered access need to have access to  information
+  - intergrity :  information need to be the same everywhere 
+  - availability : information need to be accessible when needed

@@ -877,7 +877,7 @@ Best practices in writing Dockerfiles:
 
      docker history
 
-  Docker best practices
+ # Docker best practices :
   ======================
 3. Use only official images in docker hub for base image
    docker inc. 

@@ -1,0 +1,344 @@
+what paltfrom team do?:
+
+  - provisioning and managing platforms:
+  =====================================
+     * planning and provisioning of new platform technologies and the provisioning of new instances of platform
+        already in use. Provosionning a platform consist of deploying infrastructure resource like virtual machine,
+        network components follow up by the installation of any required software to run to run the plarform service.
+
+     * for managed service the provisioning process may require less steps since the service provider would usaully managed
+        the underlying infrastructure and software.
+        exple : spining up equipment needs cluster in a new region when the business is expanding operation in different 
+                countries
+Once the platform is provisionning tha PE will carry his resposability of managing the platform and looking after the three
+  areas availability, security and cost. 
+      => for security : we use RBAC to control unauthorized operations, Firewall and NACL
+      => for avalaibility : we have performance monitoring, cpacaity planning to ensure that adequate resource are avalaible
+                  to the application, redundancy snd disaster recovery help with resiliency and enable platform team to recover 
+                  data and runtime in the event of an incident.
+      => for cost management: we implemented cost monitoring and cost saving measures as adjusting the size an infrastructure 
+      
+  - provision cicd tooling and automation:
+  ========================================
+     Provisioning infrastructure that supports Developers throughout the entire lifecycle of the product. It is one of the 
+      the most critical things for improving productivity and efficiency because automation promotes self-service, and autono-
+      my by reducing reliance on other teams.
+      Platform automation facilitates the building and publishing of artifacts such as librairies and dockers containers.
+       Ideally developpers shouldn't be concerned by the set up which will help to publish those artifacts, all that 
+       should be handled by the tools and automation that abstracts these details.
+      Code quality checks and test are also cover in some aspects by PE even if it is the role od QA team.  
+
+     
+  - Governance:
+  =============
+
+  PE plays a key role in setting and enforcing policies related to the used flip platform and the SE lifecycle as a whole.
+  PE helps in setting policies related to security availability and costs.
+  PE helps in managing compliance and developing compliance reports to help identify violations and when requiered he can 
+  introduce automation to enforce compliance.
+    exple: blocking the provisioning or deployment of resources that are not compliant 
+
+  
+
+
+A platform is a system that includes software and hardware to provide a specific service for business applications
+  such runtimwe, messaging, monitoring, and  logging service. It is any system that support a lifecycle of an appli-
+  cation from testing, deployment and operations.
+
+It can be categorized based on 
+
+- the type of service :
+
+for example                                                                                      platform technologies:
+   => runtime platform : offer environment for running business application                      k8s, aws ecs, aws fargate
+   => messaging platform: provide means for app to communicate with each other via messages      kafka, rabbitmq, amazon sqs
+   => monitoring platform: offer means for collecting and visualizing applications metrics       prometheus and grafana
+   => Data platform :  offer maens to managed data                                               hadoop, apachespark, flink
+
+- the provisioning method :
+
+for example we deploy platform in the
+
+  => Cloud 
+  => on-premise
+
+- the ownership :
+
+for example platform can be 
+
+  =>  self-managed
+  =>  platform as a service
+
+   K8s commands
+   ============
+ kubectl get pod -n kube-system
+ kubectl get pod -n kube-system -o wide
+ kubectl api-resources
+ kubectl config set-context --current --namespace=dev
+
+
+kubectl api-resources:
+
+NAME                              SHORTNAMES   APIVERSION                             NAMESPACED   KIND
+bindings                                       v1                                     true         Binding
+componentstatuses                 cs           v1                                     false        ComponentStatus
+configmaps                        cm           v1                                     true         ConfigMap
+endpoints                         ep           v1                                     true         Endpoints
+events                            ev           v1                                     true         Event
+limitranges                       limits       v1                                     true         LimitRange
+namespaces                        ns           v1                                     false        Namespace
+nodes                             no           v1                                     false        Node
+persistentvolumeclaims            pvc          v1                                     true         PersistentVolumeClaim
+persistentvolumes                 pv           v1                                     false        PersistentVolume
+pods                              po           v1                                     true         Pod
+podtemplates                                   v1                                     true         PodTemplate
+replicationcontrollers            rc           v1                                     true         ReplicationController
+resourcequotas                    quota        v1                                     true         ResourceQuota
+secrets                                        v1                                     true         Secret
+serviceaccounts                   sa           v1                                     true         ServiceAccount
+services                          svc          v1                                     true         Service
+mutatingwebhookconfigurations                  admissionregistration.k8s.io/v1        false        MutatingWebhookConfiguration  
+validatingwebhookconfigurations                admissionregistration.k8s.io/v1        false        ValidatingWebhookConfiguration
+customresourcedefinitions         crd,crds     apiextensions.k8s.io/v1                false        CustomResourceDefinition      
+apiservices                                    apiregistration.k8s.io/v1              false        APIService
+controllerrevisions                            apps/v1                                true         ControllerRevision
+daemonsets                        ds           apps/v1                                true         DaemonSet
+deployments                       deploy       apps/v1                                true         Deployment
+replicasets                       rs           apps/v1                                true         ReplicaSet
+statefulsets                      sts          apps/v1                                true         StatefulSet
+tokenreviews                                   authentication.k8s.io/v1               false        TokenReview
+localsubjectaccessreviews                      authorization.k8s.io/v1                true         LocalSubjectAccessReview      
+selfsubjectaccessreviews                       authorization.k8s.io/v1                false        SelfSubjectAccessReview       
+selfsubjectrulesreviews                        authorization.k8s.io/v1                false        SelfSubjectRulesReview        
+subjectaccessreviews                           authorization.k8s.io/v1                false        SubjectAccessReview
+horizontalpodautoscalers          hpa          autoscaling/v2                         true         HorizontalPodAutoscaler       
+cronjobs                          cj           batch/v1                               true         CronJob
+jobs                                           batch/v1                               true         Job
+certificatesigningrequests        csr          certificates.k8s.io/v1                 false        CertificateSigningRequest     
+leases                                         coordination.k8s.io/v1                 true         Lease
+endpointslices                                 discovery.k8s.io/v1                    true         EndpointSlice
+events                            ev           events.k8s.io/v1                       true         Event
+flowschemas                                    flowcontrol.apiserver.k8s.io/v1beta2   false        FlowSchema
+prioritylevelconfigurations                    flowcontrol.apiserver.k8s.io/v1beta2   false        PriorityLevelConfiguration    
+ingressclasses                                 networking.k8s.io/v1                   false        IngressClass
+ingresses                         ing          networking.k8s.io/v1                   true         Ingress
+networkpolicies                   netpol       networking.k8s.io/v1                   true         NetworkPolicy
+runtimeclasses                                 node.k8s.io/v1                         false        RuntimeClass
+poddisruptionbudgets              pdb          policy/v1                              true         PodDisruptionBudget
+clusterrolebindings                            rbac.authorization.k8s.io/v1           false        ClusterRoleBinding
+clusterroles                                   rbac.authorization.k8s.io/v1           false        ClusterRole
+rolebindings                                   rbac.authorization.k8s.io/v1           true         RoleBinding
+roles                                          rbac.authorization.k8s.io/v1           true         Role
+priorityclasses                   pc           scheduling.k8s.io/v1                   false        PriorityClass
+csidrivers                                     storage.k8s.io/v1                      false        CSIDriver
+csinodes                                       storage.k8s.io/v1                      false        CSINode
+csistoragecapacities                           storage.k8s.io/v1                      true         CSIStorageCapacity
+storageclasses                    sc           storage.k8s.io/v1                      false        StorageClass
+volumeattachments                              storage.k8s.io/v1                      false        VolumeAttachment
+
+
+
+
+Prints a table of the most important information about the specified resources. You can filter the list using a label
+selector and the --selector flag. If the desired resource type is namespaced you will only see results in your current
+namespace unless you pass --all-namespaces.
+
+ By specifying the output as 'template' and providing a Go template as the value of the --template flag, you can filter
+the attributes of the fetched resources.
+
+Use "kubectl api-resources" for a complete list of supported resources.
+
+Examples:
+  # List all pods in ps output format
+  kubectl get pods
+
+  # List all pods in ps output format with more information (such as node name)
+  kubectl get pods -o wide
+
+  # List a single replication controller with specified NAME in ps output format
+  kubectl get replicationcontroller web
+
+  # List deployments in JSON output format, in the "v1" version of the "apps" API group
+  kubectl get deployments.v1.apps -o json
+
+  # List a single pod in JSON output format
+  kubectl get -o json pod web-pod-13je7
+
+  # List a pod identified by type and name specified in "pod.yaml" in JSON output format
+  kubectl get -f pod.yaml -o json
+
+  # List resources from a directory with kustomization.yaml - e.g. dir/kustomization.yaml
+  kubectl get -k dir/
+
+  # Return only the phase value of the specified pod
+  kubectl get -o template pod/web-pod-13je7 --template={{.status.phase}}
+
+  # List resource information in custom columns
+  kubectl get pod test-pod -o custom-columns=CONTAINER:.spec.containers[0].name,IMAGE:.spec.containers[0].image
+
+  # List all replication controllers and services together in ps output format
+  kubectl get rc,services
+
+  # List one or more resources by their type and names
+  kubectl get rc/web service/frontend pods/web-pod-13je7
+
+  # List status subresource for a single pod.
+  kubectl get pod web-pod-13je7 --subresource status
+
+Options:
+    -A, --all-namespaces=false:
+        If present, list the requested object(s) across all namespaces. Namespace in current context is ignored even
+        if specified with --namespace.
+
+    --allow-missing-template-keys=true:
+        If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to
+        golang and jsonpath output formats.
+
+    --chunk-size=500:
+        Return large lists in chunks rather than all at once. Pass 0 to disable. This flag is beta and may change in
+        the future.
+
+    --field-selector='':
+        Selector (field query) to filter on, supports '=', '==', and '!='.(e.g. --field-selector
+        key1=value1,key2=value2). The server only supports a limited number of field queries per type.
+
+    -f, --filename=[]:
+        Filename, directory, or URL to files identifying the resource to get from a server.
+
+    --ignore-not-found=false:
+        If the requested object does not exist the command will return exit code 0.
+
+    -k, --kustomize='':
+        Process the kustomization directory. This flag can't be used together with -f or -R.
+
+    -L, --label-columns=[]:
+        Accepts a comma separated list of labels that are going to be presented as columns. Names are case-sensitive.
+        You can also use multiple flag options like -L label1 -L label2...
+
+    --no-headers=false:
+        When using the default or custom-column output format, don't print headers (default print headers).
+
+    -o, --output='':
+        Output format. One of: (json, yaml, name, go-template, go-template-file, template, templatefile, jsonpath,
+        jsonpath-as-json, jsonpath-file, custom-columns, custom-columns-file, wide). See custom columns
+        [https://kubernetes.io/docs/reference/kubectl/#custom-columns], golang template
+        [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template
+        [https://kubernetes.io/docs/reference/kubectl/jsonpath/].
+
+    --output-watch-events=false:
+        Output watch event objects when --watch or --watch-only is used. Existing objects are output as initial ADDED
+        events.
+
+    --raw='':
+        Raw URI to request from the server.  Uses the transport specified by the kubeconfig file.
+
+    -R, --recursive=false:
+        Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests
+        organized within the same directory.
+
+    -l, --selector='':
+        Selector (label query) to filter on, supports '=', '==', and '!='.(e.g. -l key1=value1,key2=value2). Matching
+        objects must satisfy all of the specified label constraints.
+
+    --server-print=true:
+        If true, have the server return the appropriate table output. Supports extension APIs and CRDs.
+
+    --show-kind=false:
+        If present, list the resource type for the requested object(s).
+
+    --show-labels=false:
+        When printing, show all labels as the last column (default hide labels column)
+
+    --show-managed-fields=false:
+        If true, keep the managedFields when printing objects in JSON or YAML format.
+
+    --sort-by='':
+        If non-empty, sort list types using this field specification.  The field specification is expressed as a
+        JSONPath expression (e.g. '{.metadata.name}'). The field in the API resource specified by this JSONPath
+        expression must be an integer or a string.
+
+    --subresource='':
+        If specified, gets the subresource of the requested object. Must be one of [status scale]. This flag is alpha
+        and may change in the future.
+
+    --template='':
+        Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format
+        is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+
+    -w, --watch=false:
+        After listing/getting the requested object, watch for changes.
+
+    --watch-only=false:
+        Watch for changes to the requested object(s), without listing/getting first.
+
+
+
+
+kubectl controls the Kubernetes cluster manager.:
+================================================
+
+ Find more information at: https://kubernetes.io/docs/reference/kubectl/
+
+Basic Commands (Beginner):
+  create          Create a resource from a file or from stdin
+  expose          Take a replication controller, service, deployment or pod and expose it as a new Kubernetes service
+  run             Run a particular image on the cluster
+  set             Set specific features on objects
+
+Basic Commands (Intermediate):
+  explain         Get documentation for a resource
+  get             Display one or many resources
+  edit            Edit a resource on the server
+  delete          Delete resources by file names, stdin, resources and names, or by resources and label selector
+
+Deploy Commands:
+  rollout         Manage the rollout of a resource
+  scale           Set a new size for a deployment, replica set, or replication controller
+  autoscale       Auto-scale a deployment, replica set, stateful set, or replication controller
+
+Cluster Management Commands:
+  certificate     Modify certificate resources.
+  cluster-info    Display cluster information
+  top             Display resource (CPU/memory) usage
+  cordon          Mark node as unschedulable
+  uncordon        Mark node as schedulable
+  drain           Drain node in preparation for maintenance
+  taint           Update the taints on one or more nodes
+
+Troubleshooting and Debugging Commands:
+  describe        Show details of a specific resource or group of resources
+  logs            Print the logs for a container in a pod
+  attach          Attach to a running container
+  exec            Execute a command in a container
+  port-forward    Forward one or more local ports to a pod
+  proxy           Run a proxy to the Kubernetes API server
+  cp              Copy files and directories to and from containers
+  auth            Inspect authorization
+  debug           Create debugging sessions for troubleshooting workloads and nodes
+
+Advanced Commands:
+  diff            Diff the live version against a would-be applied version
+  apply           Apply a configuration to a resource by file name or stdin
+  patch           Update fields of a resource
+  replace         Replace a resource by file name or stdin
+  wait            Experimental: Wait for a specific condition on one or many resources
+  kustomize       Build a kustomization target from a directory or URL.
+
+Settings Commands:
+  label           Update the labels on a resource
+  annotate        Update the annotations on a resource
+  completion      Output shell completion code for the specified shell (bash, zsh, fish, or powershell)
+
+Other Commands:
+  alpha           Commands for features in alpha
+  api-resources   Print the supported API resources on the server
+  api-versions    Print the supported API versions on the server, in the form of "group/version"
+  config          Modify kubeconfig files
+  plugin          Provides utilities for interacting with plugins
+  version         Print the client and server version information
+
+Usage:
+  kubectl [flags] [options]
+
+Use "kubectl <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all commands)

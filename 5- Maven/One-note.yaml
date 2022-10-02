@@ -1,0 +1,111 @@
+MAVEN 
+
+  
+
+Maven life cycle: 
+
+Maven executes a Clean package goal which deletes old build 
+
+Maven has a Default goal which validates, compiles, tests goals and creates packages which we upload 
+to a remote repo like nexus. 
+
+Maven also has Site goal used to create documents for Java classes.  
+
+  
+
+mvn site 
+
+Used to create packages for Java classes  
+
+mvn site:run 
+
+  
+
+  
+
+Meaning of POM 
+
+Project Object Model 
+
+It is a fundamental unit of work in maven, it’s an XML file containing instructions about the project 
+and configuration details used by maven to do the build 
+
+  
+
+Three major important things in Maven 
+
+Group Id  
+
+Artifacts Id 
+
+Version  
+
+  
+
+Plug-ins 
+
+Developers 
+
+Mailing list  
+
+Goals 
+
+Project dependencies 
+
+  
+
+  
+
+Dependencies and plug-ins helps maven do a build  
+
+ 
+
+For maven to do a build, we need source codes, test cases and Pom.xml build script. 
+
+Maven needs dependencies and plugins which has been defined in the project file (Pom.xml) to do a build.  
+
+  
+
+We configure maven to grab these dependencies in settings.xml 
+
+  
+
+It grabs its dependencies from maven local and central repo. But maven cannot pull directly from central 
+cos central is on the Internet. So it needs plugins.  
+
+  
+
+We also have maven remote repo, proxy repo and group repo.  
+
+  
+
+Mvn package - maven searches for dependencies and plugins from local repo, however we hv configured some
+ dependencies from its remote repo and maven proxy  
+
+Port 80 is open in remote and proxy to allow access for to search for dependencies and plugins if not 
+found in local repo  
+
+  
+
+https://kodekloud.com/ 
+
+  
+
+  
+
+https://unix.stackexchange.com/questions/603309/how-to-rename-a-batch-of-log-files-incrementally-without
+-overwrite-using-bash 
+
+  
+
+  
+
+Write a bash script that organizes a given directory 
+
+ 
+
+  
+
+  
+
+  

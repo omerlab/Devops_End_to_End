@@ -34,6 +34,7 @@ top - : Show systems resource usage.
 touch filename - : Create an empty file.
 who [options] - : Display who is logged on.
 reboot : command is similar to the halt command, but the system immediately reboots.
-nslookup : command uses DNS to resolve a domain name to an IP addresses. The command below uses nslookup to display the nameserver records for domain.com.
+nslookup : command uses DNS to resolve a domain name to an IP addresses. The command below uses
+            nslookup to display the nameserver records for domain.com.
 
 

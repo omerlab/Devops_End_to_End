@@ -29,7 +29,7 @@ We sit in meeting to talk about the kind of infrastructure me need to setup for 
 
 In all the process, security is our priority
 To access our servers in the private subnet(jenkins, maven...) we configure bastion host or jumpserver. we configure 
-proxies,LB ,webservers. noted that the jumbserver has it security group so if Jenkins want to perform a tasks, 
+proxies, LB , webservers. noted that the jumbserver has it security group so if Jenkins want to perform a tasks, 
 since it has only private ip  it can not normally run build so to access it we need to ssh in to the jumpserver 
 ( port 22 need to be open ) in which we will allow traffic from authenticated users ip@ only. from the jumperserver
  he ssh into the appserver(port 8080 need to be open) in the private subnet.
