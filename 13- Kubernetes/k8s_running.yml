@@ -1543,3 +1543,229 @@ There shall be no live class today Feb 21, 2022.
 Please follow the above videos caption; Git 3 and Git 4. 
 
 Regards,
+
+
+WORKLOAD AND SCHEDULING:
+========================
+-Labels: A label is a key/value pair that is attached to
+ Kubernetes resource, for example, a pod. Labels 
+   can be attached to resources at creation time, as well 
+   as added and modified at any later time.
+
+- Selectors:  
+     A label selector can be used to organize Kubernetes 
+     resources that have labels. 
+An equality-based selector defines a condition for selecting
+resources that have the specified label value.
+
+A set-based selector defines a condition for selecting 
+ resources that have a label value within the specified set of 
+ values.label selector defines a set of resources by 
+ specifying a requirements for their labels. For example
+
+ ==========================
+ environment = dev
+ environment != live
+ environment in (dev, test)
+ environment notin (live)
+ release = stable, environment = dev
+ =============================
+The first two selectors have an equality-based requirement,
+ the third and fourth selectors have a set-based 
+requirement. The last selector contains the comma separator,
+ which acts as a logical “AND” operator, so the selector 
+defines a set of resources where the label “release” equals 
+“stable” and the label “environment” equals “dev
+
+Node selector:
+==============
+apiVersion: v1
+kind: Pod
+metadata:
+  name: service-pod
+spec:
+  containers:
+  - name: service-pod
+    image: nginx
+  nodeSelector:
+    app: nginx1
+
+
+
+node affinity :
+===============
+Node affinity is a property of Pods that attracts them to a 
+set of nodes (either as a preference or a hard requirement). 
+
+Taints are the opposite -- they allow a node to repel a set 
+of pods.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: landmark-node-affinity
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: app
+            operator: NotIn
+            values:
+            - nginx1
+  containers:
+  - name: with-node-affinity
+    image: nginx
+
+
+Pod affinity:
+==============
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mylandmark-pod-affinity
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app
+            operator: NotIn # pod-antiAffinity. If operator is In, then podAffinity
+            values:
+            - frontend
+        topologyKey: "kubernetes.io/hostname" # same place---same server, az, region etc
+  containers:
+  - name: pod-affinity
+    image: nginx
+
+
+ Requests and limits:
+=======================
+# Best Effort: No requests, No limits
+# Burstable : requests < limits
+# Guaranteed: requests = limits
+apiVersion: v1
+kind: Pod
+metadata:
+  name: landmark-pod
+spec:
+  containers:
+  - name: landmark-container
+    image: nginx
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "0.5"
+      limits:
+        memory: "12400Mi"
+        cpu: "1.0"
+
+
+Taints and tolerations: 
+===========================
+Tolerations are applied to pods, and allow (but do not require) 
+the pods to schedule onto nodes with matching taints.
+
+# kubectl taint nodes <kubeadm-worker-01> key=value:NoSchedule
+# kubectl taint nodes <kubeadm-worker-01> key=value:NoExecute
+# kubectl taint nodes <kubeadm-worker-01> key=value:PreferNoSchedule
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx1
+  labels:
+      env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  tolerations:
+  - key: "key"
+    operator: "Equal"
+    value: value
+    effect: "NoExecute"
+===============================================
+  Key:
+
+  Operator: - Equal / Exists
+  
+  Effect:  
+    NoSchedule: if there is at least one un-ignored taint with effect NoSchedule then Kubernetes will not schedule the pod onto that node
+    PreferNoSchedule: if there is no un-ignored taint with effect NoSchedule but there is at least one un-ignored taint with effect PreferNoSchedule then Kubernetes will try to not schedule the pod onto the node
+    NoExecute: if there is at least one un-ignored taint with effect NoExecute then the pod will be evicted from the node (if it is already running on the node), and will not be scheduled onto the node (if it is not yet running on the node).
+
+health probes
+================
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec
+spec:
+  containers:
+  - name: liveness
+    image: k8s.gcr.io/busybox
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
+
+
+
+Security context
+=================
+
+# If you dont specify a security context, the processes
+ running using a UID of 0, which is root.
+# You need to run your applications /pods as a least 
+privileged user. So we use runAsUser / runAsGroup.
+# apt-get update && apt-get install procps - for a bash cli,
+ then ps -ef to list the processes running.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-context
+spec:
+  securityContext:
+      runAsUser: 1000
+      runAsGroup: 3000
+  containers:
+  - name: sec-ctx-demo
+    image: busybox
+    command: [ "sh", "-c", "sleep 1h" ]
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-context-demo
+spec:
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+  volumes:
+  - name: sec-ctx-vol
+    emptyDir: {}
+  containers:
+  - name: sec-ctx-demo
+    image: busybox
+    command: [ "sh", "-c", "sleep 1h" ]
+    volumeMounts:
+    - name: sec-ctx-vol
+      mountPath: /data/demo
+
+

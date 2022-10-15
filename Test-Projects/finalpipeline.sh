@@ -5,7 +5,7 @@
 # Build image
 # Tag image
 # Push into the Docker Registry
-# Delete previous contanair
+# Delete previous container
 # Run new container 
 
 

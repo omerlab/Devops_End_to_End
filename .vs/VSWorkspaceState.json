@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\kubernetes-notes",
+    "\\kubernetes-notes\\EKS-Create-Cluster-using-eksctl",
+    "\\kubernetes-notes\\EKS-Create-Cluster-using-eksctl\\01-02-Create-EKSCluster-and-NodeGroups",
+    "\\kubernetes-notes\\EKS-Workloads-on-Fargate",
+    "\\kubernetes-notes\\EKS-Workloads-on-Fargate\\09-01-Fargate-Profile-Basic",
+    "\\kubernetes-notes\\EKS-Workloads-on-Fargate\\09-01-Fargate-Profile-Basic\\kube-manifests"
+  ],
+  "SelectedNode": "\\kubernetes-notes\\EKS-Workloads-on-Fargate\\09-01-Fargate-Profile-Basic\\kube-manifests\\02-Nginx-App1-Deployment-and-NodePortService.yml",
+  "PreviewInSolutionExplorer": false
+}
