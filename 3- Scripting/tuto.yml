@@ -33,7 +33,7 @@ read : help to get input from the command.
   exple:
   echo "Enter name"
   read name
-  echo "Enter the name $name" 
+  echo "Your are welcome to BlessTech LLc $name" 
 
 read -p : allow to have the input on the same line
   example:
@@ -47,7 +47,7 @@ for password which need to be hide do :
 to have input and save into an array do :
   
    echo "Enter name : "
-   read -a names
+   read -a name
    echo "Name : ${names[0]}, {names[1]} "
 
   

@@ -978,6 +978,7 @@ Type of monitoring
 
  New-Relic
 
+ 
 
 
 
@@ -1128,7 +1129,8 @@ node{
     //sh "mvn validate" 
     //sh "mvn compile" 
     //sh "mvn test"
-    sh "mvn package"
+    //sh "mvn package"
+    sh "mvn install"
   }
   stage('CodeQualityReport') {
     sh "echo Running Code Quality Report analysis"
@@ -1313,3 +1315,12 @@ ThinBackup plugin --->
 
 
 Jenkins shared libraries
+
+node {
+  stage {
+
+  }
+  stage {
+
+  }
+}

@@ -19,7 +19,7 @@ echo "for loop ends"
 
 echo "while loop demo starts..."
 
-i=1
+i=1i
 
 while [ $i -le 5 ]
 

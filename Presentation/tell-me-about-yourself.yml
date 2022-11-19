@@ -6,7 +6,7 @@ where i create repository, create team's members, assign roles and responsabilit
 I had also been in charge of setting up, maintaining and monitoring our CI/CD pipeline. And in the CI/CD pipeline Jenkins is our main automation tool.
 So i intgrate Jenkins with github and automate the process using a trigger mechanism like webhook, pull scm, build periodically so whenever  developer 
 commit a new version of the code jenkins will pull the code and since the code is like a raw material, maven which is our build tool will execute clean package
-goals and we will obtain artifacts. I set up our code quality tool which is sonarqube and for each peoject we have benchmark that we follow, for example 
+goals and we will obtain artifacts. I set up our code quality tool which is sonarqube and for each project we have benchmark that we follow, for example 
 sonarqube make sure that is no bugs, no vulnerablities. if the code pass our quality gate, we need to back up the artifact in our artifactory in Nexus for disaster recovery.
 Once that is done we complete our CI process, we then prepare for deployment. For Deployment we use Ansible which is our automation tool. so with the use of ansible playbook
 we have been able to dockerise the Artifacts to create images from the Dockerfile and push them in our docker registry and once that is done Ansible is also 
